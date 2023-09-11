@@ -1,11 +1,15 @@
 import React from 'react'
-import './App.css'
-import ClothesGenerator from './components/ClothesGenerator'
+import './styles/globals.css'
+import Navbar from './components/navbar/Navbar'
+import HomePageBanner from './pages/HomePageBanner'
+import ClothesGenerator from './pages/ClothesGenerator'
+
 
 function App() {
   return (
     <div className="App">
-      <div>Add your description here</div>
+      <Navbar />
+      <HomePageBanner />
       <ClothesGenerator />
     </div>
   );
