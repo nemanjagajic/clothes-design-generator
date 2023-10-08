@@ -41,14 +41,17 @@ const ExamplesCarousel = () => {
   }
 
   return (
-    <div className='w-9/12 m-auto my-40'>
-      <Slider {...sliderSettings}>
-        <ExampleItem />
-        <ExampleItem />
-        <ExampleItem />
-        <ExampleItem />
-        <ExampleItem />
-      </Slider>
+    <div className='flex flex-col items-center my-32'>
+      <div className='mb-16 text-main-black text-4xl font-extrabold'>Primeri</div>
+      <div className='w-9/12 m-auto'>
+        <Slider {...sliderSettings}>
+          <ExampleItem />
+          <ExampleItem />
+          <ExampleItem />
+          <ExampleItem />
+          <ExampleItem />
+        </Slider>
+      </div>
     </div>
   )
 }
