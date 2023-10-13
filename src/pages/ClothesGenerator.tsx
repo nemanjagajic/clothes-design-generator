@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { generateImage } from '../api/imageGenerator'
-// import socketIOClient from 'socket.io-client'
+import socketIOClient from 'socket.io-client'
 import Container from '../components/shared/Container'
 import Button from '../components/shared/Button'
-import { log } from 'util'
 
 const ClothesGenerator = () => {
   const [description, setDescription] = useState('')
@@ -11,19 +10,19 @@ const ClothesGenerator = () => {
   const [generatedImages, setGeneratedImages] = useState([])
   const [focusedPhotoIndex, setFocusedPhotoIndex] = useState(0)
 
-  // useEffect(() => {
+  useEffect(() => {
     const baseApiUrl = process.env.REACT_APP_BASE_API_URL|| ''
-  //   const socket = socketIOClient(baseApiUrl)
-  //
-  //   socket.on('generatedImages', (data) => {
-  //     setGeneratedImages(data)
-  //     setIsGeneratingImages(false)
-  //   });
-  //
-  //   return () => {
-  //     socket.disconnect();
-  //   };
-  // }, []);
+    const socket = socketIOClient(baseApiUrl)
+
+    socket.on('generatedImages', (data) => {
+      setGeneratedImages(data)
+      setIsGeneratingImages(false)
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
 
   const handleGenerateImage = () => {
     setIsGeneratingImages(true)
@@ -62,12 +61,16 @@ const ClothesGenerator = () => {
             className='w-full h-[372px] border border-gray-200 rounded-md focus:outline-none p-4'
           />
           <br />
-          <Button
-            isMain={false}
-            text={'Napravi sliku za majicu'}
-            onClick={handleGenerateImage}
-            customStyles={'w-full'}
-          />
+          {isGeneratingImages ? (
+            <div>Slike se generišu...</div>
+          ) : (
+            <Button
+              isMain={false}
+              text={'Napravi sliku za majicu'}
+              onClick={handleGenerateImage}
+              customStyles={'w-full'}
+            />
+          )}
         </div>
 
         <div className='flex flex-col items-end w-[50%]'>
