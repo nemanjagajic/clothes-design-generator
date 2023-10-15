@@ -7,6 +7,7 @@ import ExamplesCarousel from './pages/ExamplesCarousel'
 import TShirtSizes from './pages/TShirtSizes'
 import FAQSection from './pages/FAQSection'
 import OurCustomers from './pages/OurCustomers'
+import Footer from './pages/Footer'
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
       <TShirtSizes />
       <FAQSection />
       <OurCustomers />
+      <Footer />
     </div>
   );
 }
