@@ -19,7 +19,7 @@ const FAQAnswer = ({ question, answer, isInitiallyOpen = false }: FAQAnswerTypes
           {isOpen ? 'Close' : 'Open'}
         </div>
       </div>
-      <div className={`text-sm mt-2 text-light-gray faq-answer ${isOpen ? 'open' : ''}`}>{answer}</div>
+      {isOpen && <div className={'text-sm mt-2 text-light-gray'}>{answer}</div>}
     </div>
   )
 }
