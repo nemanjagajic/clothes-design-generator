@@ -6,6 +6,7 @@ import ClothesGenerator from './pages/ClothesGenerator'
 import ExamplesCarousel from './pages/ExamplesCarousel'
 import TShirtSizes from './pages/TShirtSizes'
 import FAQSection from './pages/FAQSection'
+import OurCustomers from './pages/OurCustomers'
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <ExamplesCarousel />
       <TShirtSizes />
       <FAQSection />
+      <OurCustomers />
     </div>
   );
 }
