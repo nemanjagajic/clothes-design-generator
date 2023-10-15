@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { generateImage } from '../api/imageGenerator'
-import socketIOClient from 'socket.io-client'
+// import socketIOClient from 'socket.io-client'
 import Container from '../components/shared/Container'
 import Button from '../components/shared/Button'
 
@@ -10,19 +10,19 @@ const ClothesGenerator = () => {
   const [generatedImages, setGeneratedImages] = useState([])
   const [focusedPhotoIndex, setFocusedPhotoIndex] = useState(0)
 
-  useEffect(() => {
-    const baseApiUrl = process.env.REACT_APP_BASE_API_URL|| ''
-    const socket = socketIOClient(baseApiUrl)
-
-    socket.on('generatedImages', (data) => {
-      setGeneratedImages(data)
-      setIsGeneratingImages(false)
-    });
-
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
+  // useEffect(() => {
+  //   const baseApiUrl = process.env.REACT_APP_BASE_API_URL|| ''
+  //   const socket = socketIOClient(baseApiUrl)
+  //
+  //   socket.on('generatedImages', (data) => {
+  //     setGeneratedImages(data)
+  //     setIsGeneratingImages(false)
+  //   });
+  //
+  //   return () => {
+  //     socket.disconnect();
+  //   };
+  // }, []);
 
   const handleGenerateImage = () => {
     setIsGeneratingImages(true)
@@ -31,6 +31,7 @@ const ClothesGenerator = () => {
 
   const renderPreviewImage = (imageUrl: string, index: number) => (
     <div
+      key={index}
       className={`flex items-center justify-center border cursor-pointer
       ${index === focusedPhotoIndex ? 'border-light-blue border-2' : 'border-gray-200'} h-16 w-16 mx-2 rounded-md`}
       onClick={() => setFocusedPhotoIndex(index)}
@@ -44,8 +45,9 @@ const ClothesGenerator = () => {
     </div>
   )
 
-  const renderEmptyPreviewImage = () => (
+  const renderEmptyPreviewImage = (index: number) => (
     <div
+      key={index}
       className={`flex items-center justify-center border cursor-pointer border-gray-200 h-16 w-16 mx-2 rounded-md`}
     />
   )
@@ -92,8 +94,8 @@ const ClothesGenerator = () => {
                 return renderPreviewImage(imageUrl, index)
               })
             ) : (
-              Array.from({ length: 4 }).map((imageUrl, index) => {
-                return renderEmptyPreviewImage()
+              Array.from({ length: 4 }).map((_, index) => {
+                return renderEmptyPreviewImage(index)
               })
             )}
           </div>

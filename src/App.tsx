@@ -5,6 +5,7 @@ import HomePageBanner from './pages/HomePageBanner'
 import ClothesGenerator from './pages/ClothesGenerator'
 import ExamplesCarousel from './pages/ExamplesCarousel'
 import TShirtSizes from './pages/TShirtSizes'
+import FAQSection from './pages/FAQSection'
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <ClothesGenerator />
       <ExamplesCarousel />
       <TShirtSizes />
+      <FAQSection />
     </div>
   );
 }
