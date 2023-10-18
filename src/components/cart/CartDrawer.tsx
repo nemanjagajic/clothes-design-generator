@@ -20,7 +20,7 @@ const CartDrawer = ({ isCartOpen, onSurroundingAreaClicked }: CartDrawerTypes) =
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [drawerRef]);
-  
+
 
   return (
     <div

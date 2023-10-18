@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { ChevronDownOutline, ChevronUpOutline } from 'react-ionicons'
 
 type FAQAnswerTypes = {
   question: string
@@ -16,7 +17,17 @@ const FAQAnswer = ({ question, answer, isInitiallyOpen = false }: FAQAnswerTypes
           onClick={() => setIsOpen(!isOpen)}
           className='cursor-pointer'
         >
-          {isOpen ? 'Close' : 'Open'}
+          {isOpen ? (
+            <ChevronUpOutline
+              height="25px"
+              width="25px"
+            />
+          ) : (
+            <ChevronDownOutline
+              height="25px"
+              width="25px"
+            />
+          )}
         </div>
       </div>
       {isOpen && <div className={'text-sm mt-2 text-light-gray'}>{answer}</div>}
