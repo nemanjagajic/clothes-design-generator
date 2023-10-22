@@ -14,7 +14,8 @@ const ClothesGenerator = () => {
     const baseApiUrl = process.env.REACT_APP_BASE_API_URL|| ''
     const socket = socketIOClient(baseApiUrl)
 
-    socket.on('generatedImages', (data) => {
+    const userId = localStorage.getItem('userId')
+    socket.on(`generatedImages${userId}`, (data) => {
       setGeneratedImages(data)
       setIsGeneratingImages(false)
     });

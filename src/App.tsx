@@ -9,7 +9,10 @@ import FAQSection from './pages/FAQSection'
 import OurCustomers from './pages/OurCustomers'
 import Footer from './pages/Footer'
 import CartDrawer from './components/cart/CartDrawer'
+import { v4 as uuidv4 } from 'uuid'
 
+const uuid = uuidv4()
+localStorage.setItem('userId', uuid)
 
 function App() {
   const [isCartOpen, setIsCartOpen] = useState(false)

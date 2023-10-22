@@ -5,7 +5,8 @@ export const generateImage = async (description: string) => {
   axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
   const response = await axios.post('https://api.thenextleg.io', {
     cmd: "imagine",
-    msg: description
+    msg: description,
+    ref: localStorage.getItem('userId')
   })
 
   console.log({ response })
