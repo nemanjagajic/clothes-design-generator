@@ -4,7 +4,10 @@ import socketIOClient from 'socket.io-client'
 import Container from '../components/shared/Container'
 import Button from '../components/shared/Button'
 
-const ClothesGenerator = () => {
+type ClothesGeneratorTypes = {
+  userId: string
+}
+const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
   const [description, setDescription] = useState('')
   const [isGeneratingImages, setIsGeneratingImages] = useState(false)
   const [generatedImages, setGeneratedImages] = useState([])
@@ -14,7 +17,7 @@ const ClothesGenerator = () => {
     const baseApiUrl = process.env.REACT_APP_BASE_API_URL|| ''
     const socket = socketIOClient(baseApiUrl)
 
-    const userId = localStorage.getItem('userId')
+    console.log(`Listening generated images for ${userId}`)
     socket.on(`generatedImages${userId}`, (data) => {
       setGeneratedImages(data)
       setIsGeneratingImages(false)
@@ -27,7 +30,7 @@ const ClothesGenerator = () => {
 
   const handleGenerateImage = () => {
     setIsGeneratingImages(true)
-    generateImage(description)
+    generateImage(description, userId)
   }
 
   const renderPreviewImage = (imageUrl: string, index: number) => (

@@ -11,8 +11,7 @@ import Footer from './pages/Footer'
 import CartDrawer from './components/cart/CartDrawer'
 import { v4 as uuidv4 } from 'uuid'
 
-const uuid = uuidv4()
-localStorage.setItem('userId', uuid)
+const userId = uuidv4()
 
 function App() {
   const [isCartOpen, setIsCartOpen] = useState(false)
@@ -22,7 +21,7 @@ function App() {
       <CartDrawer isCartOpen={isCartOpen} onSurroundingAreaClicked={() => setIsCartOpen(false)} />
       <Navbar onCartClicked={() => setIsCartOpen(true)} />
       <HomePageBanner />
-      <ClothesGenerator />
+      <ClothesGenerator userId={userId} />
       <ExamplesCarousel />
       <TShirtSizes />
       <FAQSection />
