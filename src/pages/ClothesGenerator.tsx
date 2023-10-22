@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { generateImage } from '../api/imageGenerator'
-// import socketIOClient from 'socket.io-client'
+import socketIOClient from 'socket.io-client'
 import Container from '../components/shared/Container'
 import Button from '../components/shared/Button'
 
@@ -10,19 +10,19 @@ const ClothesGenerator = () => {
   const [generatedImages, setGeneratedImages] = useState([])
   const [focusedPhotoIndex, setFocusedPhotoIndex] = useState(0)
 
-  // useEffect(() => {
-  //   const baseApiUrl = process.env.REACT_APP_BASE_API_URL|| ''
-  //   const socket = socketIOClient(baseApiUrl)
-  //
-  //   socket.on('generatedImages', (data) => {
-  //     setGeneratedImages(data)
-  //     setIsGeneratingImages(false)
-  //   });
-  //
-  //   return () => {
-  //     socket.disconnect();
-  //   };
-  // }, []);
+  useEffect(() => {
+    const baseApiUrl = process.env.REACT_APP_BASE_API_URL|| ''
+    const socket = socketIOClient(baseApiUrl)
+
+    socket.on('generatedImages', (data) => {
+      setGeneratedImages(data)
+      setIsGeneratingImages(false)
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
 
   const handleGenerateImage = () => {
     setIsGeneratingImages(true)
