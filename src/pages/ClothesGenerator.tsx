@@ -52,10 +52,11 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
   const renderEmptyPreviewImage = (index: number) => (
     <div
       key={index}
-      className={`flex items-center justify-center border cursor-pointer border-gray-200 h-16 w-16 mx-2 rounded-md`}
+      className={`flex items-center justify-center border cursor-pointer border-gray-200 h-16 w-16 mx-2 rounded-md ${isGeneratingImages && gradientBgLoaderStyle}`}
     />
   )
 
+  const gradientBgLoaderStyle = 'bg-gradient-to-r from-very-light-blue via-very-light-blue to-white background-animate'
   return (
     <Container>
       <div className='flex w-full flex-row mb-10'>
@@ -67,16 +68,14 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
             className='w-full h-[372px] border border-gray-200 rounded-md focus:outline-none p-4'
           />
           <br />
-          {isGeneratingImages ? (
-            <div>Slike se generišu...</div>
-          ) : (
-            <Button
-              isMain={false}
-              text={'Napravi sliku za majicu'}
-              onClick={handleGenerateImage}
-              customStyles={'w-full'}
-            />
-          )}
+          <Button
+            isMain={false}
+            text={'Napravi sliku za majicu'}
+            onClick={handleGenerateImage}
+            customStyles={'w-full'}
+            isDisabled={isGeneratingImages}
+            disabledText={'Slike se generišu...'}
+          />
         </div>
 
         <div className='flex flex-col items-end w-[50%]'>
@@ -89,7 +88,15 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
                 src={generatedImages[focusedPhotoIndex]}
               />
             ) : (
-              <div>Generisana majica će se pojaviti ovde</div>
+              <div className={`text-gray-400 font-bold flex justify-center items-center rounded-md h-full w-full`}>
+                <div className={`w-[140px] h-[240px] ${isGeneratingImages ? gradientBgLoaderStyle : 'bg-gray-200'}`} />
+                <div className={`absolute rounded-md p-4 shadow bg-white cursor-default w-[250px] text-center mb-16`}>
+                  {isGeneratingImages ?
+                    'Generisana majica će se pojaviti ovde'
+                    : 'U polju levo opiši sliku koju želiš da vidiš ovde na majici'
+                  }
+                </div>
+              </div>
             )}
           </div>
           <div className='flex items-center justify-center w-[80%] mt-2'>
@@ -109,6 +116,8 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
               text={'Poruči ovu majicu'}
               onClick={() => console.log('Poruci')}
               customStyles={'w-full'}
+              isDisabled={generatedImages.length === 0}
+              disabledText={'Poruči ovu majicu'}
             />
           </div>
         </div>

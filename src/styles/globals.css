@@ -33,3 +33,18 @@ body {
     color: transparent;
     background-image: linear-gradient(90deg, #0090F8 50.13%, #2C34FE 100%);
 }
+
+.background-animate {
+    background-size: 1000%;
+    animation: AnimationName 2.5s ease infinite;
+}
+
+@keyframes AnimationName {
+    0%,
+    100% {
+        background-position: 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
