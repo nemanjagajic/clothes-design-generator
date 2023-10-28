@@ -1,7 +1,7 @@
 import React from 'react'
 import Container from '../components/shared/Container'
 import Button from '../components/shared/Button'
-import { goToSection } from '../utils/pageNavigation'
+import { scrollToSection } from '../utils/pageNavigation'
 
 const Footer = () => {
 
@@ -27,9 +27,9 @@ const Footer = () => {
     const sectionContent = (
       <>
         <div className='text-black text-md pb-2 font-bold'>Stranice</div>
-        <div onClick={() => goToSection('examples')} className='text-light-gray text-xs cursor-pointer'>Primeri</div>
-        <div onClick={() => goToSection('tShirtSizes')} className='text-light-gray text-xs cursor-pointer'>Veličine</div>
-        <div onClick={() => goToSection('questions')} className='text-light-gray text-xs cursor-pointer'>Pitanja</div>
+        <div onClick={() => scrollToSection('examples')} className='text-light-gray text-xs cursor-pointer'>Primeri</div>
+        <div onClick={() => scrollToSection('tShirtSizes')} className='text-light-gray text-xs cursor-pointer'>Veličine</div>
+        <div onClick={() => scrollToSection('questions')} className='text-light-gray text-xs cursor-pointer'>Pitanja</div>
       </>
     )
     return renderSection(sectionContent)
