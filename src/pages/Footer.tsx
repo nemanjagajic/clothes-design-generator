@@ -1,6 +1,7 @@
 import React from 'react'
 import Container from '../components/shared/Container'
 import Button from '../components/shared/Button'
+import { goToSection } from '../utils/pageNavigation'
 
 const Footer = () => {
 
@@ -26,9 +27,9 @@ const Footer = () => {
     const sectionContent = (
       <>
         <div className='text-black text-md pb-2 font-bold'>Stranice</div>
-        <div className='text-light-gray text-xs'>Primeri</div>
-        <div className='text-light-gray text-xs'>Veličine</div>
-        <div className='text-light-gray text-xs'>Pitanja</div>
+        <div onClick={() => goToSection('examples')} className='text-light-gray text-xs cursor-pointer'>Primeri</div>
+        <div onClick={() => goToSection('tShirtSizes')} className='text-light-gray text-xs cursor-pointer'>Veličine</div>
+        <div onClick={() => goToSection('questions')} className='text-light-gray text-xs cursor-pointer'>Pitanja</div>
       </>
     )
     return renderSection(sectionContent)

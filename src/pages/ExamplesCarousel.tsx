@@ -42,7 +42,7 @@ const ExamplesCarousel = () => {
 
   return (
     <div className='flex flex-col items-center my-32'>
-      <h3 className='mb-16 text-main-black text-4xl font-extrabold'>Primeri</h3>
+      <h3 id='examples' className='mb-16 text-main-black text-4xl font-extrabold'>Primeri</h3>
       <div className='w-9/12 m-auto'>
         <Slider {...sliderSettings}>
           <ExampleItem />
