@@ -2,13 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-    font-family: 'Segoe UI';
-    src: url('../assets/fonts/segoe/Segoe UI.ttf') format('truetype');
-}
-
 body {
-    font-family: "Segoe UI", "sans", serif
+    font-family: "Noto Sans", sans-serif
 }
 
 .slick-prev:before,
