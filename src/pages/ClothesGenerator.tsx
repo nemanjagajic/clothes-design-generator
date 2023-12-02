@@ -59,8 +59,8 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
   const gradientBgLoaderStyle = 'bg-gradient-to-r from-very-light-blue via-very-light-blue to-white background-animate'
   return (
     <Container>
-      <div className='flex w-full flex-row mb-10'>
-        <div className='flex flex-col w-[50%]'>
+      <div className='flex w-full flex-col lg:flex-row mb-10'>
+        <div className='flex flex-col w-full lg:w-[50%]'>
           <h3 className='font-bold text-xl mt-10 mb-4'>Polje za tekst</h3>
           <textarea
             value={description}
@@ -78,9 +78,9 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
           />
         </div>
 
-        <div className='flex flex-col items-end w-[50%]'>
+        <div className='flex flex-col w-full mt-4 lg:w-[50%] lg:items-end lg:mt-0'>
           <h3 className='font-bold text-xl mt-10 mb-4'>Boje</h3>
-          <div className='flex items-center justify-center w-[80%] h-[300px] border border-gray-200 rounded-md'>
+          <div className='flex items-center justify-center w-full lg:w-[80%] h-[300px] border border-gray-200 rounded-md'>
             {generatedImages && generatedImages.length > 0 ? (
               <img
                 width={200}
@@ -99,7 +99,7 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
               </div>
             )}
           </div>
-          <div className='flex items-center justify-center w-[80%] mt-2'>
+          <div className='flex items-center justify-center w-full lg:w-[80%] mt-2'>
             {generatedImages.length > 0 ? (
               generatedImages.map((imageUrl, index) => {
                 return renderPreviewImage(imageUrl, index)
@@ -110,7 +110,7 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
               })
             )}
           </div>
-          <div className='flex items-center justify-center w-[80%] mt-7'>
+          <div className='flex items-center justify-center w-full lg:w-[80%] mt-7'>
             <Button
               isMain
               text={'Poruči ovu majicu'}

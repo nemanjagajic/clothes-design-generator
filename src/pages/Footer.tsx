@@ -26,7 +26,7 @@ const Footer = () => {
   const renderPagesSection = () => {
     const sectionContent = (
       <>
-        <div className='text-black text-md pb-2 font-bold'>Stranice</div>
+        <div className='text-black text-md pb-2 font-bold mt-8 md:mt-0'>Stranice</div>
         <div onClick={() => scrollToSection('examples')} className='text-light-gray text-xs cursor-pointer'>Primeri</div>
         <div onClick={() => scrollToSection('tShirtSizes')} className='text-light-gray text-xs cursor-pointer'>Veličine</div>
         <div onClick={() => scrollToSection('questions')} className='text-light-gray text-xs cursor-pointer'>Pitanja</div>
@@ -39,7 +39,7 @@ const Footer = () => {
     const sectionContent = (
       <>
         <div>
-          <div className='text-black text-md pb-4 font-bold'>Zaprati nas</div>
+          <div className='text-black text-md pb-4 font-bold mt-8 md:mt-0'>Zaprati nas</div>
           <div className='flex flex-row'>
             <div className='w-[20px] h-[20px] bg-gray-300 mr-2 rounded-sm' />
             <div className='w-[20px] h-[20px] bg-gray-300 mr-2 rounded-sm' />
@@ -54,9 +54,8 @@ const Footer = () => {
   const renderEmailSection = () => {
     const sectionContent = (
       <>
-
-        <div className='text-black text-md pb-4 font-bold'>Pošalji nam email</div>
-        <div className='text-light-gray text-xs'>
+        <div className='text-black text-md pb-4 font-bold mt-8 md:mt-0'>Pošalji nam email</div>
+        <div className='text-light-gray text-xs mb-2 lg:mb-0'>
           Pošalji nam email i mi ćemo te obaveštavati o novim artiklima na našem sajtu.
         </div>
         <div className='flex flex-row justify-between w-full'>
@@ -78,7 +77,7 @@ const Footer = () => {
 
   return (
     <Container>
-      <div className='flex flex-row border border-t-1 border-x-0 border-b-0 border-border-gray mt-48 pt-8 pb-12 w-full'>
+      <div className='flex flex-col md:flex-row border border-t-1 border-x-0 border-b-0 border-border-gray mt-24 lg:mt-32 pt-8 pb-12 w-full'>
         {renderContactSection()}
         {renderPagesSection()}
         {renderSocialsSection()}

@@ -1,17 +1,44 @@
-import React, { useState } from 'react'
+import React, {useEffect, useState} from 'react'
 import ExampleItem from '../components/examples/ExampleItem'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import {MEDIUM_SCREEN, SMALL_SCREEN} from "../constants/screenSizes"
+
+const BREAKPOINT_OFFSET = 80
+const SLIDER_SPEED = 500
 
 const ExamplesCarousel = () => {
   const [selectedSlide, setSelectedSlide] = useState(0)
 
+    const [numOfSlides, setNumOfSlides] = useState(3)
+
+    useEffect(() => {
+        const handleResize = () => {
+            const screenWidth = window.innerWidth;
+            if (screenWidth < SMALL_SCREEN + BREAKPOINT_OFFSET) {
+                setNumOfSlides(1)
+            } else if (screenWidth < MEDIUM_SCREEN + BREAKPOINT_OFFSET) {
+                setNumOfSlides(2)
+            } else {
+                setNumOfSlides(3)
+            }
+        }
+
+        handleResize()
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
   const sliderSettings = {
     dots: true,
     infinite: true,
-    speed: 500,
-    slidesToShow: 3,
+    speed: SLIDER_SPEED,
+    slidesToShow: numOfSlides,
     slidesToScroll: 1,
     customPaging: (slideIndex: number) => {
       return (
