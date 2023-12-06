@@ -1,12 +1,12 @@
-import React from 'react'
-import {scrollToSection} from "../../utils/pageNavigation"
+import React from 'react';
+import Generations from "./Generations";
 
 enum Tabs {
   ORDERS = 'ORDERS',
   GENERATIONS = 'GENERATIONS',
 }
 
-const MyComponent = () => {
+const DashboardHome = () => {
   const [selectedTab, setSelectedTab] = React.useState<Tabs>(Tabs.ORDERS)
 
   const renderNavbar = () => (
@@ -19,8 +19,9 @@ const MyComponent = () => {
   return (
     <div>
       {renderNavbar()}
+      {selectedTab === Tabs.GENERATIONS && <Generations />}
     </div>
   );
 };
 
-export default MyComponent
+export default DashboardHome;
