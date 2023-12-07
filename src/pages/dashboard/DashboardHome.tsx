@@ -1,6 +1,5 @@
 import React from 'react';
 import Generations from "./Generations";
-
 enum Tabs {
   ORDERS = 'ORDERS',
   GENERATIONS = 'GENERATIONS',
