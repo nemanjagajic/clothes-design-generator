@@ -3,6 +3,7 @@ module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
+  safelist: ['h-20', 'w-20'],
   theme: {
     extend: {
       colors: {
@@ -12,6 +13,12 @@ module.exports = {
         'main-black': '#2C2C2C',
         'light-gray': '#6B6B6B',
         'border-gray': '#D9D9D9'
+      },
+      width: {
+        '20': "30px"      
+      },
+      height: {
+        '20': "30px"
       }
     }
   },
