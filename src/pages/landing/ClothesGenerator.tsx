@@ -78,6 +78,7 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
   }, [isGeneratingImages])
 
   const handleGenerateImage = () => {
+    setGeneratedImages([])
     setIsGeneratingImages(true)
     generateImage(description, userId)
   }
@@ -109,7 +110,7 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
   return (
     <Container>
       <div className='flex w-full flex-col lg:flex-row mb-10'>
-        <div className='flex flex-col w-full lg:w-[50%]'>
+        <div className='flex flex-col w-full lg:w-[40%]'>
           <h3 className='font-bold text-xl mt-10 mb-4'>Polje za tekst</h3>
           <textarea
             value={description}
@@ -122,12 +123,12 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
             text={'Napravi sliku za majicu'}
             onClick={handleGenerateImage}
             customStyles={'w-full'}
-            isDisabled={isGeneratingImages}
-            disabledText={'Slike se generišu...'}
+            isDisabled={isGeneratingImages || !description}
+            disabledText={description ? 'Slike se generišu...' : 'Napravi sliku za majicu'}
           />
         </div>
 
-        <div className='flex flex-col w-full mt-4 lg:w-[50%] lg:items-end lg:mt-0'>
+        <div className='flex flex-col w-full mt-4 lg:w-[60%] lg:items-end lg:mt-0'>
           <h3 className='font-bold text-xl mt-10 mb-4'>Boje</h3>
           <div className='flex items-center justify-center w-full lg:w-[80%] h-[300px] border border-gray-200 rounded-md'>
             {generatedImages && generatedImages.length > 0 ? (
