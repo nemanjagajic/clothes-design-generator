@@ -35,7 +35,6 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
 
   const getRandomOneTwoOrThree = () => {
     const randomDecimal = Math.random()
-    setProgressBarPercentage(0)
 
     if (randomDecimal < 0.3333) {
       return 1
@@ -77,8 +76,13 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
     }
   }, [isGeneratingImages])
 
-  const handleGenerateImage = () => {
+  const clearGeneratedImages = () => {
     setGeneratedImages([])
+    setProgressBarPercentage(0)
+  }
+
+  const handleGenerateImage = () => {
+    clearGeneratedImages()
     setIsGeneratingImages(true)
     generateImage(description, userId)
   }
