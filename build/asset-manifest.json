@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.3b3c8211.css",
-    "main.js": "/static/js/main.7115a138.js",
+    "main.css": "/static/css/main.5e7064f6.css",
+    "main.js": "/static/js/main.1e68fce9.js",
     "static/media/logo3.png": "/static/media/logo3.873c84c930f963921e10.png",
     "static/media/tshirt-sizes.png": "/static/media/tshirt-sizes.6e8b42155845473b13b2.png",
     "static/media/slick.svg": "/static/media/slick.2630a3e3eab21c607e21.svg",
@@ -11,7 +11,7 @@
     "index.html": "/index.html"
   },
   "entrypoints": [
-    "static/css/main.3b3c8211.css",
-    "static/js/main.7115a138.js"
+    "static/css/main.5e7064f6.css",
+    "static/js/main.1e68fce9.js"
   ]
 }
