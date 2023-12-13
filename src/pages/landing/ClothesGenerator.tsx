@@ -3,6 +3,10 @@ import { generateImage } from '../../api/imageGenerator'
 import socketIOClient from 'socket.io-client'
 import Container from '../../components/shared/Container'
 import Button from '../../components/shared/Button'
+import axios from "axios";
+
+const PROGRESS_BAR_FETCHING_INTERVAL_MS = 3000
+const DEFAULT_PROGRESS_INCREMENT = 2
 
 type ClothesGeneratorTypes = {
   userId: string
@@ -12,6 +16,7 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
   const [isGeneratingImages, setIsGeneratingImages] = useState(false)
   const [generatedImages, setGeneratedImages] = useState([])
   const [focusedPhotoIndex, setFocusedPhotoIndex] = useState(0)
+  const [progressBarPercentage, setProgressBarPercentage] = useState(0)
 
   useEffect(() => {
     const baseApiUrl = process.env.REACT_APP_BASE_API_URL|| ''
@@ -27,6 +32,50 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
       socket.disconnect();
     };
   }, []);
+
+  const getRandomOneTwoOrThree = () => {
+    const randomDecimal = Math.random()
+
+    if (randomDecimal < 0.3333) {
+      return 1
+    } else if (randomDecimal < 0.6666) {
+      return 2
+    } else {
+      return 3
+    }
+  }
+
+  const fetchAndUpdateProgress = async () => {
+    try {
+      const {data: {progress}} = await axios.get(`${process.env.REACT_APP_BASE_API_URL}/getImageGenerationProgress`)
+      if (progress < progressBarPercentage && progressBarPercentage > DEFAULT_PROGRESS_INCREMENT) return
+      if (progress === 0) {
+        const randomIncrement = getRandomOneTwoOrThree()
+        console.log('random increment: ', randomIncrement)
+        setProgressBarPercentage(prevProgress => prevProgress + randomIncrement)
+        return
+      }
+      setProgressBarPercentage(progress)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  useEffect(() => {
+    if (!isGeneratingImages) return
+    const interval = setInterval(() => {
+      fetchAndUpdateProgress()
+    }, PROGRESS_BAR_FETCHING_INTERVAL_MS)
+    setTimeout(() => {
+      if (progressBarPercentage === 0) setProgressBarPercentage(DEFAULT_PROGRESS_INCREMENT)
+    }, 1000)
+
+    return () => {
+      if (interval) {
+        clearInterval(interval)
+      }
+    }
+  }, [isGeneratingImages])
 
   const handleGenerateImage = () => {
     setIsGeneratingImages(true)
@@ -88,14 +137,13 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
                 src={generatedImages[focusedPhotoIndex]}
               />
             ) : (
-              <div className={`text-gray-400 font-bold flex justify-center items-center rounded-md h-full w-full`}>
+              <div className={`text-gray-400 font-bold flex justify-center items-center rounded-md h-full w-full relative overflow-hidden`}>
                 <div className={`w-[140px] h-[240px] ${isGeneratingImages ? gradientBgLoaderStyle : 'bg-gray-200'}`} />
-                <div className={`absolute rounded-md p-4 shadow bg-white cursor-default w-[250px] text-center mb-16`}>
-                  {isGeneratingImages ?
-                    'Generisana majica će se pojaviti ovde'
-                    : 'U polju levo opiši sliku koju želiš da vidiš ovde na majici'
-                  }
-                </div>
+                {isGeneratingImages && (
+                  <div className="w-full bg-gray-200 h-2.5 dark:bg-gray-100 absolute bottom-0 rounded-b-md">
+                    <div className="bg-light-blue h-2.5 rounded-full" style={{ width: `${progressBarPercentage}%`, transition: 'width 0.3s ease' }}></div>
+                  </div>
+                )}
               </div>
             )}
           </div>
