@@ -35,6 +35,7 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
 
   const getRandomOneTwoOrThree = () => {
     const randomDecimal = Math.random()
+    setProgressBarPercentage(0)
 
     if (randomDecimal < 0.3333) {
       return 1
@@ -51,13 +52,12 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
       if (progress < progressBarPercentage && progressBarPercentage > DEFAULT_PROGRESS_INCREMENT) return
       if (progress === 0) {
         const randomIncrement = getRandomOneTwoOrThree()
-        console.log('random increment: ', randomIncrement)
         setProgressBarPercentage(prevProgress => prevProgress + randomIncrement)
         return
       }
       setProgressBarPercentage(progress)
     } catch (e) {
-      console.log(e)
+      // Do nothing
     }
   }
 
