@@ -5,7 +5,7 @@ import Container from '../../components/shared/Container'
 import Button from '../../components/shared/Button'
 import axios from "axios";
 
-const PROGRESS_BAR_FETCHING_INTERVAL_MS = 3000
+const PROGRESS_BAR_FETCHING_INTERVAL_MS = 5000
 const DEFAULT_PROGRESS_INCREMENT = 2
 const QUEUE_FETCHING_INTERVAL_MS = 5000
 
@@ -49,14 +49,15 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
 
   const fetchAndUpdateProgress = async () => {
     try {
-      const {data: {progress}} = await axios.get(`${process.env.REACT_APP_BASE_API_URL}/getImageGenerationProgress`)
-      if (progress < progressBarPercentage && progressBarPercentage > DEFAULT_PROGRESS_INCREMENT) return
+      const { data: { progress } } = await axios.get(`${process.env.REACT_APP_BASE_API_URL}/getImageGenerationProgress`)
       if (progress === 0) {
         const randomIncrement = getRandomOneTwoOrThree()
         setProgressBarPercentage(prevProgress => prevProgress + randomIncrement)
         return
       }
-      setProgressBarPercentage(progress)
+      if (progress > 0) {
+        setProgressBarPercentage(progress)
+      }
     } catch (e) {
       // Do nothing
     }
