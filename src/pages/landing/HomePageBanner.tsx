@@ -5,7 +5,7 @@ const HomePageBanner = () => {
   return (
     <Container customStyles='bg-dark-blue py-8'>
       <div className='flex flex-col'>
-        <div className='flex flex-col w-full items-center py-8 text-center'>
+        <div className='flex flex-col w-full items-center pb-4 md:py-8 md:text-center'>
           <h2 className='text-white text-5xl font-bold leading-tight'>
             Napravi majicu sa slikom kakvu zamišljaš za
             <span className='italic text-light-blue font-normal'> 40 sekundi </span>
