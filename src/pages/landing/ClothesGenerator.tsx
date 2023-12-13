@@ -8,8 +8,9 @@ import ColorPicker from '../../components/shared/ColorPicker'
 import { Item, useItems } from '../../store/ItemsContext'
 import TShirtSizeDropdown from '../../components/shared/TShirtSizeDropdown'
 
-const PROGRESS_BAR_FETCHING_INTERVAL_MS = 3000
+const PROGRESS_BAR_FETCHING_INTERVAL_MS = 5000
 const DEFAULT_PROGRESS_INCREMENT = 2
+const QUEUE_FETCHING_INTERVAL_MS = 5000
 
 type ClothesGeneratorTypes = {
   userId: string
@@ -20,6 +21,7 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
   const [generatedImages, setGeneratedImages] = useState([])
   const [focusedPhotoIndex, setFocusedPhotoIndex] = useState(0)
   const [progressBarPercentage, setProgressBarPercentage] = useState(0)
+  const [myIndexInGenerationQueue, setMyIndexInGenerationQueue] = useState(null)
 
   const { updateCurrentItem, addToCart, currentItem } = useItems()
 
@@ -61,11 +63,6 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
       } = await axios.get(
         `${process.env.REACT_APP_BASE_API_URL}/getImageGenerationProgress`
       )
-      if (
-        progress < progressBarPercentage &&
-        progressBarPercentage > DEFAULT_PROGRESS_INCREMENT
-      )
-        return
       if (progress === 0) {
         const randomIncrement = getRandomOneTwoOrThree()
         setProgressBarPercentage(
@@ -73,14 +70,32 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
         )
         return
       }
-      setProgressBarPercentage(progress)
+      if (progress > 0) {
+        setProgressBarPercentage(progress)
+      }
     } catch (e) {
       // Do nothing
     }
   }
 
+  const fetchGenerationQueueData = async () => {
+    try {
+      const {
+        data: { imageRequestsQueue },
+      } = await axios.get(
+        `${process.env.REACT_APP_BASE_API_URL}/imageRequestsQueue`
+      )
+      const myGenerationIndex = imageRequestsQueue.findIndex(
+        (ir: any) => ir.ref === userId
+      )
+      setMyIndexInGenerationQueue(myGenerationIndex)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
   useEffect(() => {
-    if (!isGeneratingImages) return
+    if (!isGeneratingImages || myIndexInGenerationQueue !== 0) return
     const interval = setInterval(() => {
       fetchAndUpdateProgress()
     }, PROGRESS_BAR_FETCHING_INTERVAL_MS)
@@ -94,11 +109,25 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
         clearInterval(interval)
       }
     }
-  }, [isGeneratingImages])
+  }, [isGeneratingImages, myIndexInGenerationQueue])
+
+  useEffect(() => {
+    if (!isGeneratingImages || myIndexInGenerationQueue === 0) return
+    const interval = setInterval(() => {
+      fetchGenerationQueueData()
+    }, QUEUE_FETCHING_INTERVAL_MS)
+
+    return () => {
+      if (interval) {
+        clearInterval(interval)
+      }
+    }
+  }, [isGeneratingImages, myIndexInGenerationQueue])
 
   const clearGeneratedImages = () => {
     setGeneratedImages([])
     setProgressBarPercentage(0)
+    setMyIndexInGenerationQueue(null)
   }
 
   const handleGenerateImage = () => {
@@ -192,14 +221,23 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
                   }`}
                 />
                 {isGeneratingImages && (
-                  <div className='w-full bg-gray-200 h-2.5 dark:bg-gray-100 absolute bottom-0 rounded-b-md'>
-                    <div
-                      className='bg-light-blue h-2.5 rounded-full'
-                      style={{
-                        width: `${progressBarPercentage}%`,
-                        transition: 'width 0.3s ease',
-                      }}
-                    ></div>
+                  <div className='w-full absolute bottom-0'>
+                    {myIndexInGenerationQueue &&
+                    myIndexInGenerationQueue > 0 ? (
+                      <div className='text-center py-1 text-sm'>
+                        {`Trenutno ${myIndexInGenerationQueue} ljudi kreira svoju majicu`}
+                      </div>
+                    ) : (
+                      <div className='w-full bg-gray-200 h-2.5 dark:bg-gray-100 absolute bottom-0 rounded-b-md'>
+                        <div
+                          className='bg-light-blue h-2.5 rounded-full'
+                          style={{
+                            width: `${progressBarPercentage}%`,
+                            transition: 'width 0.3s ease',
+                          }}
+                        ></div>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
