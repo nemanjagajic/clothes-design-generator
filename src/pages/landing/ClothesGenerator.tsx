@@ -186,9 +186,9 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
             text={'Napravi sliku za majicu'}
             onClick={handleGenerateImage}
             customStyles={'w-full'}
-            isDisabled={isGeneratingImages || !description}
+            isDisabled={isGeneratingImages || !description.trim()}
             disabledText={
-              description ? 'Slike se generišu...' : 'Napravi sliku za majicu'
+              description.trim() ? 'Slike se generišu...' : 'Napravi sliku za majicu'
             }
           />
         </div>

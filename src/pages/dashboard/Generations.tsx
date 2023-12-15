@@ -73,7 +73,7 @@ const Generations = () => {
         {imageRequestsQueue.map((item: any, index) => (
           <tr onClick={() => setSelectedItem({ ...item, index })} className={requestBeingGenerated && requestBeingGenerated.ref === item.ref ? 'bg-blue-100 cursor-pointer' : 'cursor-pointer'} key={item.ref}>
             <td className="py-2 px-4 border-b">{item.ref.substring(0, 4)}</td>
-            <td className="py-2 px-4 border-b">{item.description.length > 50 ? `${item.description.substring(0, 50)}...` : item.description}</td>
+            <td className="py-2 px-4 border-b">{item.description?.length > 50 ? `${item?.description?.substring(0, 50)}...` : item.description}</td>
             <td className="py-2 px-4 border-b">{formatDateString(item.time)}</td>
           </tr>
         ))}
