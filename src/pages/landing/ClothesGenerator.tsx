@@ -7,6 +7,9 @@ import axios from 'axios'
 import ColorPicker from '../../components/shared/ColorPicker'
 import { Item, useItems } from '../../store/ItemsContext'
 import TShirtSizeDropdown from '../../components/shared/TShirtSizeDropdown'
+import EmailInput from '../../components/shared/EmailInput'
+import EmailButton from '../../components/shared/EmailButton'
+import EmailCard from '../../components/EmailCard/EmailCard'
 
 const PROGRESS_BAR_FETCHING_INTERVAL_MS = 5000
 const DEFAULT_PROGRESS_INCREMENT = 2
@@ -139,22 +142,22 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
   const renderPreviewImage = (imageUrl: string, index: number) => (
     <div
       key={index}
-      className={`flex items-center justify-center border cursor-pointer
+      className={`flex items-center justify-center border cursor-pointer shadow-md w-[140px] h-auto
       ${
         index === focusedPhotoIndex
           ? 'border-light-blue border-2'
           : 'border-gray-200'
-      } h-16 w-16 mx-2 rounded-md`}
+      } h-[140px] w-[140px] mx-2 rounded-md`}
       onClick={() => setFocusedPhotoIndex(index)}
     >
-      <img width={50} height={50} src={imageUrl} className='rounded-md' />
+      <img src={imageUrl} className='rounded-md' />
     </div>
   )
 
   const renderEmptyPreviewImage = (index: number) => (
     <div
       key={index}
-      className={`flex items-center justify-center border cursor-pointer border-gray-200 h-16 w-16 mx-2 rounded-md ${
+      className={`flex items-center justify-center border cursor-pointer border-gray-200 h-[140px] w-[140px] mx-2 rounded-md shadow-md ${
         isGeneratingImages && gradientBgLoaderStyle
       }`}
     />
@@ -178,7 +181,7 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className='w-full h-[372px] border border-gray-200 rounded-md focus:outline-none p-4'
+            className='w-full h-[150px] border border-gray-200 rounded-md focus:outline-none p-4 shadow-md'
           />
           <br />
           <Button
@@ -186,13 +189,18 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
             text={'Napravi sliku za majicu'}
             onClick={handleGenerateImage}
             customStyles={'w-full'}
-            isDisabled={isGeneratingImages || !description}
+            isDisabled={isGeneratingImages || !description.trim()}
             disabledText={
-              description ? 'Slike se generišu...' : 'Napravi sliku za majicu'
+              isGeneratingImages
+                ? 'Slike se generišu...'
+                : 'Napravi sliku za majicu'
             }
           />
-        </div>
 
+          {!!myIndexInGenerationQueue && myIndexInGenerationQueue > 0 && (
+            <EmailCard />
+          )}
+        </div>
         <div className='flex flex-col w-full mt-4 lg:w-[60%] lg:items-end lg:mt-4'>
           <div className='flex items-center justify-between w-[80%]'>
             <div className='flex justify-center items-center'>
@@ -204,11 +212,10 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
             </div>
           </div>
 
-          <div className='flex items-center justify-center w-full lg:w-[80%] h-[300px] border border-gray-200 rounded-md'>
+          <div className='flex items-center justify-center w-full lg:w-[80%] h-[500px] border border-gray-200 rounded-md shadow-md'>
             {generatedImages && generatedImages.length > 0 ? (
               <img
-                width={200}
-                height={200}
+                className='w-[80%]'
                 src={generatedImages[focusedPhotoIndex]}
               />
             ) : (
@@ -216,16 +223,18 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
                 className={`text-gray-400 font-bold flex justify-center items-center rounded-md h-full w-full relative overflow-hidden`}
               >
                 <div
-                  className={`w-[140px] h-[240px] ${
+                  className={`w-[400px] h-[400px] ${
                     isGeneratingImages ? gradientBgLoaderStyle : 'bg-gray-200'
                   }`}
                 />
                 {isGeneratingImages && (
                   <div className='w-full absolute bottom-0'>
-                    {myIndexInGenerationQueue &&
+                    {!!myIndexInGenerationQueue &&
                     myIndexInGenerationQueue > 0 ? (
-                      <div className='text-center py-1 text-sm'>
-                        {`Trenutno ${myIndexInGenerationQueue} ljudi kreira svoju majicu`}
+                      <div>
+                        <div className='text-center py-1 text-sm'>
+                          {`Trenutno ${myIndexInGenerationQueue} ljudi kreira svoju majicu`}
+                        </div>
                       </div>
                     ) : (
                       <div className='w-full bg-gray-200 h-2.5 dark:bg-gray-100 absolute bottom-0 rounded-b-md'>
@@ -243,6 +252,7 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
               </div>
             )}
           </div>
+
           <div className='flex items-center justify-center w-full lg:w-[80%] mt-2'>
             {generatedImages.length > 0
               ? generatedImages.map((imageUrl, index) => {
@@ -255,11 +265,11 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
           <div className='flex items-center justify-center w-full lg:w-[80%] mt-7'>
             <Button
               isMain
-              text={'Poruči ovu majicu'}
+              text={'Dodaj u korpu'}
               onClick={() => addToCart(currentItem)}
               customStyles={'w-full'}
               isDisabled={generatedImages.length === 0}
-              disabledText={'Poruči ovu majicu'}
+              disabledText={'Dodaj u korpu'}
             />
           </div>
         </div>

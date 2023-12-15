@@ -1,23 +1,25 @@
-import React from "react";
+import React from 'react'
 
 type ButtonProps = {
-  isMain: boolean;
-  text: string;
-  onClick: () => void;
-  customStyles?: string;
-  isDisabled?: boolean;
-  disabledText?: string;
-};
+  isMain?: boolean
+  text: string
+  onClick: () => void
+  customStyles?: string
+  isDisabled?: boolean
+  disabledText?: string
+  customDisabledStyles?: string
+}
 const Button = ({
-  isMain,
+  isMain = false,
   text,
   onClick,
-  customStyles,
+  customStyles = '',
   isDisabled,
   disabledText,
 }: ButtonProps) => {
-  const commonStyles = "border rounded-full py-3 px-4 text-sm";
-  const commonDisablesStyles = `${commonStyles} border-gray-100 text-gray-400 bg-gray-100 cursor-not-allowed`;
+  const commonStyles =
+    'border rounded-full py-3 px-4 text-sm button-text-gradient'
+  const commonDisablesStyles = `border rounded-full py-3 px-4 text-sm border-gray-100 text-gray-400 bg-gray-100 cursor-not-allowed`
 
   const styles = isMain
     ? `${
@@ -28,14 +30,14 @@ const Button = ({
     : `${
         isDisabled
           ? commonDisablesStyles
-          : `bg-white border-light-blue button-text-gradient ${commonStyles}`
-      } ${customStyles}`;
+          : `bg-white border-light-blue ${commonStyles}`
+      } ${customStyles}`
 
   return (
     <button onClick={onClick} className={styles} disabled={isDisabled}>
       {isDisabled ? disabledText : text}
     </button>
-  );
-};
+  )
+}
 
-export default Button;
+export default Button

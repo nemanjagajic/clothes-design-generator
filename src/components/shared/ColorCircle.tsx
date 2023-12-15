@@ -24,7 +24,7 @@ const ColorCircle = ({
       key={color}
       disabled={type === 'passive'}
       className={`h-${size} w-${size} rounded-full ${bgClass} ${
-        selected ? 'ring-4 ring-black' : 'ring-2'
+        selected ? 'ring-4' : 'ring-2'
       }`}
       onClick={() => onClick(color)}
       aria-label={`Select ${color}`}
