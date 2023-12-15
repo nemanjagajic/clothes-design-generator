@@ -3,10 +3,17 @@ import axios from 'axios'
 
 const INTERVAL = 5000
 
+type SelectedItem = {
+  description: string,
+  ref: string,
+  index: number,
+  time: string
+}
+
 const Generations = () => {
   const [imageRequestsQueue, setImageRequestsQueue] = React.useState([])
   const [requestBeingGenerated, setRequestBeingGenerated] = React.useState<any>(null)
-  const [selectedItem, setSelectedItem] = useState(null)
+  const [selectedItem, setSelectedItem] = useState<SelectedItem | null>(null)
 
   const fetchGenerationQueueData = async () => {
     try {
@@ -41,6 +48,17 @@ const Generations = () => {
     return `${day}.${month}.${year} - ${hours}:${minutes}`;
   }
 
+  const handleDelete = async () => {
+    try {
+      if (!selectedItem) return
+      await axios.delete(`${process.env.REACT_APP_BASE_API_URL}/removeFromQueueByIndex/${selectedItem.index}`)
+      setSelectedItem(null)
+      fetchGenerationQueueData()
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
   const renderDataTable = () => (
     <div className="container mx-auto mt-8">
       <table className="min-w-full bg-white border border-gray-300">
@@ -52,10 +70,10 @@ const Generations = () => {
         </tr>
         </thead>
         <tbody>
-        {imageRequestsQueue.map((item: any) => (
-          <tr onClick={() => setSelectedItem(item)} className={requestBeingGenerated && requestBeingGenerated.ref === item.ref ? 'bg-blue-100' : ''} key={item.ref}>
+        {imageRequestsQueue.map((item: any, index) => (
+          <tr onClick={() => setSelectedItem({ ...item, index })} className={requestBeingGenerated && requestBeingGenerated.ref === item.ref ? 'bg-blue-100 cursor-pointer' : 'cursor-pointer'} key={item.ref}>
             <td className="py-2 px-4 border-b">{item.ref.substring(0, 4)}</td>
-            <td className="py-2 px-4 border-b">{item.description.length > 50 ? `${item.description.substring(0, 50)}...` : item.description}</td>
+            <td className="py-2 px-4 border-b">{item.description?.length > 50 ? `${item?.description?.substring(0, 50)}...` : item.description}</td>
             <td className="py-2 px-4 border-b">{formatDateString(item.time)}</td>
           </tr>
         ))}
@@ -74,6 +92,9 @@ const Generations = () => {
           <p><strong>Time:</strong>{formatDateString(data.time)}</p>
           <button onClick={onClose} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">
             Close
+          </button>
+          <button onClick={handleDelete} className="mt-4 ml-4 px-4 py-2 bg-red-500 text-white rounded">
+            Delete
           </button>
         </div>
       </div>

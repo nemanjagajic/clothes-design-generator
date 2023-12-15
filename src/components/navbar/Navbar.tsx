@@ -10,31 +10,42 @@ type NavbarTypes = {
 }
 
 const Navbar = ({ onCartClicked }: NavbarTypes) => (
-  <Container customStyles='fixed z-30 top-0 bg-white w-full'>
+  <Container customStyles='fixed z-30 top-0 bg-white w-full shadow-md'>
     <div className='flex flex-row w-full justify-between'>
-      <img src={logo} width={100} />
+      <div
+        className='cursor-pointer'
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      >
+        <img className="h-24" src={logo} />
+      </div>
       <div className='flex flex-row hidden sm:inline-flex'>
         <div
           onClick={() => scrollToSection('examples')}
           className='flex justify-center items-center px-8 cursor-pointer'
         >
-          Primeri
+          <div className='border-transparent border-b-4 pt-4 pb-2 hover:border-light-blue transition-width duration-200'>
+            Primeri
+          </div>
         </div>
         <div
           onClick={() => scrollToSection('tShirtSizes')}
           className='flex justify-center items-center px-8 cursor-pointer'
         >
-          Veličine
+          <div className='border-transparent border-b-4 pt-4 pb-2 hover:border-light-blue transition-width duration-200'>
+            Veličine
+          </div>
         </div>
         <div
           onClick={() => scrollToSection('questions')}
           className='flex justify-center items-center px-8 cursor-pointer'
         >
-          Pitanja
+          <div className='border-transparent border-b-4 pt-4 pb-2 hover:border-light-blue transition-width duration-200'>
+            Pitanja
+          </div>
         </div>
       </div>
       <div
-        className='p-2 rounded-md shadow cursor-pointer my-8'
+        className='p-2 rounded-md shadow cursor-pointer h-10 my-auto'
         onClick={onCartClicked}
       >
         <BagOutline height='25px' width='25px' />
