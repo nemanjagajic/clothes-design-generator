@@ -12,7 +12,12 @@ type NavbarTypes = {
 const Navbar = ({ onCartClicked }: NavbarTypes) => (
   <Container customStyles='fixed z-30 top-0 bg-white w-full shadow-md'>
     <div className='flex flex-row w-full justify-between'>
-      <img className="h-24" src={logo} />
+      <div
+        className='cursor-pointer'
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      >
+        <img className="h-24" src={logo} />
+      </div>
       <div className='flex flex-row hidden sm:inline-flex'>
         <div
           onClick={() => scrollToSection('examples')}
