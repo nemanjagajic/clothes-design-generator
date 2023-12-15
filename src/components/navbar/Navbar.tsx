@@ -18,19 +18,25 @@ const Navbar = ({ onCartClicked }: NavbarTypes) => (
           onClick={() => scrollToSection('examples')}
           className='flex justify-center items-center px-8 cursor-pointer'
         >
-          Primeri
+          <div className='border-transparent border-b-4 pt-4 pb-2 hover:border-light-blue transition-width duration-200'>
+            Primeri
+          </div>
         </div>
         <div
           onClick={() => scrollToSection('tShirtSizes')}
           className='flex justify-center items-center px-8 cursor-pointer'
         >
-          Veličine
+          <div className='border-transparent border-b-4 pt-4 pb-2 hover:border-light-blue transition-width duration-200'>
+            Veličine
+          </div>
         </div>
         <div
           onClick={() => scrollToSection('questions')}
           className='flex justify-center items-center px-8 cursor-pointer'
         >
-          Pitanja
+          <div className='border-transparent border-b-4 pt-4 pb-2 hover:border-light-blue transition-width duration-200'>
+            Pitanja
+          </div>
         </div>
       </div>
       <div
