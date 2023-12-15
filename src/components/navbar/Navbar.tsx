@@ -12,7 +12,7 @@ type NavbarTypes = {
 const Navbar = ({ onCartClicked }: NavbarTypes) => (
   <Container customStyles='fixed z-30 top-0 bg-white w-full'>
     <div className='flex flex-row w-full justify-between'>
-      <img src={logo} width={100} />
+      <img className="h-24" src={logo} />
       <div className='flex flex-row hidden sm:inline-flex'>
         <div
           onClick={() => scrollToSection('examples')}
@@ -34,7 +34,7 @@ const Navbar = ({ onCartClicked }: NavbarTypes) => (
         </div>
       </div>
       <div
-        className='p-2 rounded-md shadow cursor-pointer my-8'
+        className='p-2 rounded-md shadow cursor-pointer h-10 my-auto'
         onClick={onCartClicked}
       >
         <BagOutline height='25px' width='25px' />
