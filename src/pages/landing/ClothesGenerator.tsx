@@ -77,7 +77,7 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
         setProgressBarPercentage(progress)
       }
     } catch (e) {
-      // Do nothing
+      console.log(e)
     }
   }
 
