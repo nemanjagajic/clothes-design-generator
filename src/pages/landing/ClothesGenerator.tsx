@@ -33,7 +33,7 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
     const img2 = decodeURIComponent(searchParams.get('img2')!)
     const img3 = decodeURIComponent(searchParams.get('img3')!)
 
-    if (img0) {
+    if (img0 !== 'null') {
       setGeneratedImages([img0, img1, img2, img3])
     }
   }, [])
