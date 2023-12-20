@@ -211,7 +211,7 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
           {!!isGeneratingImages && <EmailCard userId={userId} />}
         </div>
         <div className='flex flex-col w-full mt-4 lg:w-[60%] lg:items-end lg:mt-4'>
-          <div className='flex items-center justify-between w-[80%]'>
+          <div className='flex items-start justify-between lg:w-[80%] md:w-[100%] flex-col sm:flex-row sm:items-center'>
             <div className='flex justify-center items-center'>
               <h3 className='font-bold text-xl mr-4'>Boja</h3>
               <ColorPicker onColorPick={updateColor} />
