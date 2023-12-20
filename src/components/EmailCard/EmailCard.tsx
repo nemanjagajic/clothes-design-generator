@@ -1,12 +1,38 @@
-import { useState } from 'react'
+import axios from 'axios'
+import { FormEventHandler, useState } from 'react'
 import EmailButton from '../shared/EmailButton'
 import EmailInput from '../shared/EmailInput'
 
-const EmailCard = () => {
+type EmailCardProps = {
+  userId: string
+}
+
+const EmailCard = ({ userId }: EmailCardProps) => {
   const [isValid, setIsValid] = useState(true)
   const [email, setEmail] = useState('')
+
+  const handleEmailSubmit: FormEventHandler<HTMLFormElement> = (event) => {
+    event.preventDefault()
+    axios
+      .post(`${process.env.REACT_APP_BE_API_URL}/email-refs`, {
+        data: {
+          email,
+          ref: userId,
+        },
+      })
+      .then((data) => {
+        console.log('Email saved', data)
+      })
+      .catch((error) => {
+        console.log('Error sending mail', error)
+      })
+  }
+
   return (
-    <div className='p-4 flex-col items-center justify-center mt-8 bg-[#edf7ed] border-2 shadow-md  rounded-md w-full'>
+    <form
+      onSubmit={handleEmailSubmit}
+      className='p-4 flex-col items-center justify-center mt-8 bg-[#edf7ed] border-2 shadow-md  rounded-md w-full'
+    >
       <h3 className='text-xl font-bold text-[#1e4620]'>
         📬 Ne želis da čekaš?
       </h3>
@@ -21,13 +47,9 @@ const EmailCard = () => {
           isValid={isValid}
           setIsValid={setIsValid}
         />
-        <EmailButton
-          label={'Pošalji'}
-          onClick={() => {}}
-          disabled={!isValid || !email}
-        />
+        <EmailButton label={'Pošalji'} disabled={!isValid || !email} />
       </div>
-    </div>
+    </form>
   )
 }
 

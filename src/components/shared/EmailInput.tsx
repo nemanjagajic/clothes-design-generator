@@ -31,6 +31,7 @@ const EmailInput = ({
       <input
         type='email' // Changed to type 'email' to use browser's email validation as well
         value={email}
+        name='email'
         onChange={handleChange}
         onBlur={() => validateEmail(email)}
         className='p-2 m-2 border border-gray-300 rounded w-full'

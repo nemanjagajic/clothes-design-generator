@@ -7,9 +7,8 @@ import axios from 'axios'
 import ColorPicker from '../../components/shared/ColorPicker'
 import { Item, useItems } from '../../store/ItemsContext'
 import TShirtSizeDropdown from '../../components/shared/TShirtSizeDropdown'
-import EmailInput from '../../components/shared/EmailInput'
-import EmailButton from '../../components/shared/EmailButton'
 import EmailCard from '../../components/EmailCard/EmailCard'
+import { useSearchParams } from 'react-router-dom'
 
 const PROGRESS_BAR_FETCHING_INTERVAL_MS = 5000
 const DEFAULT_PROGRESS_INCREMENT = 2
@@ -21,11 +20,23 @@ type ClothesGeneratorTypes = {
 const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
   const [description, setDescription] = useState('')
   const [isGeneratingImages, setIsGeneratingImages] = useState(false)
-  const [generatedImages, setGeneratedImages] = useState([])
+  const [generatedImages, setGeneratedImages] = useState<string[]>([])
   const [focusedPhotoIndex, setFocusedPhotoIndex] = useState(0)
   const [progressBarPercentage, setProgressBarPercentage] = useState(0)
   const [myIndexInGenerationQueue, setMyIndexInGenerationQueue] = useState(null)
 
+  const [searchParams] = useSearchParams()
+
+  useEffect(() => {
+    const img0 = decodeURIComponent(searchParams.get('img0')!)
+    const img1 = decodeURIComponent(searchParams.get('img1')!)
+    const img2 = decodeURIComponent(searchParams.get('img2')!)
+    const img3 = decodeURIComponent(searchParams.get('img3')!)
+
+    if (img0) {
+      setGeneratedImages([img0, img1, img2, img3])
+    }
+  }, [])
   const { updateCurrentItem, addToCart, currentItem } = useItems()
 
   useEffect(() => {
@@ -197,9 +208,7 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
             }
           />
 
-          {!!myIndexInGenerationQueue && myIndexInGenerationQueue > 0 && (
-            <EmailCard />
-          )}
+          {!!isGeneratingImages && <EmailCard userId={userId} />}
         </div>
         <div className='flex flex-col w-full mt-4 lg:w-[60%] lg:items-end lg:mt-4'>
           <div className='flex items-center justify-between w-[80%]'>
