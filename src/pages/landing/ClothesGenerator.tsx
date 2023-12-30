@@ -9,6 +9,8 @@ import { Item, useItems } from '../../store/ItemsContext'
 import TShirtSizeDropdown from '../../components/shared/TShirtSizeDropdown'
 import EmailCard from '../../components/EmailCard/EmailCard'
 import { useSearchParams } from 'react-router-dom'
+// @ts-ignore
+import whiteTShirt from '../../assets/images/black-tshirt.png'
 
 const PROGRESS_BAR_FETCHING_INTERVAL_MS = 5000
 const DEFAULT_PROGRESS_INCREMENT = 2
@@ -223,16 +225,21 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
 
           <div className='flex items-center justify-center w-full lg:w-[80%] h-[500px] border border-gray-200 rounded-md shadow-md'>
             {generatedImages && generatedImages.length > 0 ? (
-              <img
-                className='w-[80%]'
-                src={generatedImages[focusedPhotoIndex]}
-              />
+              <>
+                <img width={500} src={whiteTShirt} />
+                <img
+                  className='absolute mb-28 mr-2 rounded-md'
+                  width={170}
+                  src={generatedImages[focusedPhotoIndex]}
+                />
+              </>
             ) : (
               <div
                 className={`text-gray-400 font-bold flex justify-center items-center rounded-md h-full w-full relative overflow-hidden`}
               >
+                <img width={500} src={whiteTShirt} />
                 <div
-                  className={`w-[400px] h-[400px] ${
+                  className={`w-[170px] h-[170px] absolute mb-28 mr-2 rounded-md ${
                     isGeneratingImages ? gradientBgLoaderStyle : 'bg-gray-200'
                   }`}
                 />
