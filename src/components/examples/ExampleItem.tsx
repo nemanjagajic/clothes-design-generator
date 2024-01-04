@@ -1,18 +1,20 @@
 import React from 'react'
 import Button from '../shared/Button'
-
-const ExampleItem = () => {
+// @ts-ignore
+import blackTShirt from "../../assets/images/black-tshirt.png"
+const ExampleItem = ({ imgSrc, description }: { imgSrc: string, description: string}) => {
   return (
     <div className='m-auto mb-12'>
-      <img
-        alt='example-image'
-        className='m-auto'
-        height={200}
-        width={200}
-        src='http://placekitten.com/g/400/200'
-      />
-      <div className='m-auto w-[70%] text-gray-500 my-4'>
-        "Neki tekst ide ovde da opise sta se nalazi kao upit na majici"
+      <div className='flex items-center justify-center'>
+        <img alt='example-image' width={400} src={blackTShirt} />
+        <img
+          src={imgSrc}
+          alt='generated-image'
+          className={`w-[115px] h-[115px] absolute mb-28 mr-2 rounded-md`}
+        />
+      </div>
+      <div className='m-auto w-[70%] text-gray-500 my-4 h-12'>
+        "<span>{description}</span>"
       </div>
       <div className={'m-auto w-[80%]'}>
         <Button
