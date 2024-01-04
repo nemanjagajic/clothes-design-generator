@@ -170,7 +170,7 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
   const renderEmptyPreviewImage = (index: number) => (
     <div
       key={index}
-      className={`flex items-center justify-center border cursor-pointer border-gray-200 min-h-[120px] min-w-[120px] mx-2 rounded-md shadow-md ${
+      className={`flex items-center justify-center border cursor-pointer border-gray-200 min-h-[120px] min-w-[120px] mx-2 rounded-md ${
         isGeneratingImages && gradientBgLoaderStyle
       }`}
     />
@@ -228,7 +228,7 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
               <>
                 <img width={400} src={blackTShirt} className="px-2" />
                 <img
-                  className='w-[150px] h-[150px] sm:w-[170px] sm:h-[170px] absolute mb-28 mr-1 sm:mr-2 rounded-md'
+                  className='w-[120px] h-[120px] sm:w-[170px] sm:h-[170px] absolute mb-28 mr-1 sm:mr-2 rounded-md'
                   width={170}
                   src={generatedImages[focusedPhotoIndex]}
                 />
@@ -239,7 +239,7 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
               >
                 <img width={400} src={blackTShirt} className="px-2" />
                 <div
-                  className={`w-[150px] h-[150px] sm:w-[170px] sm:h-[170px] absolute mb-28 mr-1 sm:mr-2 rounded-md ${
+                  className={`w-[120px] h-[120px] sm:w-[170px] sm:h-[170px] absolute mb-28 mr-1 sm:mr-2 rounded-md ${
                     isGeneratingImages ? gradientBgLoaderStyle : 'bg-gray-200'
                   }`}
                 />
@@ -269,7 +269,7 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
             )}
           </div>
 
-          <div className='flex items-center md:justify-center w-full xl:w-[90%] mt-2 overflow-x-auto'>
+          <div className='flex items-center md:justify-center w-full xl:w-[90%] mt-2 overflow-x-auto pb-3'>
             {generatedImages.length > 0
               ? generatedImages.map((imageUrl, index) => {
                   return renderPreviewImage(imageUrl, index)
@@ -278,7 +278,7 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
                   return renderEmptyPreviewImage(index)
                 })}
           </div>
-          <div className='flex items-center justify-center w-full xl:w-[80%] mt-7'>
+          <div className='flex items-center justify-center w-full xl:w-[90%] mt-5'>
             <Button
               isMain
               text={'Dodaj u korpu'}

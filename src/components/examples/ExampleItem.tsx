@@ -10,10 +10,10 @@ const ExampleItem = ({ imgSrc, description }: { imgSrc: string, description: str
         <img
           src={imgSrc}
           alt='generated-image'
-          className={`w-[150px] h-[150px] lg:w-[120px] lg:h-[120px] xl:w-[150px] xl:h-[150px] absolute mb-28 mr-2 rounded-md`}
+          className={`w-[120px] h-[120px] xl:w-[150px] xl:h-[150px] absolute mb-28 mr-2 rounded-md`}
         />
       </div>
-      <div className='m-auto w-[70%] text-gray-500 my-4 h-12'>
+      <div className='m-auto w-[70%] text-gray-500 mt-4 mb-10 h-12'>
         "<span>{description}</span>"
       </div>
       <div className={'m-auto w-[80%]'}>
