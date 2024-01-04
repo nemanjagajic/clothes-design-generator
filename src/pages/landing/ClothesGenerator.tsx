@@ -11,6 +11,7 @@ import EmailCard from '../../components/EmailCard/EmailCard'
 import { useSearchParams } from 'react-router-dom'
 // @ts-ignore
 import blackTShirt from '../../assets/images/black-tshirt.png'
+import {Close} from "react-ionicons";
 
 const PROGRESS_BAR_FETCHING_INTERVAL_MS = 5000
 const DEFAULT_PROGRESS_INCREMENT = 2
@@ -26,6 +27,7 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
   const [focusedPhotoIndex, setFocusedPhotoIndex] = useState(0)
   const [progressBarPercentage, setProgressBarPercentage] = useState(0)
   const [myIndexInGenerationQueue, setMyIndexInGenerationQueue] = useState(null)
+  const [isSelectedImagePreviewModalOpen, setIsSelectedImagePreviewModalOpen] = useState(false)
 
   const [searchParams] = useSearchParams()
 
@@ -140,6 +142,15 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
     }
   }, [isGeneratingImages, myIndexInGenerationQueue])
 
+  useEffect(() => {
+    toggleBodyScroll(!isSelectedImagePreviewModalOpen)
+    return () => toggleBodyScroll(true)
+  }, [isSelectedImagePreviewModalOpen])
+
+  const toggleBodyScroll = (shouldEnable: boolean) => {
+    document.body.style.overflow = shouldEnable ? 'auto' : 'hidden'
+  }
+
   const clearGeneratedImages = () => {
     setGeneratedImages([])
     setProgressBarPercentage(0)
@@ -228,7 +239,8 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
               <>
                 <img width={400} src={blackTShirt} className="px-2" />
                 <img
-                  className='w-[120px] h-[120px] sm:w-[170px] sm:h-[170px] absolute mb-28 mr-1 sm:mr-2 rounded-md'
+                  className='w-[120px] h-[120px] sm:w-[170px] sm:h-[170px] absolute mb-28 mr-1 sm:mr-2 rounded-md cursor-pointer'
+                  onClick={() => setIsSelectedImagePreviewModalOpen(true)}
                   width={170}
                   src={generatedImages[focusedPhotoIndex]}
                 />
@@ -289,6 +301,21 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
             />
           </div>
         </div>
+        {isSelectedImagePreviewModalOpen && (
+          <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-30 overflow-auto">
+            <div className="relative">
+              <img
+                src={generatedImages[focusedPhotoIndex]}
+                alt="Full view"
+                className="object-contain mx-auto my-0"
+                style={{ maxHeight: 'calc(100vh - 2rem)' }}
+              />
+              <div onClick={() => setIsSelectedImagePreviewModalOpen(false)} className="absolute top-0 right-0 p-2 z-40 bg-gray-900 cursor-pointer">
+                <Close height='30px' width='30px' color='#fff' />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </Container>
   )
