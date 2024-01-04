@@ -159,8 +159,8 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
       ${
         index === focusedPhotoIndex
           ? 'border-light-blue border-2'
-          : 'border-gray-200'
-      } h-[140px] w-[140px] mx-2 rounded-md`}
+          : 'border-white border-2'
+      } h-[140px] w-[140px] mx-2 rounded-lg`}
       onClick={() => setFocusedPhotoIndex(index)}
     >
       <img src={imageUrl} className='rounded-md' />
