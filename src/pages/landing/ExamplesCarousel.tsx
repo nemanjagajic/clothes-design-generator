@@ -3,7 +3,7 @@ import ExampleItem from '../../components/examples/ExampleItem'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import {MEDIUM_SCREEN, SMALL_SCREEN} from "../../constants/screenSizes"
+import {LARGE_SCREEN, MEDIUM_SCREEN, SMALL_SCREEN} from "../../constants/screenSizes"
 // @ts-ignore
 import logo from '../../assets/images/logo3.png'
 // @ts-ignore
@@ -13,7 +13,6 @@ import imgCoffee from '../../assets/images/example-coffee.png'
 // @ts-ignore
 import imgNoleLidl from '../../assets/images/example-nole-lidl.png'
 
-const BREAKPOINT_OFFSET = 80
 const SLIDER_SPEED = 500
 
 const ExamplesCarousel = () => {
@@ -24,10 +23,8 @@ const ExamplesCarousel = () => {
     useEffect(() => {
         const handleResize = () => {
             const screenWidth = window.innerWidth;
-            if (screenWidth < SMALL_SCREEN + BREAKPOINT_OFFSET) {
+            if (screenWidth < LARGE_SCREEN) {
                 setNumOfSlides(1)
-            } else if (screenWidth < MEDIUM_SCREEN + BREAKPOINT_OFFSET) {
-                setNumOfSlides(2)
             } else {
                 setNumOfSlides(3)
             }

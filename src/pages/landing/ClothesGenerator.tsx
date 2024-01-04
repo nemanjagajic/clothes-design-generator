@@ -10,7 +10,7 @@ import TShirtSizeDropdown from '../../components/shared/TShirtSizeDropdown'
 import EmailCard from '../../components/EmailCard/EmailCard'
 import { useSearchParams } from 'react-router-dom'
 // @ts-ignore
-import whiteTShirt from '../../assets/images/black-tshirt.png'
+import blackTShirt from '../../assets/images/black-tshirt.png'
 
 const PROGRESS_BAR_FETCHING_INTERVAL_MS = 5000
 const DEFAULT_PROGRESS_INCREMENT = 2
@@ -170,7 +170,7 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
   const renderEmptyPreviewImage = (index: number) => (
     <div
       key={index}
-      className={`flex items-center justify-center border cursor-pointer border-gray-200 h-[140px] w-[140px] mx-2 rounded-md shadow-md ${
+      className={`flex items-center justify-center border cursor-pointer border-gray-200 min-h-[120px] min-w-[120px] mx-2 rounded-md shadow-md ${
         isGeneratingImages && gradientBgLoaderStyle
       }`}
     />
@@ -188,9 +188,9 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
     'bg-gradient-to-r from-very-light-blue via-very-light-blue to-white background-animate'
   return (
     <Container>
-      <div className='flex w-full flex-col lg:flex-row mb-10'>
-        <div className='flex flex-col w-full lg:w-[40%]'>
-          <h3 className='font-bold text-xl mt-10 mb-4'>Polje za tekst</h3>
+      <div className='flex w-full flex-col xl:flex-row mb-10'>
+        <div className='flex flex-col w-full xl:w-[40%]'>
+          <h3 className='font-bold text-xl mt-10 mb-3'>Polje za tekst</h3>
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -212,8 +212,8 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
 
           {!!isGeneratingImages && <EmailCard userId={userId} />}
         </div>
-        <div className='flex flex-col w-full mt-4 lg:w-[60%] lg:items-end lg:mt-4'>
-          <div className='flex items-start justify-between lg:w-[80%] md:w-[100%] flex-col sm:flex-row sm:items-center'>
+        <div className='flex flex-col w-full mt-4 xl:w-[60%] xl:items-end xl:mt-4'>
+          <div className='flex items-start justify-between xl:w-[90%] md:w-[100%] flex-col sm:flex-row sm:items-center'>
             <div className='flex justify-center items-center'>
               <h3 className='font-bold text-xl mr-4'>Boja</h3>
               <ColorPicker onColorPick={updateColor} />
@@ -223,12 +223,12 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
             </div>
           </div>
 
-          <div className='flex items-center justify-center w-full lg:w-[80%] h-[500px] border border-gray-200 rounded-md shadow-md'>
+          <div className='flex items-center justify-center w-full xl:w-[90%] h-[500px] border border-gray-200 rounded-md shadow-md px-2'>
             {generatedImages && generatedImages.length > 0 ? (
               <>
-                <img width={500} src={whiteTShirt} />
+                <img width={400} src={blackTShirt} />
                 <img
-                  className='absolute mb-28 mr-2 rounded-md'
+                  className='w-[150px] h-[150px] sm:w-[170px] sm:h-[170px] absolute mb-28 mr-1 sm:mr-2 rounded-md'
                   width={170}
                   src={generatedImages[focusedPhotoIndex]}
                 />
@@ -237,9 +237,9 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
               <div
                 className={`text-gray-400 font-bold flex justify-center items-center rounded-md h-full w-full relative overflow-hidden`}
               >
-                <img width={500} src={whiteTShirt} />
+                <img width={400} src={blackTShirt}/>
                 <div
-                  className={`w-[170px] h-[170px] absolute mb-28 mr-2 rounded-md ${
+                  className={`w-[150px] h-[150px] sm:w-[170px] sm:h-[170px] absolute mb-28 mr-1 sm:mr-2 rounded-md ${
                     isGeneratingImages ? gradientBgLoaderStyle : 'bg-gray-200'
                   }`}
                 />
@@ -269,7 +269,7 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
             )}
           </div>
 
-          <div className='flex items-center justify-center w-full lg:w-[80%] mt-2'>
+          <div className='flex items-center md:justify-center w-full xl:w-[90%] mt-2 overflow-x-auto'>
             {generatedImages.length > 0
               ? generatedImages.map((imageUrl, index) => {
                   return renderPreviewImage(imageUrl, index)
@@ -278,7 +278,7 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
                   return renderEmptyPreviewImage(index)
                 })}
           </div>
-          <div className='flex items-center justify-center w-full lg:w-[80%] mt-7'>
+          <div className='flex items-center justify-center w-full xl:w-[80%] mt-7'>
             <Button
               isMain
               text={'Dodaj u korpu'}
