@@ -12,7 +12,7 @@ const OurCustomers = () => {
   return (
     <div className='bg-dark-blue pb-16'>
       <div className='flex flex-col justify-center items-center w-full'>
-        <h3 className='mt-8 mb-12 text-white text-4xl font-extrabold'>Naši korisnici</h3>
+        <h3 id='our-users' className='mt-8 mb-12 text-white text-4xl font-extrabold'>Naši korisnici</h3>
         <div className='flex lg:flex-row flex-col justify-center items-center w-full overflow-x-auto'>
           {Array.from({ length: 3 }).map((_, index) => renderCustomerImage(index))}
         </div>

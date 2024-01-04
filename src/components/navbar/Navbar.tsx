@@ -18,7 +18,7 @@ const Navbar = ({ onCartClicked }: NavbarTypes) => (
       >
         <img className="h-24" src={logo} />
       </div>
-      <div className='flex flex-row hidden sm:inline-flex'>
+      <div className='flex flex-row hidden lg:inline-flex'>
         <div
           onClick={() => scrollToSection('examples')}
           className='flex justify-center items-center px-8 cursor-pointer'
@@ -41,6 +41,14 @@ const Navbar = ({ onCartClicked }: NavbarTypes) => (
         >
           <div className='border-transparent border-b-4 pt-4 pb-2 hover:border-light-blue transition-width duration-200'>
             Pitanja
+          </div>
+        </div>
+        <div
+          onClick={() => scrollToSection('our-users')}
+          className='flex justify-center items-center px-8 cursor-pointer'
+        >
+          <div className='border-transparent border-b-4 pt-4 pb-2 hover:border-light-blue transition-width duration-200'>
+            Naši korisnici
           </div>
         </div>
       </div>
