@@ -155,7 +155,7 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
   const renderPreviewImage = (imageUrl: string, index: number) => (
     <div
       key={index}
-      className={`flex items-center justify-center border cursor-pointer shadow-md w-[140px] h-auto
+      className={`flex items-center justify-center border cursor-pointer w-[140px] h-auto min-h-[120px] min-w-[120px]
       ${
         index === focusedPhotoIndex
           ? 'border-light-blue border-2'
@@ -223,26 +223,28 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
             </div>
           </div>
 
-          <div className='flex items-center justify-center w-full xl:w-[90%] h-[500px] border border-gray-200 rounded-md shadow-md px-2'>
+          <div className='flex items-center justify-center w-full xl:w-[90%] h-[500px] border border-gray-200 rounded-md shadow-md'>
             {generatedImages && generatedImages.length > 0 ? (
-              <>
+              <div className="px-2">
                 <img width={400} src={blackTShirt} />
                 <img
                   className='w-[150px] h-[150px] sm:w-[170px] sm:h-[170px] absolute mb-28 mr-1 sm:mr-2 rounded-md'
                   width={170}
                   src={generatedImages[focusedPhotoIndex]}
                 />
-              </>
+              </div>
             ) : (
               <div
                 className={`text-gray-400 font-bold flex justify-center items-center rounded-md h-full w-full relative overflow-hidden`}
               >
-                <img width={400} src={blackTShirt}/>
-                <div
-                  className={`w-[150px] h-[150px] sm:w-[170px] sm:h-[170px] absolute mb-28 mr-1 sm:mr-2 rounded-md ${
-                    isGeneratingImages ? gradientBgLoaderStyle : 'bg-gray-200'
-                  }`}
-                />
+                <div className="px-2">
+                  <img width={400} src={blackTShirt}/>
+                  <div
+                    className={`w-[150px] h-[150px] sm:w-[170px] sm:h-[170px] absolute mb-28 mr-1 sm:mr-2 rounded-md ${
+                      isGeneratingImages ? gradientBgLoaderStyle : 'bg-gray-200'
+                    }`}
+                  />
+                </div>
                 {isGeneratingImages && (
                   <div className='w-full absolute bottom-0'>
                     {!!myIndexInGenerationQueue &&
