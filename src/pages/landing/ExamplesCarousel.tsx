@@ -3,9 +3,16 @@ import ExampleItem from '../../components/examples/ExampleItem'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import {MEDIUM_SCREEN, SMALL_SCREEN} from "../../constants/screenSizes"
+import {LARGE_SCREEN, MEDIUM_SCREEN, SMALL_SCREEN} from "../../constants/screenSizes"
+// @ts-ignore
+import logo from '../../assets/images/logo3.png'
+// @ts-ignore
+import imgFrog from '../../assets/images/example-frog.png'
+// @ts-ignore
+import imgCoffee from '../../assets/images/example-coffee.png'
+// @ts-ignore
+import imgNoleLidl from '../../assets/images/example-nole-lidl.png'
 
-const BREAKPOINT_OFFSET = 80
 const SLIDER_SPEED = 500
 
 const ExamplesCarousel = () => {
@@ -16,10 +23,8 @@ const ExamplesCarousel = () => {
     useEffect(() => {
         const handleResize = () => {
             const screenWidth = window.innerWidth;
-            if (screenWidth < SMALL_SCREEN + BREAKPOINT_OFFSET) {
+            if (screenWidth < LARGE_SCREEN) {
                 setNumOfSlides(1)
-            } else if (screenWidth < MEDIUM_SCREEN + BREAKPOINT_OFFSET) {
-                setNumOfSlides(2)
             } else {
                 setNumOfSlides(3)
             }
@@ -72,11 +77,11 @@ const ExamplesCarousel = () => {
       <h3 id='examples' className='mb-16 text-main-black text-4xl font-extrabold'>Primeri</h3>
       <div className='w-9/12 m-auto'>
         <Slider {...sliderSettings}>
-          <ExampleItem />
-          <ExampleItem />
-          <ExampleItem />
-          <ExampleItem />
-          <ExampleItem />
+          <ExampleItem imgSrc={imgFrog} description='Sedi žaba sama na listu lokvanja, sa naočarima i kapom' />
+          <ExampleItem imgSrc={imgNoleLidl} description='Novak Đoković kupuje smrznutu piletinu u lidlu i stvara gužvu' />
+          <ExampleItem imgSrc={imgCoffee} description='Jutrić kafica' />
+          <ExampleItem imgSrc={logo} description='Something' />
+          <ExampleItem imgSrc={logo} description='Something' />
         </Slider>
       </div>
     </div>
