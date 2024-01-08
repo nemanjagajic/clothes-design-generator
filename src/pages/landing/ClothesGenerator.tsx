@@ -156,11 +156,10 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
     <div
       key={index}
       className={`flex items-center justify-center border cursor-pointer shadow-md w-[140px] h-auto
-      ${
-        index === focusedPhotoIndex
+      ${index === focusedPhotoIndex
           ? 'border-light-blue border-2'
           : 'border-gray-200'
-      } h-[140px] w-[140px] mx-2 rounded-md`}
+        } h-[140px] w-[140px] mx-2 rounded-md`}
       onClick={() => setFocusedPhotoIndex(index)}
     >
       <img src={imageUrl} className='rounded-md' />
@@ -170,9 +169,8 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
   const renderEmptyPreviewImage = (index: number) => (
     <div
       key={index}
-      className={`flex items-center justify-center border cursor-pointer border-gray-200 h-[140px] w-[140px] mx-2 rounded-md shadow-md ${
-        isGeneratingImages && gradientBgLoaderStyle
-      }`}
+      className={`flex items-center justify-center border cursor-pointer border-gray-200 h-[140px] w-[140px] mx-2 rounded-md shadow-md ${isGeneratingImages && gradientBgLoaderStyle
+        }`}
     />
   )
 
@@ -239,14 +237,13 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
               >
                 <img width={500} src={whiteTShirt} />
                 <div
-                  className={`w-[170px] h-[170px] absolute mb-28 mr-2 rounded-md ${
-                    isGeneratingImages ? gradientBgLoaderStyle : 'bg-gray-200'
-                  }`}
+                  className={`w-[170px] h-[170px] absolute mb-28 mr-2 rounded-md ${isGeneratingImages ? gradientBgLoaderStyle : 'bg-gray-200'
+                    }`}
                 />
                 {isGeneratingImages && (
                   <div className='w-full absolute bottom-0'>
                     {!!myIndexInGenerationQueue &&
-                    myIndexInGenerationQueue > 0 ? (
+                      myIndexInGenerationQueue > 0 ? (
                       <div>
                         <div className='text-center py-1 text-sm'>
                           {`Trenutno ${myIndexInGenerationQueue} ljudi kreira svoju majicu`}
@@ -272,11 +269,11 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
           <div className='flex items-center justify-center w-full lg:w-[80%] mt-2'>
             {generatedImages.length > 0
               ? generatedImages.map((imageUrl, index) => {
-                  return renderPreviewImage(imageUrl, index)
-                })
+                return renderPreviewImage(imageUrl, index)
+              })
               : Array.from({ length: 4 }).map((_, index) => {
-                  return renderEmptyPreviewImage(index)
-                })}
+                return renderEmptyPreviewImage(index)
+              })}
           </div>
           <div className='flex items-center justify-center w-full lg:w-[80%] mt-7'>
             <Button

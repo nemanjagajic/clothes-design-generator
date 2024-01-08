@@ -19,14 +19,16 @@ const ItemsContext = createContext<{
   items: Item[]
   addToCart: (item: Item) => void
   removeFromCart: (itemToRemove: Item) => void
+  removeAllFromCart: (itemToRemove: Item) => void
   currentItem: Item
   updateCurrentItem: (itemData: Partial<Item>) => void
 }>({
   items: [defaultItem],
-  addToCart: () => {},
-  removeFromCart: () => {},
+  addToCart: () => { },
+  removeFromCart: () => { },
+  removeAllFromCart: () => { },
   currentItem: defaultItem,
-  updateCurrentItem: () => {},
+  updateCurrentItem: () => { },
 })
 
 // Implement the Provider
@@ -64,6 +66,14 @@ export const ItemsProvider = ({ children }: { children: ReactNode }) => {
     }
   }
 
+  const removeAllFromCart = (itemToRemove: Item) => {
+    setItems((prevItems) => {
+      return prevItems.filter(item => !(item.imageUrl === itemToRemove.imageUrl &&
+        item.color === itemToRemove.color &&
+        item.size === itemToRemove.size))
+    })
+  }
+
   const removeFromCart = (itemToRemove: Item) => {
     setItems((prevItems) => {
       return prevItems.reduce((updatedItems, item) => {
@@ -94,6 +104,7 @@ export const ItemsProvider = ({ children }: { children: ReactNode }) => {
         items,
         addToCart,
         removeFromCart,
+        removeAllFromCart,
         currentItem,
         updateCurrentItem,
       }}
