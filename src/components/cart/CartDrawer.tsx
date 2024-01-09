@@ -43,7 +43,8 @@ const CartDrawer = ({
               <div>
                 <Card
                   imageUrl={item.imageUrl!}
-                  price={'2400'}
+                  price={2400}
+                  gender={item.gender}
                   onRemove={() => {
                     removeFromCart(item)
                   }}

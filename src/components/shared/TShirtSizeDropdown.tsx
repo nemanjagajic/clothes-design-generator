@@ -41,7 +41,7 @@ const TShirtSizeDropdown = ({
   }
 
   return (
-    <div className='relative inline-block text-left min-w-[140px] pb-4 md:pl-2 sm:pb-0' ref={dropdownRef}>
+    <div className='relative inline-block text-left min-w-[140px] pb-4 md:pl-2 md:pb-0' ref={dropdownRef}>
       <button
         type='button'
         className='inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none'
@@ -74,9 +74,8 @@ const TShirtSizeDropdown = ({
             {sizes.map((size) => (
               <button
                 key={size}
-                className={`block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100${
-                  selectedSize === size ? 'bg-gray-100' : ''
-                }`}
+                className={`block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100${selectedSize === size ? 'bg-gray-100' : ''
+                  }`}
                 role='menuitem'
                 onClick={() => handleSizeSelection(size)}
               >

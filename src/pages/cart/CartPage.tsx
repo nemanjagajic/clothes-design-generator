@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import OrderForm from "./OrderForm"
 import OrderItems from "./OrderItems"
 import { useItems } from "../../store/ItemsContext"
+import CartDrawer from "../../components/cart/CartDrawer"
 
 
 
@@ -11,15 +12,19 @@ const CartPage = () => {
     const { items } = useItems()
     const [isCartOpen, setIsCartOpen] = useState(false)
     const navigate = useNavigate()
-    console.log("Items brate", items)
+
     useEffect(() => {
-        if (!items) {
+        if (!items.length) {
             navigate('/')
         }
     }, [items])
 
     return <>
         <Navbar onCartClicked={() => setIsCartOpen(true)} />
+        <CartDrawer
+            isCartOpen={isCartOpen}
+            onSurroundingAreaClicked={() => setIsCartOpen(false)}
+        />
         <div className="mt-28 mx-10 lg:mx-24">
             <h1 className='text-5xl font-bold leading-tight'>Završi kupovinu</h1>
             <div className="mt-12 "><span className="text-neutral-500 text-base font-normal font-['Segoe UI']">Porudžbinu plaćaš pouzećem, potrebno je 3-5 dana da porudžbina stigne na tvoju adresu. Cena poštarine je </span><span className="text-black text-base font-semibold font-['Segoe UI']">250 Rsd</span><span className="text-neutral-500 text-base font-normal font-['Segoe UI']"> na teritoriji Srbije.</span></div>

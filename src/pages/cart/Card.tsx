@@ -10,7 +10,7 @@ import ColorCircle from '../../components/shared/ColorCircle'
 
 interface ProductCardProps {
     imageUrl: string | null
-    price: string
+    price: number
     quantity: number
     onAdd: () => void
     onRemove: () => void

@@ -13,7 +13,7 @@ const OrderItems = ({ items }: OrderItemsProps) => {
     return (<div>
         {items.map((item) => {
             return <div className="flex items-center justify-center">
-                <Card {...item} onAdd={() => { addToCart(item) }} onRemove={() => { removeFromCart(item) }} onRemoveAll={() => { removeAllFromCart(item) }} price={"2400"} />
+                <Card {...item} onAdd={() => { addToCart(item) }} onRemove={() => { removeFromCart(item) }} onRemoveAll={() => { removeAllFromCart(item) }} price={2400} />
             </div>
         })}
     </div>)

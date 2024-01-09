@@ -12,6 +12,7 @@ import { useSearchParams } from 'react-router-dom'
 // @ts-ignore
 import blackTShirt from '../../assets/images/black-tshirt.png'
 import { Close } from "react-ionicons";
+import GenderRadioButtons from './GenderRadioButtons'
 
 const PROGRESS_BAR_FETCHING_INTERVAL_MS = 5000
 const DEFAULT_PROGRESS_INCREMENT = 2
@@ -222,12 +223,16 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
           {!!isGeneratingImages && <EmailCard userId={userId} />}
         </div>
         <div className='flex flex-col w-full mt-4 xl:w-[60%] xl:items-end xl:mt-4'>
-          <div className='flex items-start justify-between xl:w-[90%] md:w-[100%] flex-col sm:flex-row sm:items-center'>
+          <div className='flex items-start justify-between xl:w-[90%] md:w-[100%] flex-col md:flex-row md:items-center'>
             <div className='flex justify-center items-center'>
               <h3 className='font-bold text-xl mr-4'>Boja</h3>
               <ColorPicker onColorPick={updateColor} />
             </div>
-            <div className='flex-row'>
+            <div className="flex justify-center items-center lg:mx-2">
+              <h3 className='font-bold text-xl mr-4'>Pol</h3>
+              <GenderRadioButtons onChange={(gender) => updateCurrentItem({ gender })} />
+            </div>
+            <div className='flex-row mt-4 md:mt-0 '>
               <TShirtSizeDropdown onSizeChange={updateSize} />
             </div>
           </div>

@@ -5,19 +5,20 @@ import {
   CloseOutline,
 } from 'react-ionicons'
 import { ColorOption, colorOptions } from '../../constants'
-import { Item, SizeOption } from '../../store/ItemsContext'
+import { Gender, Item, SizeOption, genderToLabel } from '../../store/ItemsContext'
 import ColorCircle from './ColorCircle'
 // @ts-ignore
 import whiteTshirt from "../../assets/images/white-tshirt.png"
 
 interface ProductCardProps {
   imageUrl: string
-  price: string
+  price: number
   quantity: number
   onAdd: () => void
   onRemove: () => void
   size: SizeOption
   color: Item['color']
+  gender: Gender
   onRemoveAll: () => void
 }
 
@@ -26,6 +27,7 @@ const Card: React.FC<ProductCardProps> = ({
   price,
   quantity,
   size,
+  gender,
   color,
   onAdd,
   onRemove,
@@ -90,11 +92,21 @@ const Card: React.FC<ProductCardProps> = ({
           </div>
           <div className="text-center"><p>{size}</p></div>
         </div>
+
+      </div>
+
+      <div className='flex'>
+        <div className="m-1 flex items-center">
+          <div>
+            <p className='text-gray-700 text-md mx-2'>Pol:</p>
+          </div>
+          <div className="text-center"><p>{genderToLabel[gender]}</p></div>
+        </div>
         <div className="m-1 flex items-center">
           <div>
             <p className='text-gray-700 text-md mx-2'>Cena:</p>
           </div>
-          <div className="text-center"><p>{price}rsd</p></div>
+          <div className="text-center"><p>{price * quantity}rsd</p></div>
         </div>
       </div>
       <div className="w-full ">

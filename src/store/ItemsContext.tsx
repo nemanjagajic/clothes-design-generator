@@ -1,18 +1,28 @@
 import React, { createContext, ReactNode, useContext, useState } from 'react'
 
 export type SizeOption = 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL'
+export type Gender = "male" | "female"
+
+export const genderToLabel = {
+  male: "Muški",
+  female: "Ženski"
+}
 
 export type Item = {
   imageUrl: string | null
   color: string
   size: SizeOption
   quantity: number
+  price: number
+  gender: Gender
 }
 const defaultItem = {
   size: 'M' as SizeOption,
   quantity: 1,
   color: 'white',
   imageUrl: null,
+  price: 2400,
+  gender: "male" as Gender
 }
 // Create the context
 const ItemsContext = createContext<{
