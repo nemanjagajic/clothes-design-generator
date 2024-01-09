@@ -260,9 +260,18 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
               >
                 <img width={400} src={blackTShirt} className="px-2 mb-8" />
                 <div
-                  className={`w-[120px] h-[120px] sm:w-[170px] sm:h-[170px] absolute mb-32 sm:mb-40 mr-1 sm:mr-2 rounded-md ${isGeneratingImages ? gradientBgLoaderStyle : 'bg-gray-200'
-                    }`}
-                />
+                  className={`flex items-center justify-center w-[120px] h-[120px] sm:w-[170px] sm:h-[170px] absolute mb-32 sm:mb-40 mr-1 sm:mr-2 rounded-md ${isGeneratingImages ? 'bg-gray-transparent' : 'bg-gray-200'
+                  }`}
+                >
+                  {isGeneratingImages && (
+                    <div className="loader w-[120px] h-[120px] sm:w-[170px] sm:h-[170px]">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </div>
+                  )}
+                </div>
                 {isGeneratingImages && (
                   <div className='w-full absolute bottom-0'>
                     {!!myIndexInGenerationQueue &&
