@@ -13,6 +13,7 @@ import { useSearchParams } from 'react-router-dom'
 import blackTShirt from '../../assets/images/black-tshirt.png'
 import { Close } from "react-ionicons";
 import GenderRadioButtons from './GenderRadioButtons'
+import { checkIfElementIsInViewPort, scrollToSection } from "../../utils/pageNavigation";
 
 const PROGRESS_BAR_FETCHING_INTERVAL_MS = 5000
 const DEFAULT_PROGRESS_INCREMENT = 2
@@ -162,6 +163,16 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
     clearGeneratedImages()
     setIsGeneratingImages(true)
     generateImage(description, userId)
+    scrollToTShirtContainer()
+  }
+
+  const scrollToTShirtContainer = () => {
+    setTimeout(() => {
+      const tShirtContainerDiv = document.getElementById('t-shirt-container')
+      if (tShirtContainerDiv && !checkIfElementIsInViewPort(tShirtContainerDiv)) {
+        scrollToSection('t-shirt-container')
+      }
+    }, 0)
   }
 
   const renderPreviewImage = (imageUrl: string, index: number) => (
@@ -237,12 +248,12 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
             </div>
           </div>
 
-          <div className='flex items-center justify-center w-full xl:w-[90%] h-[500px] border border-gray-200 rounded-md shadow-md'>
+          <div id='t-shirt-container' className='flex items-center justify-center w-full xl:w-[90%] border border-gray-200 rounded-md shadow-md pt-4'>
             {generatedImages && generatedImages.length > 0 ? (
               <>
-                <img width={400} src={blackTShirt} className="px-2" />
+                <img width={400} src={blackTShirt} className="px-2 mb-8" />
                 <img
-                  className='w-[120px] h-[120px] sm:w-[170px] sm:h-[170px] absolute mb-28 mr-1 sm:mr-2 rounded-md cursor-pointer'
+                  className='w-[120px] h-[120px] sm:w-[170px] sm:h-[170px] absolute mb-32 sm:mb-40 mr-1 sm:mr-2 rounded-md cursor-pointer'
                   onClick={() => setIsSelectedImagePreviewModalOpen(true)}
                   width={170}
                   src={generatedImages[focusedPhotoIndex]}
@@ -252,11 +263,20 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
               <div
                 className={`text-gray-400 font-bold flex justify-center items-center rounded-md h-full w-full relative overflow-hidden`}
               >
-                <img width={400} src={blackTShirt} className="px-2" />
+                <img width={400} src={blackTShirt} className="px-2 mb-8" />
                 <div
-                  className={`w-[120px] h-[120px] sm:w-[170px] sm:h-[170px] absolute mb-28 mr-1 sm:mr-2 rounded-md ${isGeneratingImages ? gradientBgLoaderStyle : 'bg-gray-200'
+                  className={`flex items-center justify-center w-[120px] h-[120px] sm:w-[170px] sm:h-[170px] absolute mb-32 sm:mb-40 mr-1 sm:mr-2 rounded-md ${isGeneratingImages ? 'bg-gray-transparent' : 'bg-gray-200'
                     }`}
-                />
+                >
+                  {isGeneratingImages && (
+                    <div className="loader w-[120px] h-[120px] sm:w-[170px] sm:h-[170px]">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </div>
+                  )}
+                </div>
                 {isGeneratingImages && (
                   <div className='w-full absolute bottom-0'>
                     {!!myIndexInGenerationQueue &&
@@ -267,15 +287,22 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
                         </div>
                       </div>
                     ) : (
-                      <div className='w-full bg-gray-200 h-2.5 dark:bg-gray-100 absolute bottom-0 rounded-b-md'>
-                        <div
-                          className='bg-light-blue h-2.5 rounded-full'
-                          style={{
-                            width: `${progressBarPercentage}%`,
-                            transition: 'width 0.3s ease',
-                          }}
-                        ></div>
-                      </div>
+                      <>
+                        <div className='mb-2 m-auto flex items-center justify-center'>
+                          <div className='font-normal text-light-blue'>
+                            {progressBarPercentage}%
+                          </div>
+                        </div>
+                        <div className='w-full bg-gray-200 h-2.5 dark:bg-gray-100 absolute bottom-0 rounded-b-md'>
+                          <div
+                            className='bg-light-blue h-2.5 rounded-full'
+                            style={{
+                              width: `${progressBarPercentage}%`,
+                              transition: 'width 0.3s ease',
+                            }}
+                          ></div>
+                        </div>
+                      </>
                     )}
                   </div>
                 )}
