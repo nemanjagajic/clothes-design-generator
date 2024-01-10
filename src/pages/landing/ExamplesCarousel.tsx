@@ -12,6 +12,10 @@ import imgFrog from '../../assets/images/example-frog.png'
 import imgCoffee from '../../assets/images/example-coffee.png'
 // @ts-ignore
 import imgNoleLidl from '../../assets/images/example-nole-lidl.png'
+// @ts-ignore
+import imgElonMusk from '../../assets/images/example-elon-musk.png'
+// @ts-ignore
+import imgAstronautDrinking from '../../assets/images/example_astronaut_drinking.png'
 
 const SLIDER_SPEED = 500
 
@@ -73,15 +77,15 @@ const ExamplesCarousel = () => {
   }
 
   return (
-    <div className='flex flex-col items-center my-32'>
+    <div className='flex flex-col items-center mt-14 sm:mt-24 mb-32'>
       <h3 id='examples' className='mb-16 text-main-black text-4xl font-extrabold'>Primeri</h3>
       <div className='w-9/12 m-auto'>
         <Slider {...sliderSettings}>
-          <ExampleItem imgSrc={imgFrog} description='Sedi žaba sama na listu lokvanja, sa naočarima i kapom' />
+          <ExampleItem imgSrc={imgAstronautDrinking} description='Astronaut pije koktel na plaži koja je na mesecu' />
           <ExampleItem imgSrc={imgNoleLidl} description='Novak Đoković kupuje smrznutu piletinu u lidlu i stvara gužvu' />
           <ExampleItem imgSrc={imgCoffee} description='Jutrić kafica' />
-          <ExampleItem imgSrc={logo} description='Something' />
-          <ExampleItem imgSrc={logo} description='Something' />
+          <ExampleItem imgSrc={imgElonMusk} description='Elon Musk igra kolo u srpskoj narodnoj nošnji' />
+          <ExampleItem imgSrc={imgFrog} description='Sedi žaba sama na listu lokvanja, sa naočarima i kapom' />
         </Slider>
       </div>
     </div>

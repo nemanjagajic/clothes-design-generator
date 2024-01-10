@@ -3,7 +3,7 @@ import Container from '../../components/shared/Container'
 
 const HomePageBanner = () => {
   return (
-    <Container customStyles='bg-dark-blue py-8 mt-24'>
+    <Container customStyles='bg-dark-blue py-8 mt-16 sm:mt-20'>
       <div className='flex flex-col'>
         <div className='flex flex-col w-full items-center pb-4 md:py-8 md:text-center'>
           <h2 className='text-white text-5xl font-bold leading-tight'>
