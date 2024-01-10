@@ -1,8 +1,10 @@
 {
   "files": {
-    "main.css": "/static/css/main.c59e9d65.css",
-    "main.js": "/static/js/main.c22c6654.js",
+    "main.css": "/static/css/main.bebcdebb.css",
+    "main.js": "/static/js/main.bf62dca8.js",
+    "static/media/example_astronaut_drinking.png": "/static/media/example_astronaut_drinking.ca74790e03bcb7f59142.png",
     "static/media/white-tshirt.png": "/static/media/white-tshirt.192f25a1e867063bb2f6.png",
+    "static/media/example-elon-musk.png": "/static/media/example-elon-musk.dec466c0f559d6200204.png",
     "static/media/black-tshirt.png": "/static/media/black-tshirt.3e3ba86ea011296559c6.png",
     "static/media/logo3.png": "/static/media/logo3.873c84c930f963921e10.png",
     "static/media/example-coffee.png": "/static/media/example-coffee.502f32d42c5488ade5c9.png",
@@ -16,7 +18,7 @@
     "index.html": "/index.html"
   },
   "entrypoints": [
-    "static/css/main.c59e9d65.css",
-    "static/js/main.c22c6654.js"
+    "static/css/main.bebcdebb.css",
+    "static/js/main.bf62dca8.js"
   ]
 }
