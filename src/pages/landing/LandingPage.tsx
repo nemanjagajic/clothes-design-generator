@@ -9,11 +9,13 @@ import FAQSection from './FAQSection'
 import OurCustomers from './OurCustomers'
 import Footer from './Footer'
 import { v4 as uuidv4 } from 'uuid'
+import { useItems } from '../../store/ItemsContext'
 
 const userId = uuidv4()
 
 const MyComponent = () => {
   const [isCartOpen, setIsCartOpen] = useState(false)
+  const { itemCount } = useItems()
 
   return (
     <div className='App'>
@@ -21,7 +23,7 @@ const MyComponent = () => {
         isCartOpen={isCartOpen}
         onSurroundingAreaClicked={() => setIsCartOpen(false)}
       />
-      <Navbar onCartClicked={() => setIsCartOpen(true)} />
+      <Navbar onCartClicked={() => setIsCartOpen(true)} itemCount={itemCount} />
       <HomePageBanner />
       <ClothesGenerator userId={userId} />
       <ExamplesCarousel />

@@ -30,12 +30,13 @@ export default function OrderForm() {
         <div className="flex justify-center items-center mt-8 flex f-full">
             <div className="w-full">
                 <form onSubmit={handleSubmit(onSubmit)} noValidate className="flex flex-col gap-4">
-                    <input {...register('firstName', { required: true })} placeholder="Ime" className="border p-2" />
-                    {errors.firstName && <span className="text-red-500">Polje je obavezno</span>}
+                    <div className='flex justify-between'>
+                        <input {...register('firstName', { required: true })} placeholder="Ime" className="border p-2 w-1/2 mr-1" />
+                        {errors.firstName && <span className="text-red-500">Polje je obavezno</span>}
 
-                    <input {...register('lastName', { required: true })} placeholder="Prezime" className="border p-2" />
-                    {errors.lastName && <span className="text-red-500">Polje je obavezno</span>}
-
+                        <input {...register('lastName', { required: true })} placeholder="Prezime" className="border p-2 w-1/2 ml-2" />
+                        {errors.lastName && <span className="text-red-500">Polje je obavezno</span>}
+                    </div>
                     <input
                         {...register('phoneNumber', {
                             required: true,

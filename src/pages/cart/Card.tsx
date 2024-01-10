@@ -5,7 +5,7 @@ import {
     RemoveCircleOutline,
 } from 'react-ionicons'
 import { ColorOption, colorOptions } from '../../constants'
-import { Item, SizeOption } from '../../store/ItemsContext'
+import { Gender, Item, SizeOption, genderToLabel } from '../../store/ItemsContext'
 import ColorCircle from '../../components/shared/ColorCircle'
 
 interface ProductCardProps {
@@ -16,6 +16,7 @@ interface ProductCardProps {
     onRemove: () => void
     size: SizeOption
     color: Item['color']
+    gender: Gender
     onRemoveAll: () => void
 }
 
@@ -27,17 +28,18 @@ const Card: React.FC<ProductCardProps> = ({
     color,
     onAdd,
     onRemove,
+    gender,
     onRemoveAll
 }) => {
     return (
-        <div className='m-3 flex items-center bg-white'>
-            <div className='flex shadow-lg m-4 rounded-md overflow-hidden'>
-                <img src={imageUrl!} width={'200px'} height={'200px'} alt='Product' />
+        <div className='my-1 flex items-center bg-white'>
+            <div className='flex shadow-lg my-4 mr-4 rounded-md overflow-hidden'>
+                <img src={imageUrl!} width={'150px'} alt='Product' />
             </div>
             <table>
                 <tr>
-                    <td className="text-center"><p className='text-gray-700 text-md'>Količina:</p></td>
-                    <td className="text-center">
+                    <td className="text-left"><p className='text-gray-700 text-md'>Količina:</p></td>
+                    <td className="text-left">
                         <div className='flex items-center justify-center'>
                             <button onClick={onRemove}>
                                 <ChevronBackOutline
@@ -62,11 +64,11 @@ const Card: React.FC<ProductCardProps> = ({
                     <td>
                         <p className='text-gray-700 text-md'>Veličina:</p>
                     </td>
-                    <td className="text-center"><p className='mr-8 font-bold'>{size}</p></td>
+                    <td className="text-left"><p className='ml-3'>{size}</p></td>
                 </tr>
                 <tr>
                     <td><p className='text-gray-700 text-md'>Boja:</p></td>
-                    <td><div className='font-bold flex items-center'>
+                    <td><div className='flex items-center ml-3'>
                         <ColorCircle
                             color={color}
                             type='passive'
@@ -74,6 +76,18 @@ const Card: React.FC<ProductCardProps> = ({
                             size={'5'}
                         />
                     </div></td>
+                </tr>
+                <tr>
+                    <td>
+                        <p className='text-gray-700 text-md'>Tip:</p>
+                    </td>
+                    <td className="text-left"><p className='ml-3 '>{genderToLabel[gender]}</p></td>
+                </tr>
+                <tr>
+                    <td>
+                        <p className='text-gray-700 text-md'>Cena:</p>
+                    </td>
+                    <td className="text-left"><p className='ml-3 '>{price * quantity}rsd</p></td>
                 </tr>
 
             </table>

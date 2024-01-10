@@ -34,6 +34,11 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
   const [searchParams] = useSearchParams()
 
   useEffect(() => {
+    if (generatedImages.length)
+      localStorage.setItem("images", JSON.stringify(generatedImages))
+  }, [generatedImages])
+
+  useEffect(() => {
     const img0 = decodeURIComponent(searchParams.get('img0')!)
     const img1 = decodeURIComponent(searchParams.get('img1')!)
     const img2 = decodeURIComponent(searchParams.get('img2')!)
@@ -41,6 +46,17 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
 
     if (img0 !== 'null') {
       setGeneratedImages([img0, img1, img2, img3])
+      return
+    }
+
+    try {
+      const imagesFromStorage = localStorage.getItem("images")
+      if (imagesFromStorage) {
+        setGeneratedImages(JSON.parse(imagesFromStorage))
+      }
+
+    } catch (error) {
+
     }
   }, [])
   const { updateCurrentItem, addToCart, currentItem } = useItems()

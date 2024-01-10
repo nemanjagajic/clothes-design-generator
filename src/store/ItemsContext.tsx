@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode, useContext, useState } from 'react'
+import React, { createContext, ReactNode, useContext, useMemo, useState } from 'react'
 
 export type SizeOption = 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL'
 export type Gender = "male" | "female"
@@ -31,6 +31,8 @@ const ItemsContext = createContext<{
   removeFromCart: (itemToRemove: Item) => void
   removeAllFromCart: (itemToRemove: Item) => void
   currentItem: Item
+  totalPrice: number
+  itemCount: number
   updateCurrentItem: (itemData: Partial<Item>) => void
 }>({
   items: [defaultItem],
@@ -39,6 +41,8 @@ const ItemsContext = createContext<{
   removeAllFromCart: () => { },
   currentItem: defaultItem,
   updateCurrentItem: () => { },
+  totalPrice: 0,
+  itemCount: 0
 })
 
 // Implement the Provider
@@ -64,7 +68,8 @@ export const ItemsProvider = ({ children }: { children: ReactNode }) => {
       (item) =>
         item.imageUrl === newItem.imageUrl &&
         item.color === newItem.color &&
-        item.size === newItem.size
+        item.size === newItem.size &&
+        item.gender === newItem.gender
     )
 
     if (existingIndex !== -1) {
@@ -80,9 +85,21 @@ export const ItemsProvider = ({ children }: { children: ReactNode }) => {
     setItems((prevItems) => {
       return prevItems.filter(item => !(item.imageUrl === itemToRemove.imageUrl &&
         item.color === itemToRemove.color &&
-        item.size === itemToRemove.size))
+        item.size === itemToRemove.size && item.gender === itemToRemove.gender))
     })
   }
+
+  const totalPrice = useMemo(() => {
+    return items.reduce((acc, item) => {
+      return acc + item.price * item.quantity
+    }, 0)
+  }, [items])
+
+  const itemCount = useMemo(() => {
+    return items.reduce((acc, item) => {
+      return acc + item.quantity
+    }, 0)
+  }, [items])
 
   const removeFromCart = (itemToRemove: Item) => {
     setItems((prevItems) => {
@@ -90,7 +107,8 @@ export const ItemsProvider = ({ children }: { children: ReactNode }) => {
         if (
           item.imageUrl === itemToRemove.imageUrl &&
           item.color === itemToRemove.color &&
-          item.size === itemToRemove.size
+          item.size === itemToRemove.size &&
+          item.gender === itemToRemove.gender
         ) {
           if (item.quantity > 1) {
             // Reduce quantity
@@ -117,6 +135,8 @@ export const ItemsProvider = ({ children }: { children: ReactNode }) => {
         removeAllFromCart,
         currentItem,
         updateCurrentItem,
+        totalPrice,
+        itemCount
       }}
     >
       {children}
