@@ -16,7 +16,7 @@ const Navbar = ({ onCartClicked }: NavbarTypes) => (
         className='cursor-pointer'
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       >
-        <img className="h-24" src={logo} />
+        <img className="h-16 sm:h-[80px]" src={logo} />
       </div>
       <div className='flex flex-row hidden lg:inline-flex'>
         <div
