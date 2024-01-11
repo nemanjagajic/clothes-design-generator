@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { generateImage } from '../../api/imageGenerator'
-import socketIOClient from 'socket.io-client'
 import Container from '../../components/shared/Container'
 import Button from '../../components/shared/Button'
 import axios from 'axios'
@@ -62,21 +61,6 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
   const { updateCurrentItem, addToCart, currentItem } = useItems()
 
   useEffect(() => {
-    const baseApiUrl = process.env.REACT_APP_BASE_API_URL || ''
-    const socket = socketIOClient(baseApiUrl)
-
-    console.log(`Listening generated images for ${userId}`)
-    socket.on(`generatedImages${userId}`, (data) => {
-      setGeneratedImages(data)
-      setIsGeneratingImages(false)
-    })
-
-    return () => {
-      socket.disconnect()
-    }
-  }, [])
-
-  useEffect(() => {
     updateCurrentItem({ imageUrl: generatedImages[focusedPhotoIndex] })
   }, [generatedImages, focusedPhotoIndex])
 
@@ -95,7 +79,7 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
   const fetchAndUpdateProgress = async () => {
     try {
       const {
-        data: { progress },
+        data: { progress, response },
       } = await axios.get(
         `${process.env.REACT_APP_BASE_API_URL}/getImageGenerationProgress`
       )
@@ -108,6 +92,10 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
       }
       if (progress > 0) {
         setProgressBarPercentage(progress)
+      }
+      if (progress === 100) {
+        setGeneratedImages(response.imageUrls)
+        setIsGeneratingImages(false)
       }
     } catch (e) {
       console.log(e)
