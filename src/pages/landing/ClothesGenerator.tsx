@@ -10,7 +10,7 @@ import EmailCard from '../../components/EmailCard/EmailCard'
 import { useSearchParams } from 'react-router-dom'
 // @ts-ignore
 import blackTShirt from '../../assets/images/black-tshirt.png'
-import { Close } from "react-ionicons";
+import { Close } from "react-ionicons"
 import GenderRadioButtons from './GenderRadioButtons'
 import { checkIfElementIsInViewPort, scrollToSection } from "../../utils/pageNavigation";
 
