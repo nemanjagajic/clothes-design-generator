@@ -12,7 +12,7 @@ import { useSearchParams } from 'react-router-dom'
 import blackTShirt from '../../assets/images/black-tshirt.png'
 import { Close } from "react-ionicons"
 import GenderRadioButtons from './GenderRadioButtons'
-import { checkIfElementIsInViewPort, scrollToSection } from "../../utils/pageNavigation";
+import { checkIfElementIsInViewPort, scrollToSection } from "../../utils/pageNavigation"
 
 const PROGRESS_BAR_FETCHING_INTERVAL_MS = 5000
 const DEFAULT_PROGRESS_INCREMENT = 2
