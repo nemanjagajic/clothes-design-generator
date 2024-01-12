@@ -13,6 +13,7 @@ module.exports = {
         'main-black': '#2C2C2C',
         'nsm-gray-100': '#ECEBE4',
         'nsm-gray-200': '#6B6B6B',
+        'nsm-gray-300': '#FAF9F1',
         'light-gray': '#6B6B6B',
         'border-gray': '#D9D9D9'
       },

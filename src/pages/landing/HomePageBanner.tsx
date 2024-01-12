@@ -5,15 +5,15 @@ import {scrollToSection} from "../../utils/pageNavigation";
 
 const HomePageBanner = () => {
   return (
-    <Container customStyles='bg-dark-blue py-8 mt-16 sm:mt-20'>
-      <div className='flex flex-col w-full items-center justify-center'>
+    <div className='bg-dark-blue px-4 py-8 mt-16 sm:mt-20'>
+      <div className='flex flex-col w-full sm:items-center sm:justify-center'>
         <div className='flex flex-col w-full items-center pb-4 md:pt-8 md:pb-6 md:text-center'>
-          <h2 className='text-white text-5xl font-bold leading-tight'>
+          <h2 className='text-white text-[44px] sm:text-5xl font-bold leading-tight'>
             <div>
               Od tvoje mašte do stvarnosti
             </div>
             <span>Dizajniraj</span>
-            <span className='italic text-light-blue font-normal'>
+            <span className='italic text-light-blue bold'>
               {' '}
               majicu u minuti{' '}
             </span>
@@ -28,7 +28,7 @@ const HomePageBanner = () => {
         </p>
         <Button text={'Napravi svoj dizajn majice'} onClick={() => scrollToSection('t-shirt-container')} />
       </div>
-    </Container>
+    </div>
   )
 }
 

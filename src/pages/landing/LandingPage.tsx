@@ -10,6 +10,7 @@ import OurCustomers from './OurCustomers'
 import Footer from './Footer'
 import { v4 as uuidv4 } from 'uuid'
 import { useItems } from '../../store/ItemsContext'
+import Instructions from "./Instructions";
 
 const userId = uuidv4()
 
@@ -25,6 +26,7 @@ const MyComponent = () => {
       />
       <Navbar onCartClicked={() => setIsCartOpen(true)} itemCount={itemCount} />
       <HomePageBanner />
+      <Instructions />
       <ClothesGenerator userId={userId} />
       <ExamplesCarousel />
       <TShirtSizes />
