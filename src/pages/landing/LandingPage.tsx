@@ -11,6 +11,7 @@ import Footer from './Footer'
 import { v4 as uuidv4 } from 'uuid'
 import { useItems } from '../../store/ItemsContext'
 import Instructions from "./Instructions";
+import ExampleSection from "./ExampleSection";
 
 const userId = uuidv4()
 
@@ -26,6 +27,7 @@ const MyComponent = () => {
       />
       <Navbar onCartClicked={() => setIsCartOpen(true)} itemCount={itemCount} />
       <HomePageBanner />
+      <ExampleSection />
       <Instructions />
       <ClothesGenerator userId={userId} />
       <ExamplesCarousel />
