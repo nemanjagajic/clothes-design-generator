@@ -1,43 +1,32 @@
 import React from 'react'
 import Container from '../../components/shared/Container'
+import Button from "../../components/shared/Button";
+import {scrollToSection} from "../../utils/pageNavigation";
 
 const HomePageBanner = () => {
   return (
     <Container customStyles='bg-dark-blue py-8 mt-16 sm:mt-20'>
-      <div className='flex flex-col'>
-        <div className='flex flex-col w-full items-center pb-4 md:py-8 md:text-center'>
+      <div className='flex flex-col w-full items-center justify-center'>
+        <div className='flex flex-col w-full items-center pb-4 md:pt-8 md:pb-6 md:text-center'>
           <h2 className='text-white text-5xl font-bold leading-tight'>
-            Napravi majicu sa slikom kakvu zamišljaš za
+            <div>
+              Od tvoje mašte do stvarnosti
+            </div>
+            <span>Dizajniraj</span>
             <span className='italic text-light-blue font-normal'>
               {' '}
-              40 sekundi{' '}
+              majicu u minuti{' '}
             </span>
-            bez dizajnera
+            <span>!</span>
           </h2>
         </div>
-        <div className='flex flex-col md:flex-row text-white mt-6 w-full'>
-          <div className='flex flex-row justify-center items-center w-full md:w-1/3 mr-6 mb-6 lg:mb-2'>
-            <div className='mr-4 font-bold text-2xl'>1</div>
-            <div>
-              U polje ispod opiši kakvu sliku zamišljaš na majici. Npr. "Slatki
-              mali kuca pije kafu"
-            </div>
-          </div>
-          <div className='flex flex-row justify-center items-center w-full md:w-1/3 mb-6 lg:mb-2'>
-            <div className='mr-4 font-bold text-2xl'>2</div>
-            <div>
-              Zatim odredi u kojem stilu želis taj vizual da bude pa pritisni
-              dugme generiši i sa desne strane će biti majica sa tvojim vizualom
-            </div>
-          </div>
-          <div className='flex flex-row justify-center items-center w-full md:w-1/3 md:ml-6 mb-6 lg:mb-2'>
-            <div className='mr-4 font-bold text-2xl'>3</div>
-            <div>
-              Kada generiše vizual odredi koja boja ti odgovara majice, odaberi
-              veličinu i klikni na dugme ‘kupi ovu majicu’
-            </div>
-          </div>
-        </div>
+        <p className='text-white'>
+          Zamislite. Opišite. Oživite Vaš jedinstveni
+        </p>
+        <p className='text-white mb-10'>
+          dizajn majice, brzo i lako.
+        </p>
+        <Button text={'Napravi svoj dizajn majice'} onClick={() => scrollToSection('t-shirt-container')} />
       </div>
     </Container>
   )

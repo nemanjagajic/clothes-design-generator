@@ -29,7 +29,7 @@ const Navbar = ({ onCartClicked, itemCount }: NavbarTypes) => {
             onClick={() => scrollToSection('examples')}
             className='flex justify-center items-center px-8 cursor-pointer'
           >
-            <div className='font-medium text-nsm-gray-200 hover:text-light-blue transition-width duration-200'>
+            <div className='font-medium text-nsm-gray-200 hover:text-light-blue transition-text duration-200'>
               Primeri
             </div>
           </div>
@@ -37,7 +37,7 @@ const Navbar = ({ onCartClicked, itemCount }: NavbarTypes) => {
             onClick={() => scrollToSection('tShirtSizes')}
             className='flex justify-center items-center px-8 cursor-pointer'
           >
-            <div className='font-medium text-nsm-gray-200 hover:text-light-blue transition-width duration-200'>
+            <div className='font-medium text-nsm-gray-200 hover:text-light-blue transition-text duration-200'>
               Veličine
             </div>
           </div>
@@ -45,7 +45,7 @@ const Navbar = ({ onCartClicked, itemCount }: NavbarTypes) => {
             onClick={() => scrollToSection('questions')}
             className='flex justify-center items-center px-8 cursor-pointer'
           >
-            <div className='font-medium text-nsm-gray-200 hover:text-light-blue transition-width duration-200'>
+            <div className='font-medium text-nsm-gray-200 hover:text-light-blue transition-text duration-200'>
               Pitanja
             </div>
           </div>
@@ -53,7 +53,7 @@ const Navbar = ({ onCartClicked, itemCount }: NavbarTypes) => {
             onClick={() => scrollToSection('our-users')}
             className='font-medium flex justify-center items-center px-8 cursor-pointer'
           >
-            <div className='text-nsm-gray-200 hover:text-light-blue transition-width duration-200'>
+            <div className='text-nsm-gray-200 hover:text-light-blue transition-text duration-200'>
               Naši korisnici
             </div>
           </div>
