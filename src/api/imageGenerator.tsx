@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const generateImage = async (description: string, ref: string) => {
+export const generateImage = async (description: string, ref: string, onError: () => void) => {
   const baseUrl = process.env.REACT_APP_BASE_API_URL
   try {
     await axios.post(`${baseUrl}/generateImage`, {
@@ -8,6 +8,7 @@ export const generateImage = async (description: string, ref: string) => {
       ref
     })
   } catch (e) {
+    onError()
     console.log(e)
   }
 }

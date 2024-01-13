@@ -13,8 +13,6 @@ import { useItems } from '../../store/ItemsContext'
 import Instructions from "./Instructions";
 import ExampleSection from "./ExampleSection";
 
-const userId = uuidv4()
-
 const MyComponent = () => {
   const [isCartOpen, setIsCartOpen] = useState(false)
   const { itemCount } = useItems()
@@ -29,7 +27,7 @@ const MyComponent = () => {
       <HomePageBanner />
       <ExampleSection />
       <Instructions />
-      <ClothesGenerator userId={userId} />
+      <ClothesGenerator />
       <ExamplesCarousel />
       <TShirtSizes />
       <FAQSection />

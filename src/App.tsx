@@ -4,6 +4,7 @@ import LandingPage from './pages/landing/LandingPage'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import DashboardHome from './pages/dashboard/DashboardHome'
 import CartPage from './pages/cart/CartPage'
+import GridComponent from './pages/landing/GridComponent'
 
 function App() {
   const router = createBrowserRouter([
@@ -14,6 +15,10 @@ function App() {
     {
       path: '/',
       element: <LandingPage />,
+    },
+    {
+      path: '/grid',
+      element: <GridComponent >{null}</GridComponent>,
     },
     {
       path: '/cart',
