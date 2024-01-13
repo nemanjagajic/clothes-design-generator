@@ -15,7 +15,8 @@ module.exports = {
         'nsm-gray-200': '#6B6B6B',
         'nsm-gray-300': '#FAF9F1',
         'light-gray': '#6B6B6B',
-        'border-gray': '#D9D9D9'
+        'border-gray': '#D9D9D9',
+        'nsm-orange': '#FAC43C'
       },
       width: {
         '20': "30px"      
