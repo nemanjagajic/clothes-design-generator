@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Container from '../shared/Container'
 import { BagOutline } from 'react-ionicons'
 import { scrollToSection } from '../../utils/pageNavigation'
@@ -13,8 +13,30 @@ type NavbarTypes = {
 
 const Navbar = ({ onCartClicked, itemCount }: NavbarTypes) => {
   const navigate = useNavigate()
+
+  const [visible, setVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  const controlNavbar = () => {
+    if (typeof window !== 'undefined') {
+      const currentScrollY = window.scrollY;
+      setVisible(currentScrollY < lastScrollY || currentScrollY <= 0);
+      setLastScrollY(currentScrollY);
+    }
+  };
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', controlNavbar);
+
+      return () => window.removeEventListener('scroll', controlNavbar);
+    }
+  }, [lastScrollY]);
+
   return (
-    <Container customStyles='h-[80px] fixed z-30 top-0 bg-nsm-gray-100 w-full shadow-md'>
+    <Container customStyles={`h-[80px] fixed z-30 top-0 bg-nsm-gray-100 w-full shadow-md transition-transform duration-300 ${
+      visible ? 'transform translate-y-0' : 'transform -translate-y-full'
+    }`}>
       <div className='flex flex-row w-full justify-between'>
         <div
           className='flex justify-center items-center cursor-pointer'
