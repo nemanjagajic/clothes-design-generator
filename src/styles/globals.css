@@ -94,3 +94,7 @@ body {
     border: solid white 10px;
     border-radius: 50%;
 }
+
+.clip-angled-edges {
+    clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
+}
