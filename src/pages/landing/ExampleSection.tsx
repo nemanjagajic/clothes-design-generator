@@ -27,7 +27,7 @@ const ExampleSection = () => {
         </h2>
         <img src={imgArrow1} className='z-20 absolute h-[160px] lg:h-[200px] xl:h-[270px] lg:left-[30px] xl:left-[35px]' />
         <div className='flex justify-center items-center p-2 rounded-md text-[28px] absolute w-[300px] h-[100px] bg-white top-[150px] lg:top-[190px] xl:top-[250px] left-[130px] lg:left-[190px] xl:left-[260px]'>
-          'Pomeranac vija hranu u svemiru'
+          "Pomeranac vija hranu u svemiru"
         </div>
         <img src={imgArrow2} className='z-20 absolute h-[70px] lg:h-[80px] xl:h-[100px] top-[260px] lg:top-[310px] xl:top-[340px] left-[200px] lg:left-[230px] xl:left-[490px]' />
         <div className='flex items-center clip-angled-edges p-2 pl-3 text-[28px] absolute w-[210px] text-white h-[40px] bg-nsm-orange top-[300px] lg:top-[360px] xl:top-[400px] left-[350px] lg:left-[400px] xl:left-[700px]'>
@@ -41,13 +41,13 @@ const ExampleSection = () => {
 
   const renderMobileContent = () => (
     <div>
-      <div className='absolute top-10 px-4 z-10'>
+      <div className='absolute top-20 px-4 z-10'>
         <h2 className='text-black text-[44px] font-bold leading-tight'>
           Ovo smo mi opisali
         </h2>
         <img src={imgArrow1Small} className='absolute h-[120px] top-[40px] left-[280px] z-20' />
         <div className='flex justify-center items-center rounded-md absolute top-[170px] right-[40px] w-[280px] h-[80px] bg-white text-[24px] p-2'>
-          'Pomeranac vija hranu u svemiru'
+          "Pomeranac vija hranu u svemiru"
         </div>
         <img src={imgArrow2Small} className='absolute h-[100px] left-[120px] top-[260px] z-20' />
         <div className='flex justify-center items-center clip-angled-edges absolute w-[190px] h-[40px] bg-nsm-orange top-[360px] left-[100px] text-[24px] text-white'>
