@@ -18,7 +18,11 @@ const PROGRESS_BAR_FETCHING_INTERVAL_MS = 5000
 const DEFAULT_PROGRESS_INCREMENT = 2
 const QUEUE_FETCHING_INTERVAL_MS = 5000
 
-const ClothesGenerator = () => {
+type ClothesGeneratorTypes = {
+  imgGenerationRef: string
+}
+
+const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
   const [description, setDescription] = useState('')
   const [showBadWord, setShowBadWord] = useState(false)
   const [isGeneratingImages, setIsGeneratingImages] = useState(false)
@@ -109,7 +113,7 @@ const ClothesGenerator = () => {
         `${process.env.REACT_APP_BASE_API_URL}/imageRequestsQueue`
       )
       const myGenerationIndex = imageRequestsQueue.findIndex(
-        (ir: any) => ir.ref === userId
+        (ir: any) => ir.ref === imgGenerationRef
       )
       setMyIndexInGenerationQueue(myGenerationIndex)
     } catch (e) {
@@ -166,7 +170,7 @@ const ClothesGenerator = () => {
     clearGeneratedImages()
     setIsGeneratingImages(true)
     scrollToTShirtContainer()
-    generateImage(description, userId, () => {
+    generateImage(description, imgGenerationRef, () => {
       setShowBadWord(true)
       setIsGeneratingImages(false)
       scrollToPromptField()
@@ -314,7 +318,7 @@ const ClothesGenerator = () => {
               </div>
             )}
 
-            <div className='flex items-center md:justify-center w-full mt-2 overflow-x-auto pb-3 hide-scrollbar'>
+            <div className='flex items-center md:justify-center w-full mt-2 overflow-x-auto pb-3 sm:pb-8 hide-scrollbar'>
               {generatedImages.length > 0
                 ? generatedImages.map((imageUrl, index) => {
                   return renderPreviewImage(imageUrl, index)

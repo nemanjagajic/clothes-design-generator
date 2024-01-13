@@ -13,6 +13,8 @@ import { useItems } from '../../store/ItemsContext'
 import Instructions from "./Instructions";
 import ExampleSection from "./ExampleSection";
 
+const imgGenerationRef = uuidv4()
+
 const MyComponent = () => {
   const [isCartOpen, setIsCartOpen] = useState(false)
   const { itemCount } = useItems()
@@ -27,7 +29,7 @@ const MyComponent = () => {
       <HomePageBanner />
       <ExampleSection />
       <Instructions />
-      <ClothesGenerator />
+      <ClothesGenerator imgGenerationRef={imgGenerationRef} />
       <ExamplesCarousel />
       <TShirtSizes />
       <FAQSection />
