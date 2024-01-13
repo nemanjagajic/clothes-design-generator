@@ -16,29 +16,18 @@ const GenderRadioButtons = ({ onChange }: GenderRadioBUttonProps) => {
 
     return (
         <div className="flex items-center space-x-4">
-            <label className="flex items-center space-x-2">
-                <input
-                    type="radio"
-                    name="gender"
-                    value="male"
-                    checked={gender === 'male' as Gender}
-                    onChange={() => setGender('male' as Gender)}
-                    className="form-radio h-5 w-5 text-light-blue-500" // Adjusted size
-                />
-                <span className="text-lg">Muški</span>
-            </label>
-
-            <label className="flex items-center space-x-2">
-                <input
-                    type="radio"
-                    name="gender"
-                    value="female"
-                    checked={gender === 'female' as Gender}
-                    onChange={() => setGender('female' as Gender)}
-                    className="form-radio h-5 w-5 text-light-blue-500" // Adjusted size
-                />
-                <span className="text-lg">Ženski</span>
-            </label>
+          <button
+            onClick={() => setGender('male' as Gender)}
+            className={`px-4 py-2 rounded ${gender === 'male' ? 'bg-light-blue text-white' : 'bg-white text-gray-700 border border-nsm-gray-500'}`}
+          >
+            Musko
+          </button>
+          <button
+            onClick={() => setGender('female' as Gender)}
+            className={`px-4 py-2 rounded ${gender === 'female' ? 'bg-light-blue text-white' : 'bg-white text-gray-700 border border-nsm-gray-500'}`}
+          >
+            Zensko
+          </button>
         </div>
     );
 };
