@@ -28,7 +28,7 @@ const InstructionSection = () => {
         </div>
       </h2>
       <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-        {renderStep(1, 'Razmislite i opiši dizajn za majicu u polje za unost teksta ispod.')}
+        {renderStep(1, 'Razmisli i opiši dizajn za majicu u polje za unost teksta ispod.')}
         {renderStep(2, 'Pritisni dugme \'Generiši\' i za minut dobijaš vizual tvoje majice.')}
         {renderStep(3, 'Odaberi jednu od četiri ponuđene fotke, boju majice, veličinu i dodaj u korpu.')}
       </div>
