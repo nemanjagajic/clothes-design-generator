@@ -1,12 +1,13 @@
 {
   "files": {
-    "main.css": "/static/css/main.bebcdebb.css",
-    "main.js": "/static/js/main.bf62dca8.js",
+    "main.css": "/static/css/main.a2f5617e.css",
+    "main.js": "/static/js/main.e4fde444.js",
     "static/media/example_astronaut_drinking.png": "/static/media/example_astronaut_drinking.ca74790e03bcb7f59142.png",
     "static/media/white-tshirt.png": "/static/media/white-tshirt.192f25a1e867063bb2f6.png",
     "static/media/example-elon-musk.png": "/static/media/example-elon-musk.dec466c0f559d6200204.png",
     "static/media/black-tshirt.png": "/static/media/black-tshirt.3e3ba86ea011296559c6.png",
     "static/media/logo3.png": "/static/media/logo3.873c84c930f963921e10.png",
+    "static/media/t-shirt-pomeranian-example.png": "/static/media/t-shirt-pomeranian-example.2c48b682c3360a25ef5d.png",
     "static/media/example-coffee.png": "/static/media/example-coffee.502f32d42c5488ade5c9.png",
     "static/media/tshirt-sizes.png": "/static/media/tshirt-sizes.6e8b42155845473b13b2.png",
     "static/media/example-nole-lidl.png": "/static/media/example-nole-lidl.438e23f926c48d000778.png",
@@ -18,7 +19,7 @@
     "index.html": "/index.html"
   },
   "entrypoints": [
-    "static/css/main.bebcdebb.css",
-    "static/js/main.bf62dca8.js"
+    "static/css/main.a2f5617e.css",
+    "static/js/main.e4fde444.js"
   ]
 }
