@@ -35,27 +35,27 @@ const ClothesGenerator = () => {
       localStorage.setItem("images", JSON.stringify(generatedImages))
   }, [generatedImages])
 
-  useEffect(() => {
-    const img0 = decodeURIComponent(searchParams.get('img0')!)
-    const img1 = decodeURIComponent(searchParams.get('img1')!)
-    const img2 = decodeURIComponent(searchParams.get('img2')!)
-    const img3 = decodeURIComponent(searchParams.get('img3')!)
-
-    if (img0 !== 'null') {
-      setGeneratedImages([img0, img1, img2, img3])
-      return
-    }
-
-    try {
-      const imagesFromStorage = localStorage.getItem("images")
-      if (imagesFromStorage) {
-        setGeneratedImages(JSON.parse(imagesFromStorage))
-      }
-
-    } catch (error) {
-
-    }
-  }, [])
+  // useEffect(() => {
+  //   const img0 = decodeURIComponent(searchParams.get('img0')!)
+  //   const img1 = decodeURIComponent(searchParams.get('img1')!)
+  //   const img2 = decodeURIComponent(searchParams.get('img2')!)
+  //   const img3 = decodeURIComponent(searchParams.get('img3')!)
+  //
+  //   if (img0 !== 'null') {
+  //     setGeneratedImages([img0, img1, img2, img3])
+  //     return
+  //   }
+  //
+  //   try {
+  //     const imagesFromStorage = localStorage.getItem("images")
+  //     if (imagesFromStorage) {
+  //       setGeneratedImages(JSON.parse(imagesFromStorage))
+  //     }
+  //
+  //   } catch (error) {
+  //
+  //   }
+  // }, [])
 
   const { updateCurrentItem, addToCart, currentItem, userId } = useItems()
 
@@ -195,11 +195,11 @@ const ClothesGenerator = () => {
   const renderPreviewImage = (imageUrl: string, index: number) => (
     <div
       key={index}
-      className={`flex items-center justify-center border cursor-pointer w-[140px] h-auto min-h-[120px] min-w-[120px]
+      className={`flex items-center justify-center border cursor-pointer w-[120px] h-[120px] min-h-[120px] min-w-[120px] sm:w-[140px] sm:h-[140px] sm:min-h-[140px] sm:in-w-[140px]
       ${index === focusedPhotoIndex
           ? 'border-light-blue border-2'
           : 'border-gray-300 border-2'
-        } h-[140px] w-[140px] mr-2 rounded-lg p-1`}
+        } mr-2 rounded-lg p-1`}
       onClick={() => setFocusedPhotoIndex(index)}
     >
       <img src={imageUrl} className='rounded-md' />
@@ -209,7 +209,7 @@ const ClothesGenerator = () => {
   const renderEmptyPreviewImage = (index: number) => (
     <div
       key={index}
-      className={`flex items-center justify-center border cursor-pointer border-gray-200 min-h-[120px] min-w-[120px] mx-2 rounded-md ${isGeneratingImages && gradientBgLoaderStyle
+      className={`flex items-center justify-center border cursor-pointer border-gray-200 w-[120px] h-[120px] min-h-[120px] min-w-[120px] sm:w-[140px] sm:h-[140px] sm:min-h-[140px] sm:in-w-[140px] mx-2 rounded-md ${isGeneratingImages && gradientBgLoaderStyle
         }`}
     />
   )
@@ -225,13 +225,14 @@ const ClothesGenerator = () => {
   const gradientBgLoaderStyle =
     'bg-gradient-to-r from-very-light-blue via-very-light-blue to-white background-animate'
   return (
-    <div className='min-h-full bg-dark-blue py-4 lg:px-8'>
-      <div className='mt-6 flex flex-col lg:flex-row w-full bg-nsm-gray-400 px-4 pt-8' id='prompt-input'>
+    <div className='min-h-full bg-dark-blue py-4 md:px-8'>
+      <div className='bg-nsm-gray-400 rounded-2xl'>
+      <div className='mt-6 flex flex-col md:flex-row w-full px-4 pt-8' id='prompt-input'>
           <textarea
             placeholder='Ovde opiši sliku kakvu želiš na majici ispod'
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className='w-full min-h-[100px] lg:min-h-[50px] border border-gray-300 rounded-md focus:outline-none p-4 lg:p-3'
+            className='w-full min-h-[100px] md:min-h-[50px] md:h-[50px] border border-gray-300 rounded-md focus:outline-none p-4 md:p-3'
           />
         {showBadWord && <p className='text-[#F00]'>*ne možete koristiti psovke ili uvredljive reči</p>}
         <br />
@@ -239,7 +240,7 @@ const ClothesGenerator = () => {
           isMain={false}
           text={'Napravi'}
           onClick={handleGenerateImage}
-          customStyles={'w-full h-[50px] lg:w-[300px] lg:ml-4'}
+          customStyles={'w-full h-[50px] md:w-[300px] md:ml-4'}
           isDisabled={isGeneratingImages || !description.trim()}
           disabledText={
             isGeneratingImages
@@ -248,10 +249,10 @@ const ClothesGenerator = () => {
           }
         />
 
-        {!!isGeneratingImages && <EmailCard userId={userId} />}
+        {/*{!!isGeneratingImages && <EmailCard userId={userId} />}*/}
       </div>
 
-      <div className='flex w-full h-full flex-col xl:flex-row mb-8 bg-nsm-gray-400 px-4'>
+      <div className='flex w-full h-full flex-col xl:flex-row mb-8 px-4 bg'>
           <div id='t-shirt-container' className='flex flex-col items-center justify-center w-full pt-4 xl:min-w-[50%] relative'>
             {generatedImages && generatedImages.length > 0 ? (
               <>
@@ -265,15 +266,15 @@ const ClothesGenerator = () => {
               </>
             ) : (
               <div
-                className={`text-gray-400 font-bold flex justify-center items-center rounded-md h-full w-full relative overflow-hidden`}
+                className={`text-gray-400 font-bold flex justify-center items-center rounded-md max-h-[500px] w-full relative overflow-hidden`}
               >
                 <img width={400} src={blackTShirt} className="px-2 mb-8" />
                 <div
-                  className={`flex items-center justify-center w-[120px] h-[120px] sm:w-[170px] sm:h-[170px] absolute mb-32 sm:mb-40 mr-1 sm:mr-2 rounded-md ${isGeneratingImages ? 'bg-gray-transparent' : 'bg-gray-200'
+                  className={`flex items-center justify-center w-[140px] h-[140px] sm:w-[170px] sm:h-[170px] absolute mb-32 sm:mb-40 mr-1 sm:mr-2 rounded-md ${isGeneratingImages ? 'bg-gray-transparent' : 'bg-gray-200'
                     }`}
                 >
                   {isGeneratingImages && (
-                    <div className="loader w-[120px] h-[120px] sm:w-[170px] sm:h-[170px]">
+                    <div className="loader w-[140px] h-[140px] sm:w-[170px] sm:h-[170px]">
                       <span></span>
                       <span></span>
                       <span></span>
@@ -297,7 +298,7 @@ const ClothesGenerator = () => {
                             {progressBarPercentage}%
                           </div>
                         </div>
-                        <div className='w-full bg-gray-200 h-2.5 dark:bg-gray-100 absolute bottom-0 rounded-b-md'>
+                        <div className='w-full bg-gray-200 h-2.5 dark:bg-gray-100 absolute bottom-0 rounded-md'>
                           <div
                             className='bg-light-blue h-2.5 rounded-full'
                             style={{
@@ -364,6 +365,7 @@ const ClothesGenerator = () => {
             </div>
           </div>
         )}
+      </div>
       </div>
     </div>
   )
