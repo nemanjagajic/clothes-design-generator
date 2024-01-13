@@ -41,7 +41,7 @@ const ExampleSection = () => {
 
   const renderMobileContent = () => (
     <div>
-      <div className='absolute top-20 px-4 z-10'>
+      <div className='absolute top-10 px-4 z-10'>
         <h2 className='text-black text-[44px] font-bold leading-tight'>
           Ovo smo mi opisali
         </h2>

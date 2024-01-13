@@ -15,9 +15,9 @@ const HomePageBanner = () => {
             <span>Dizajniraj</span>
             <span className='italic text-light-blue bold'>
               {' '}
-              majicu u minuti{' '}
+              majicu u minuti{''}
             </span>
-            <span>!</span>
+            <span className='pl-1 sm:pl-2'>!</span>
           </h2>
         </div>
         <p className='text-white'>
