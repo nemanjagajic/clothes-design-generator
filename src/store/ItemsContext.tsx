@@ -1,4 +1,5 @@
-import React, { createContext, ReactNode, useContext, useMemo, useState } from 'react'
+import React, { createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useMemo, useState } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 
 export type SizeOption = 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL'
 export type Gender = "male" | "female"
@@ -34,6 +35,7 @@ const ItemsContext = createContext<{
   totalPrice: number
   itemCount: number
   updateCurrentItem: (itemData: Partial<Item>) => void
+  userId: string
 }>({
   items: [defaultItem],
   addToCart: () => { },
@@ -42,13 +44,34 @@ const ItemsContext = createContext<{
   currentItem: defaultItem,
   updateCurrentItem: () => { },
   totalPrice: 0,
-  itemCount: 0
+  itemCount: 0,
+  userId: ''
 })
 
 // Implement the Provider
 export const ItemsProvider = ({ children }: { children: ReactNode }) => {
   const [items, setItems] = useState<Item[]>([])
   const [currentItem, setcurrentItem] = useState<Item>(defaultItem)
+
+  useEffect(() => {
+    const userId = localStorage.getItem('userId')
+    if (!userId) {
+      localStorage.setItem('userId', uuidv4())
+    }
+  }, [])
+
+  const userId = useMemo(() => {
+    return localStorage.getItem('userId') as string
+  }, [])
+
+
+  useEffect(() => {
+    const itemsFromStorage = localStorage.getItem("cart")
+    if (itemsFromStorage) {
+      setItems(JSON.parse(itemsFromStorage))
+    }
+  }, [])
+
 
   const updateCurrentItem = (itemData: Partial<Item>) => {
     if (!currentItem) {
@@ -76,17 +99,19 @@ export const ItemsProvider = ({ children }: { children: ReactNode }) => {
       const updatedItems = [...items]
       updatedItems[existingIndex].quantity += 1
       setItems(updatedItems)
+      localStorage.setItem("cart", JSON.stringify(updatedItems))
     } else {
       setItems([...items, { ...newItem, quantity: 1 }])
+      localStorage.setItem("cart", JSON.stringify([...items, { ...newItem, quantity: 1 }]))
     }
   }
 
   const removeAllFromCart = (itemToRemove: Item) => {
-    setItems((prevItems) => {
-      return prevItems.filter(item => !(item.imageUrl === itemToRemove.imageUrl &&
-        item.color === itemToRemove.color &&
-        item.size === itemToRemove.size && item.gender === itemToRemove.gender))
-    })
+    const updatedItems = items.filter(item => !(item.imageUrl === itemToRemove.imageUrl &&
+      item.color === itemToRemove.color &&
+      item.size === itemToRemove.size && item.gender === itemToRemove.gender))
+    setItems(updatedItems)
+    localStorage.setItem('cart', JSON.stringify(updatedItems))
   }
 
   const totalPrice = useMemo(() => {
@@ -102,33 +127,35 @@ export const ItemsProvider = ({ children }: { children: ReactNode }) => {
   }, [items])
 
   const removeFromCart = (itemToRemove: Item) => {
-    setItems((prevItems) => {
-      return prevItems.reduce((updatedItems, item) => {
-        if (
-          item.imageUrl === itemToRemove.imageUrl &&
-          item.color === itemToRemove.color &&
-          item.size === itemToRemove.size &&
-          item.gender === itemToRemove.gender
-        ) {
-          if (item.quantity > 1) {
-            // Reduce quantity
-            updatedItems.push({
-              ...item,
-              quantity: item.quantity - 1,
-            })
-          }
-          // If quantity matches or is less, item gets removed (not pushed)
-        } else {
-          updatedItems.push(item)
+    const updatedItems = items.reduce((updatedItems, item) => {
+      if (
+        item.imageUrl === itemToRemove.imageUrl &&
+        item.color === itemToRemove.color &&
+        item.size === itemToRemove.size &&
+        item.gender === itemToRemove.gender
+      ) {
+        if (item.quantity > 1) {
+          // Reduce quantity
+          updatedItems.push({
+            ...item,
+            quantity: item.quantity - 1,
+          })
         }
-        return updatedItems
-      }, [] as Item[])
-    })
+        // If quantity matches or is less, item gets removed (not pushed)
+      } else {
+        updatedItems.push(item)
+      }
+      return updatedItems
+    }, [] as Item[])
+    setItems(updatedItems)
+
+    localStorage.setItem('cart', JSON.stringify(updatedItems))
   }
 
   return (
     <ItemsContext.Provider
       value={{
+        userId,
         items,
         addToCart,
         removeFromCart,
@@ -136,7 +163,7 @@ export const ItemsProvider = ({ children }: { children: ReactNode }) => {
         currentItem,
         updateCurrentItem,
         totalPrice,
-        itemCount
+        itemCount,
       }}
     >
       {children}

@@ -18,11 +18,9 @@ const PROGRESS_BAR_FETCHING_INTERVAL_MS = 5000
 const DEFAULT_PROGRESS_INCREMENT = 2
 const QUEUE_FETCHING_INTERVAL_MS = 5000
 
-type ClothesGeneratorTypes = {
-  userId: string
-}
-const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
+const ClothesGenerator = () => {
   const [description, setDescription] = useState('')
+  const [showBadWord, setShowBadWord] = useState(false)
   const [isGeneratingImages, setIsGeneratingImages] = useState(false)
   const [generatedImages, setGeneratedImages] = useState<string[]>([])
   const [focusedPhotoIndex, setFocusedPhotoIndex] = useState(0)
@@ -58,7 +56,8 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
 
     }
   }, [])
-  const { updateCurrentItem, addToCart, currentItem } = useItems()
+
+  const { updateCurrentItem, addToCart, currentItem, userId } = useItems()
 
   useEffect(() => {
     updateCurrentItem({ imageUrl: generatedImages[focusedPhotoIndex] })
@@ -166,8 +165,22 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
   const handleGenerateImage = () => {
     clearGeneratedImages()
     setIsGeneratingImages(true)
-    generateImage(description, userId)
     scrollToTShirtContainer()
+    generateImage(description, userId, () => {
+      setShowBadWord(true)
+      setIsGeneratingImages(false)
+      scrollToPromptField()
+    })
+  }
+  const scrollToPromptField = () => {
+    setTimeout(() => {
+      const promptInput = document.getElementById('prompt-input')
+      const sectionOffset = promptInput?.offsetTop
+      console.log({ sectionOffset, promptInput })
+      if (promptInput && !checkIfElementIsInViewPort(promptInput) && sectionOffset) {
+        window.scrollTo({ top: sectionOffset - 120, behavior: 'smooth' })
+      }
+    }, 0)
   }
 
   const scrollToTShirtContainer = () => {
@@ -214,13 +227,14 @@ const ClothesGenerator = ({ userId }: ClothesGeneratorTypes) => {
   return (
     <Container>
       <div className='flex w-full flex-col xl:flex-row mb-10'>
-        <div className='flex flex-col w-full xl:w-[40%]'>
+        <div className='flex flex-col w-full xl:w-[40%]' id='prompt-input'>
           <h3 className='font-bold text-xl mt-10 mb-3'>Polje za tekst</h3>
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             className='w-full h-[150px] border border-gray-200 rounded-md focus:outline-none p-4 shadow-md'
           />
+          {showBadWord && <p className='text-[#F00]'>*ne možete koristiti psovke ili uvredljive reči</p>}
           <br />
           <Button
             isMain={false}
