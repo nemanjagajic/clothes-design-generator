@@ -10,32 +10,19 @@ type ButtonProps = {
   customDisabledStyles?: string
 }
 const Button = ({
-  isMain = false,
+  isMain,
   text,
   onClick,
   customStyles = '',
   isDisabled,
   disabledText,
 }: ButtonProps) => {
-  const commonStyles =
-    'border rounded-full py-3 px-4 text-sm button-text-gradient'
-  const commonDisablesStyles = `border rounded-full py-3 px-4 text-sm border-gray-100 text-gray-400 bg-gray-100 cursor-not-allowed`
-
-  const styles = isMain
-    ? `${
-        isDisabled
-          ? commonDisablesStyles
-          : `gradient-button text-white ${commonStyles}`
-      } ${customStyles}`
-    : `${
-        isDisabled
-          ? commonDisablesStyles
-          : `bg-white border-light-blue ${commonStyles}`
-      } ${customStyles}`
-
   return (
-    <button onClick={onClick} className={styles} disabled={isDisabled}>
-      {isDisabled ? disabledText : text}
+    <button
+      className="bg-gradient-to-r from-blue-500 to-blue-700 text-white rounded-full shadow-md hover:from-blue-600 hover:to-blue-800 py-3 px-12 mb-10"
+      onClick={onClick}
+    >
+      { text }
     </button>
   )
 }

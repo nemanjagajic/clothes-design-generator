@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-    font-family: "Noto Sans", sans-serif
+    font-family: "Open Sans", sans-serif
 }
 
 .slick-prev:before,
@@ -93,4 +93,8 @@ body {
     bottom: 10px;
     border: solid white 10px;
     border-radius: 50%;
+}
+
+.clip-angled-edges {
+    clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
 }
