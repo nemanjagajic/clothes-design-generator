@@ -14,6 +14,8 @@ import imgArrow1Small from '../../assets/images/arrow-1-small.png'
 import imgArrow2Small from '../../assets/images/arrow-2-small.png'
 // @ts-ignore
 import imgArrow3Small from '../../assets/images/arrow-3-small.png'
+// @ts-ignore
+import imgExampleInputTShirtPomeranian from '../../assets/images/example-input-tshirt-pomeranian.png'
 import { useWindowWidth } from '../../utils/useWindowWidth'
 import { MEDIUM_SCREEN } from '../../constants/screenSizes'
 const ExampleSection = () => {
@@ -54,7 +56,7 @@ const ExampleSection = () => {
   )
 
   const renderMobileContent = () => (
-    <div>
+    <div className="w-full h-full">
       <div className="absolute top-20 px-4 z-10">
         <h2 className="text-black text-[44px] font-bold leading-tight">
           Ovo smo mi opisali
@@ -63,29 +65,18 @@ const ExampleSection = () => {
           src={imgArrow1Small}
           className="absolute h-[120px] top-[40px] left-[280px] z-20"
         />
-        <div className="flex justify-center items-center rounded-md absolute top-[170px] right-[40px] w-[280px] h-[80px] bg-white text-[24px] p-2">
-          "Pomeranac vija hranu u svemiru"
-        </div>
-        <img
-          src={imgArrow2Small}
-          className="absolute h-[100px] left-[120px] top-[260px] z-20"
-        />
-        <div className="flex justify-center items-center clip-angled-edges absolute w-[190px] h-[40px] bg-nsm-orange top-[360px] left-[100px] text-[24px] text-white">
-          Ovo smo dobili
-        </div>
-        <img
-          src={imgArrow3Small}
-          className="absolute h-[80px] top-[400px] left-[140px] z-20"
-        />
       </div>
-      <div className="flex justify-center w-full h-[320px] absolute bottom-0">
-        <img src={imgTShirtPomeranian} className={'h-[320px]'} />
+      <div className="flex mt-[240px] w-full px-2">
+        <img
+          src={imgExampleInputTShirtPomeranian}
+          className={'h-full m-auto'}
+        />
       </div>
     </div>
   )
 
   return (
-    <div className="relative flex w-full h-screen bg-nsm-gray-100">
+    <div className="relative flex w-full min-h-screen bg-nsm-gray-100">
       {windowWidth > MEDIUM_SCREEN
         ? renderDesktopContent()
         : renderMobileContent()}
