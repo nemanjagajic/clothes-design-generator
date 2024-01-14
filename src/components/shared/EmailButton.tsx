@@ -7,7 +7,7 @@ interface ButtonProps {
 
 const EmailButton: React.FC<ButtonProps> = ({ label, disabled }) => {
   return (
-    <div className='mt-2 flex justify-center items-center'>
+    <div className="mt-2 flex justify-center items-center">
       <button
         disabled={disabled}
         className={`px-4 py-2 border rounded-md text-sm font-medium shadow-sm transition-colors

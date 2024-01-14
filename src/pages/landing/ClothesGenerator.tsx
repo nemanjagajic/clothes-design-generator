@@ -9,10 +9,13 @@ import EmailCard from '../../components/EmailCard/EmailCard'
 import { useSearchParams } from 'react-router-dom'
 // @ts-ignore
 import blackTShirt from '../../assets/images/black-tshirt.png'
-import { Close } from "react-ionicons"
+import { Close } from 'react-ionicons'
 import GenderRadioButtons from './GenderRadioButtons'
-import { checkIfElementIsInViewPort, scrollToSection } from "../../utils/pageNavigation"
-import TShirtSizeSelector from "../../components/shared/TShirtSizeSelector";
+import {
+  checkIfElementIsInViewPort,
+  scrollToSection,
+} from '../../utils/pageNavigation'
+import TShirtSizeSelector from '../../components/shared/TShirtSizeSelector'
 
 const PROGRESS_BAR_FETCHING_INTERVAL_MS = 5000
 const DEFAULT_PROGRESS_INCREMENT = 2
@@ -30,13 +33,14 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
   const [focusedPhotoIndex, setFocusedPhotoIndex] = useState(0)
   const [progressBarPercentage, setProgressBarPercentage] = useState(0)
   const [myIndexInGenerationQueue, setMyIndexInGenerationQueue] = useState(null)
-  const [isSelectedImagePreviewModalOpen, setIsSelectedImagePreviewModalOpen] = useState(false)
+  const [isSelectedImagePreviewModalOpen, setIsSelectedImagePreviewModalOpen] =
+    useState(false)
 
   const [searchParams] = useSearchParams()
 
   useEffect(() => {
     if (generatedImages.length)
-      localStorage.setItem("images", JSON.stringify(generatedImages))
+      localStorage.setItem('images', JSON.stringify(generatedImages))
   }, [generatedImages])
 
   useEffect(() => {
@@ -51,14 +55,11 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
     }
 
     try {
-      const imagesFromStorage = localStorage.getItem("images")
+      const imagesFromStorage = localStorage.getItem('images')
       if (imagesFromStorage) {
         setGeneratedImages(JSON.parse(imagesFromStorage))
       }
-
-    } catch (error) {
-
-    }
+    } catch (error) {}
   }, [])
 
   const { updateCurrentItem, addToCart, currentItem, userId } = useItems()
@@ -84,12 +85,12 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
       const {
         data: { progress, response },
       } = await axios.get(
-        `${process.env.REACT_APP_BASE_API_URL}/getImageGenerationProgress`
+        `${process.env.REACT_APP_BASE_API_URL}/getImageGenerationProgress`,
       )
       if (progress === 0) {
         const randomIncrement = getRandomOneTwoOrThree()
         setProgressBarPercentage(
-          (prevProgress) => prevProgress + randomIncrement
+          (prevProgress) => prevProgress + randomIncrement,
         )
         return
       }
@@ -110,10 +111,10 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
       const {
         data: { imageRequestsQueue },
       } = await axios.get(
-        `${process.env.REACT_APP_BASE_API_URL}/imageRequestsQueue`
+        `${process.env.REACT_APP_BASE_API_URL}/imageRequestsQueue`,
       )
       const myGenerationIndex = imageRequestsQueue.findIndex(
-        (ir: any) => ir.ref === imgGenerationRef
+        (ir: any) => ir.ref === imgGenerationRef,
       )
       setMyIndexInGenerationQueue(myGenerationIndex)
     } catch (e) {
@@ -181,7 +182,11 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
       const promptInput = document.getElementById('prompt-input')
       const sectionOffset = promptInput?.offsetTop
       console.log({ sectionOffset, promptInput })
-      if (promptInput && !checkIfElementIsInViewPort(promptInput) && sectionOffset) {
+      if (
+        promptInput &&
+        !checkIfElementIsInViewPort(promptInput) &&
+        sectionOffset
+      ) {
         window.scrollTo({ top: sectionOffset - 120, behavior: 'smooth' })
       }
     }, 0)
@@ -190,7 +195,10 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
   const scrollToTShirtContainer = () => {
     setTimeout(() => {
       const tShirtContainerDiv = document.getElementById('t-shirt-container')
-      if (tShirtContainerDiv && !checkIfElementIsInViewPort(tShirtContainerDiv)) {
+      if (
+        tShirtContainerDiv &&
+        !checkIfElementIsInViewPort(tShirtContainerDiv)
+      ) {
         scrollToSection('t-shirt-container')
       }
     }, 0)
@@ -200,21 +208,23 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
     <div
       key={index}
       className={`flex items-center justify-center border cursor-pointer w-[120px] h-[120px] min-h-[120px] min-w-[120px] sm:w-[140px] sm:h-[140px] sm:min-h-[140px] sm:in-w-[140px]
-      ${index === focusedPhotoIndex
+      ${
+        index === focusedPhotoIndex
           ? 'border-light-blue border-2'
           : 'border-gray-300 border-2'
-        } mr-2 rounded-lg p-1`}
+      } mr-2 rounded-lg p-1`}
       onClick={() => setFocusedPhotoIndex(index)}
     >
-      <img src={imageUrl} className='rounded-md' />
+      <img src={imageUrl} className="rounded-md" />
     </div>
   )
 
   const renderEmptyPreviewImage = (index: number) => (
     <div
       key={index}
-      className={`flex items-center justify-center border cursor-pointer border-gray-200 w-[120px] h-[120px] min-h-[120px] min-w-[120px] sm:w-[140px] sm:h-[140px] sm:min-h-[140px] sm:in-w-[140px] mx-2 rounded-md ${isGeneratingImages && gradientBgLoaderStyle
-        }`}
+      className={`flex items-center justify-center border cursor-pointer border-gray-200 w-[120px] h-[120px] min-h-[120px] min-w-[120px] sm:w-[140px] sm:h-[140px] sm:min-h-[140px] sm:in-w-[140px] mx-2 rounded-md ${
+        isGeneratingImages && gradientBgLoaderStyle
+      }`}
     />
   )
 
@@ -229,40 +239,50 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
   const gradientBgLoaderStyle =
     'bg-gradient-to-r from-very-light-blue via-very-light-blue to-white background-animate'
   return (
-    <div className='min-h-full bg-dark-blue py-4 md:px-8'>
-      <div className='bg-nsm-gray-400 rounded-2xl'>
-      <div className='mt-6 flex flex-col md:flex-row w-full px-4 pt-8' id='prompt-input'>
+    <div className="min-h-full bg-dark-blue py-4 md:px-8">
+      <div className="bg-nsm-gray-400 rounded-2xl">
+        <div
+          className="mt-6 flex flex-col md:flex-row w-full px-4 pt-8"
+          id="prompt-input"
+        >
           <textarea
-            placeholder='Ovde opiši sliku kakvu želiš na majici ispod'
+            placeholder="Ovde opiši sliku kakvu želiš na majici ispod"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className='w-full min-h-[100px] md:min-h-[50px] md:h-[50px] border border-gray-300 rounded-md focus:outline-none p-4 md:p-3'
+            className="w-full min-h-[100px] md:min-h-[50px] md:h-[50px] border border-gray-300 rounded-md focus:outline-none p-4 md:p-3"
           />
-        {showBadWord && <p className='text-[#F00]'>*ne možete koristiti psovke ili uvredljive reči</p>}
-        <br />
-        <Button
-          isMain={false}
-          text={'Napravi'}
-          onClick={handleGenerateImage}
-          customStyles={'w-full h-[50px] md:w-[300px] md:ml-4'}
-          isDisabled={isGeneratingImages || !description.trim()}
-          disabledText={
-            isGeneratingImages
-              ? 'Slike se generišu...'
-              : 'Napravi sliku za majicu'
-          }
-        />
+          {showBadWord && (
+            <p className="text-[#F00]">
+              *ne možete koristiti psovke ili uvredljive reči
+            </p>
+          )}
+          <br />
+          <Button
+            isMain={false}
+            text={'Napravi'}
+            onClick={handleGenerateImage}
+            customStyles={'w-full h-[50px] md:w-[300px] md:ml-4'}
+            isDisabled={isGeneratingImages || !description.trim()}
+            disabledText={
+              isGeneratingImages
+                ? 'Slike se generišu...'
+                : 'Napravi sliku za majicu'
+            }
+          />
 
-        {/*{!!isGeneratingImages && <EmailCard userId={userId} />}*/}
-      </div>
+          {/*{!!isGeneratingImages && <EmailCard userId={userId} />}*/}
+        </div>
 
-      <div className='flex w-full h-full flex-col xl:flex-row mb-8 px-4 bg'>
-          <div id='t-shirt-container' className='flex flex-col items-center justify-center w-full pt-4 xl:min-w-[50%] relative'>
+        <div className="flex w-full h-full flex-col xl:flex-row mb-8 px-4 bg">
+          <div
+            id="t-shirt-container"
+            className="flex flex-col items-center justify-center w-full pt-4 xl:min-w-[50%] relative"
+          >
             {generatedImages && generatedImages.length > 0 ? (
               <>
                 <img width={400} src={blackTShirt} className="px-2 mb-8" />
                 <img
-                  className='w-[140px] h-[140px] sm:w-[170px] sm:h-[170px] absolute top-[90px] sm:mb-40 mr-1 sm:mr-2 rounded-md cursor-pointer'
+                  className="w-[140px] h-[140px] sm:w-[170px] sm:h-[170px] absolute top-[90px] sm:mb-40 mr-1 sm:mr-2 rounded-md cursor-pointer"
                   onClick={() => setIsSelectedImagePreviewModalOpen(true)}
                   width={170}
                   src={generatedImages[focusedPhotoIndex]}
@@ -270,12 +290,15 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
               </>
             ) : (
               <div
-                className={`text-gray-400 font-bold flex justify-center items-center rounded-md max-h-[500px] w-full relative overflow-hidden`}
+                className={
+                  'text-gray-400 font-bold flex justify-center items-center rounded-md max-h-[500px] w-full relative overflow-hidden'
+                }
               >
                 <img width={400} src={blackTShirt} className="px-2 mb-8" />
                 <div
-                  className={`flex items-center justify-center w-[140px] h-[140px] sm:w-[170px] sm:h-[170px] absolute mb-32 sm:mb-40 mr-1 sm:mr-2 rounded-md ${isGeneratingImages ? 'bg-gray-transparent' : 'bg-gray-200'
-                    }`}
+                  className={`flex items-center justify-center w-[140px] h-[140px] sm:w-[170px] sm:h-[170px] absolute mb-32 sm:mb-40 mr-1 sm:mr-2 rounded-md ${
+                    isGeneratingImages ? 'bg-gray-transparent' : 'bg-gray-200'
+                  }`}
                 >
                   {isGeneratingImages && (
                     <div className="loader w-[140px] h-[140px] sm:w-[170px] sm:h-[170px]">
@@ -287,24 +310,24 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
                   )}
                 </div>
                 {isGeneratingImages && (
-                  <div className='w-full absolute bottom-0'>
+                  <div className="w-full absolute bottom-0">
                     {!!myIndexInGenerationQueue &&
-                      myIndexInGenerationQueue > 0 ? (
+                    myIndexInGenerationQueue > 0 ? (
                       <div>
-                        <div className='text-center py-1 text-sm'>
+                        <div className="text-center py-1 text-sm">
                           {`Trenutno ${myIndexInGenerationQueue} ljudi kreira svoju majicu`}
                         </div>
                       </div>
                     ) : (
                       <>
-                        <div className='mb-2 m-auto flex items-center justify-center'>
-                          <div className='font-normal text-light-blue'>
+                        <div className="mb-2 m-auto flex items-center justify-center">
+                          <div className="font-normal text-light-blue">
                             {progressBarPercentage}%
                           </div>
                         </div>
-                        <div className='w-full bg-gray-200 h-2.5 dark:bg-gray-100 absolute bottom-0 rounded-md'>
+                        <div className="w-full bg-gray-200 h-2.5 dark:bg-gray-100 absolute bottom-0 rounded-md">
                           <div
-                            className='bg-light-blue h-2.5 rounded-full'
+                            className="bg-light-blue h-2.5 rounded-full"
                             style={{
                               width: `${progressBarPercentage}%`,
                               transition: 'width 0.3s ease',
@@ -318,58 +341,65 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
               </div>
             )}
 
-            <div className='flex items-center md:justify-center w-full mt-2 overflow-x-auto pb-3 sm:pb-8 hide-scrollbar'>
+            <div className="flex items-center md:justify-center w-full mt-2 overflow-x-auto pb-3 sm:pb-8 hide-scrollbar">
               {generatedImages.length > 0
                 ? generatedImages.map((imageUrl, index) => {
-                  return renderPreviewImage(imageUrl, index)
-                })
+                    return renderPreviewImage(imageUrl, index)
+                  })
                 : Array.from({ length: 4 }).map((_, index) => {
-                  return renderEmptyPreviewImage(index)
-                })}
+                    return renderEmptyPreviewImage(index)
+                  })}
             </div>
           </div>
 
-        <div className='flex flex-col w-full mt-4 xl:min-w-[50%]'>
-          <div className='flex flex-col'>
-            <h3 className='font-bold text-[18px]'>Izaberi boju majice</h3>
-            <ColorPicker onColorPick={updateColor} />
-          </div>
-          <div className="flex flex-col justify-center mb-4">
-            <h3 className='font-bold text-[18px] mr-4 mb-2'>Izaberi pol</h3>
-            <GenderRadioButtons onChange={(gender) => updateCurrentItem({ gender })} />
-          </div>
-          <div className='flex-row md:mt-0 mb-2'>
-            <h3 className='font-bold text-[18px] mr-4 mb-2'>Izaberi veličinu</h3>
-            <TShirtSizeSelector onSizeChange={updateSize} />
-          </div>
-
-          <div className='flex items-center justify-center w-full mt-5'>
-            <Button
-              isMain
-              text={'Dodaj u korpu'}
-              onClick={() => addToCart(currentItem)}
-              customStyles={'w-full'}
-              isDisabled={generatedImages.length === 0}
-              disabledText={'Dodaj u korpu'}
-            />
-          </div>
-        </div>
-        {isSelectedImagePreviewModalOpen && (
-          <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-30 overflow-auto">
-            <div className="relative">
-              <img
-                src={generatedImages[focusedPhotoIndex]}
-                alt="Full view"
-                className="object-contain mx-auto my-0"
-                style={{ maxHeight: 'calc(100vh - 2rem)' }}
+          <div className="flex flex-col w-full mt-4 xl:min-w-[50%]">
+            <div className="flex flex-col">
+              <h3 className="font-bold text-[18px]">Izaberi boju majice</h3>
+              <ColorPicker onColorPick={updateColor} />
+            </div>
+            <div className="flex flex-col justify-center mb-4">
+              <h3 className="font-bold text-[18px] mr-4 mb-2">Izaberi pol</h3>
+              <GenderRadioButtons
+                onChange={(gender) => updateCurrentItem({ gender })}
               />
-              <div onClick={() => setIsSelectedImagePreviewModalOpen(false)} className="absolute top-0 right-0 p-2 z-40 bg-gray-900 cursor-pointer">
-                <Close height='30px' width='30px' color='#fff' />
+            </div>
+            <div className="flex-row md:mt-0 mb-2">
+              <h3 className="font-bold text-[18px] mr-4 mb-2">
+                Izaberi veličinu
+              </h3>
+              <TShirtSizeSelector onSizeChange={updateSize} />
+            </div>
+
+            <div className="flex items-center justify-center w-full mt-5">
+              <Button
+                isMain
+                text={'Dodaj u korpu'}
+                onClick={() => addToCart(currentItem)}
+                customStyles={'w-full'}
+                isDisabled={generatedImages.length === 0}
+                disabledText={'Dodaj u korpu'}
+              />
+            </div>
+          </div>
+          {isSelectedImagePreviewModalOpen && (
+            <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-30 overflow-auto">
+              <div className="relative">
+                <img
+                  src={generatedImages[focusedPhotoIndex]}
+                  alt="Full view"
+                  className="object-contain mx-auto my-0"
+                  style={{ maxHeight: 'calc(100vh - 2rem)' }}
+                />
+                <div
+                  onClick={() => setIsSelectedImagePreviewModalOpen(false)}
+                  className="absolute top-0 right-0 p-2 z-40 bg-gray-900 cursor-pointer"
+                >
+                  <Close height="30px" width="30px" color="#fff" />
+                </div>
               </div>
             </div>
-          </div>
-        )}
-      </div>
+          )}
+        </div>
       </div>
     </div>
   )

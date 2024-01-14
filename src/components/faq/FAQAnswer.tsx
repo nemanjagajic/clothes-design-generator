@@ -6,27 +6,22 @@ type FAQAnswerTypes = {
   answer: string
   isInitiallyOpen?: boolean
 }
-const FAQAnswer = ({ question, answer, isInitiallyOpen = false }: FAQAnswerTypes) => {
+const FAQAnswer = ({
+  question,
+  answer,
+  isInitiallyOpen = false,
+}: FAQAnswerTypes) => {
   const [isOpen, setIsOpen] = useState(isInitiallyOpen)
 
   return (
-    <div className='flex flex-col w-full mb-6'>
-      <div className='flex flex-row w-full justify-between'>
-        <div className='text-xl font-bold'>{question}</div>
-        <div
-          onClick={() => setIsOpen(!isOpen)}
-          className='cursor-pointer'
-        >
+    <div className="flex flex-col w-full mb-6">
+      <div className="flex flex-row w-full justify-between">
+        <div className="text-xl font-bold">{question}</div>
+        <div onClick={() => setIsOpen(!isOpen)} className="cursor-pointer">
           {isOpen ? (
-            <ChevronUpOutline
-              height="25px"
-              width="25px"
-            />
+            <ChevronUpOutline height="25px" width="25px" />
           ) : (
-            <ChevronDownOutline
-              height="25px"
-              width="25px"
-            />
+            <ChevronDownOutline height="25px" width="25px" />
           )}
         </div>
       </div>

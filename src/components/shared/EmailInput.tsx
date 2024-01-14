@@ -29,13 +29,13 @@ const EmailInput = ({
   return (
     <div className={customStyle}>
       <input
-        type='email' // Changed to type 'email' to use browser's email validation as well
+        type="email" // Changed to type 'email' to use browser's email validation as well
         value={email}
-        name='email'
+        name="email"
         onChange={handleChange}
         onBlur={() => validateEmail(email)}
-        className='p-2 m-2 border border-gray-300 rounded w-full'
-        placeholder='Email'
+        className="p-2 m-2 border border-gray-300 rounded w-full"
+        placeholder="Email"
       />
       {!isValid && (
         <div style={{ color: 'red' }}>E-mail nije dobro formatiran</div>

@@ -1,12 +1,21 @@
-import React, { createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useMemo, useState } from 'react'
+import React, {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
 export type SizeOption = 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL'
-export type Gender = "male" | "female"
+export type Gender = 'male' | 'female'
 
 export const genderToLabel = {
-  male: "Muški",
-  female: "Ženski"
+  male: 'Muški',
+  female: 'Ženski',
 }
 
 export type Item = {
@@ -23,7 +32,7 @@ const defaultItem = {
   color: 'white',
   imageUrl: null,
   price: 2400,
-  gender: "male" as Gender
+  gender: 'male' as Gender,
 }
 // Create the context
 const ItemsContext = createContext<{
@@ -38,14 +47,14 @@ const ItemsContext = createContext<{
   userId: string
 }>({
   items: [defaultItem],
-  addToCart: () => { },
-  removeFromCart: () => { },
-  removeAllFromCart: () => { },
+  addToCart: () => {},
+  removeFromCart: () => {},
+  removeAllFromCart: () => {},
   currentItem: defaultItem,
-  updateCurrentItem: () => { },
+  updateCurrentItem: () => {},
   totalPrice: 0,
   itemCount: 0,
-  userId: ''
+  userId: '',
 })
 
 // Implement the Provider
@@ -64,14 +73,12 @@ export const ItemsProvider = ({ children }: { children: ReactNode }) => {
     return localStorage.getItem('userId') as string
   }, [])
 
-
   useEffect(() => {
-    const itemsFromStorage = localStorage.getItem("cart")
+    const itemsFromStorage = localStorage.getItem('cart')
     if (itemsFromStorage) {
       setItems(JSON.parse(itemsFromStorage))
     }
   }, [])
-
 
   const updateCurrentItem = (itemData: Partial<Item>) => {
     if (!currentItem) {
@@ -92,24 +99,33 @@ export const ItemsProvider = ({ children }: { children: ReactNode }) => {
         item.imageUrl === newItem.imageUrl &&
         item.color === newItem.color &&
         item.size === newItem.size &&
-        item.gender === newItem.gender
+        item.gender === newItem.gender,
     )
 
     if (existingIndex !== -1) {
       const updatedItems = [...items]
       updatedItems[existingIndex].quantity += 1
       setItems(updatedItems)
-      localStorage.setItem("cart", JSON.stringify(updatedItems))
+      localStorage.setItem('cart', JSON.stringify(updatedItems))
     } else {
       setItems([...items, { ...newItem, quantity: 1 }])
-      localStorage.setItem("cart", JSON.stringify([...items, { ...newItem, quantity: 1 }]))
+      localStorage.setItem(
+        'cart',
+        JSON.stringify([...items, { ...newItem, quantity: 1 }]),
+      )
     }
   }
 
   const removeAllFromCart = (itemToRemove: Item) => {
-    const updatedItems = items.filter(item => !(item.imageUrl === itemToRemove.imageUrl &&
-      item.color === itemToRemove.color &&
-      item.size === itemToRemove.size && item.gender === itemToRemove.gender))
+    const updatedItems = items.filter(
+      (item) =>
+        !(
+          item.imageUrl === itemToRemove.imageUrl &&
+          item.color === itemToRemove.color &&
+          item.size === itemToRemove.size &&
+          item.gender === itemToRemove.gender
+        ),
+    )
     setItems(updatedItems)
     localStorage.setItem('cart', JSON.stringify(updatedItems))
   }

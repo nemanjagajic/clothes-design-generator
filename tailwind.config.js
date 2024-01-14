@@ -1,8 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-  ],
+  content: ['./src/**/*.{js,jsx,ts,tsx}'],
   safelist: ['h-20', 'w-20'],
   theme: {
     extend: {
@@ -19,16 +17,15 @@ module.exports = {
         'nsm-gray-500': '#E2E2E2',
         'light-gray': '#6B6B6B',
         'border-gray': '#D9D9D9',
-        'nsm-orange': '#FAC43C'
+        'nsm-orange': '#FAC43C',
       },
       width: {
-        '20': "30px"      
+        20: '30px',
       },
       height: {
-        '20': "30px"
-      }
-    }
+        20: '30px',
+      },
+    },
   },
   plugins: [],
 }
-

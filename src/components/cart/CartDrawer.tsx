@@ -32,10 +32,11 @@ const CartDrawer = ({
   return (
     <div
       ref={drawerRef}
-      className={`fixed z-10 bg-white right-0 top-0 h-full w-[350px] shadow-xl transform ${isCartOpen ? 'translate-x-0' : 'translate-x-full'
-        } transition-transform duration-300`}
+      className={`fixed z-10 bg-white right-0 top-0 h-full w-[350px] shadow-xl transform ${
+        isCartOpen ? 'translate-x-0' : 'translate-x-full'
+      } transition-transform duration-300`}
     >
-      <h3 className='font-bold text-xl m-8'>Korpa</h3>
+      <h3 className="font-bold text-xl m-8">Korpa</h3>
       <div className="flex flex-col h-full">
         <div className="overflow-y-auto h-[calc(100%-190px)] p-2">
           {items.map((item) => {
@@ -63,7 +64,14 @@ const CartDrawer = ({
           })}
         </div>
         <div className="absolute bottom-0 w-full h-24 flex items-center justify-center border-t">
-          <Button isMain customStyles='w-full mx-2' text="Kupi" onClick={() => { navigate('/cart') }} />
+          <Button
+            isMain
+            customStyles="w-full mx-2"
+            text="Kupi"
+            onClick={() => {
+              navigate('/cart')
+            }}
+          />
         </div>
       </div>
     </div>

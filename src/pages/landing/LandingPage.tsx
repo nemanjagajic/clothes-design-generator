@@ -10,8 +10,8 @@ import OurCustomers from './OurCustomers'
 import Footer from './Footer'
 import { v4 as uuidv4 } from 'uuid'
 import { useItems } from '../../store/ItemsContext'
-import Instructions from "./Instructions";
-import ExampleSection from "./ExampleSection";
+import Instructions from './Instructions'
+import ExampleSection from './ExampleSection'
 
 const imgGenerationRef = uuidv4()
 
@@ -20,7 +20,7 @@ const MyComponent = () => {
   const { itemCount } = useItems()
 
   return (
-    <div className='App'>
+    <div className="App">
       <CartDrawer
         isCartOpen={isCartOpen}
         onSurroundingAreaClicked={() => setIsCartOpen(false)}

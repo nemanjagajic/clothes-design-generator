@@ -14,85 +14,89 @@ type NavbarTypes = {
 const Navbar = ({ onCartClicked, itemCount }: NavbarTypes) => {
   const navigate = useNavigate()
 
-  const [visible, setVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const [visible, setVisible] = useState(true)
+  const [lastScrollY, setLastScrollY] = useState(0)
 
   const controlNavbar = () => {
     if (typeof window !== 'undefined') {
-      const currentScrollY = window.scrollY;
-      setVisible(currentScrollY < lastScrollY || currentScrollY <= 0);
-      setLastScrollY(currentScrollY);
+      const currentScrollY = window.scrollY
+      setVisible(currentScrollY < lastScrollY || currentScrollY <= 0)
+      setLastScrollY(currentScrollY)
     }
-  };
+  }
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      window.addEventListener('scroll', controlNavbar);
+      window.addEventListener('scroll', controlNavbar)
 
-      return () => window.removeEventListener('scroll', controlNavbar);
+      return () => window.removeEventListener('scroll', controlNavbar)
     }
-  }, [lastScrollY]);
+  }, [lastScrollY])
 
   return (
-    <Container customStyles={`h-[80px] fixed z-30 top-0 bg-nsm-gray-100 w-full shadow-md transition-transform duration-300 ${
-      visible ? 'transform translate-y-0' : 'transform -translate-y-full'
-    }`}>
-      <div className='flex flex-row w-full justify-between'>
+    <Container
+      customStyles={`h-[80px] fixed z-30 top-0 bg-nsm-gray-100 w-full shadow-md transition-transform duration-300 ${
+        visible ? 'transform translate-y-0' : 'transform -translate-y-full'
+      }`}
+    >
+      <div className="flex flex-row w-full justify-between">
         <div
-          className='flex justify-center items-center cursor-pointer'
+          className="flex justify-center items-center cursor-pointer"
           onClick={() => navigate('/')}
         >
-          <div className='bg-white rounded-full'>
+          <div className="bg-white rounded-full">
             <img className="h-[56px]" src={logo} />
           </div>
         </div>
-        <div className='flex flex-row hidden lg:inline-flex'>
+        <div className="flex flex-row hidden lg:inline-flex">
           <div
             onClick={() => scrollToSection('examples')}
-            className='flex justify-center items-center px-8 cursor-pointer'
+            className="flex justify-center items-center px-8 cursor-pointer"
           >
-            <div className='text-nsm-gray-200 hover:text-light-blue transition-text duration-200'>
+            <div className="text-nsm-gray-200 hover:text-light-blue transition-text duration-200">
               Primeri
             </div>
           </div>
           <div
             onClick={() => scrollToSection('tShirtSizes')}
-            className='flex justify-center items-center px-8 cursor-pointer'
+            className="flex justify-center items-center px-8 cursor-pointer"
           >
-            <div className='text-nsm-gray-200 hover:text-light-blue transition-text duration-200'>
+            <div className="text-nsm-gray-200 hover:text-light-blue transition-text duration-200">
               Veličine
             </div>
           </div>
           <div
             onClick={() => scrollToSection('questions')}
-            className='flex justify-center items-center px-8 cursor-pointer'
+            className="flex justify-center items-center px-8 cursor-pointer"
           >
-            <div className='text-nsm-gray-200 hover:text-light-blue transition-text duration-200'>
+            <div className="text-nsm-gray-200 hover:text-light-blue transition-text duration-200">
               Pitanja
             </div>
           </div>
           <div
             onClick={() => scrollToSection('our-users')}
-            className='flex justify-center items-center px-8 cursor-pointer'
+            className="flex justify-center items-center px-8 cursor-pointer"
           >
-            <div className='text-nsm-gray-200 hover:text-light-blue transition-text duration-200'>
+            <div className="text-nsm-gray-200 hover:text-light-blue transition-text duration-200">
               Naši korisnici
             </div>
           </div>
         </div>
-        <div className='bg-white relative p-2 rounded-md shadow cursor-pointer h-[40px] w-[40px] my-auto'>
-          {!!itemCount && <div
-            className='absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center'
-            style={{ minWidth: '24px' }}
-          >
-            {itemCount}
-          </div>}
+        <div className="bg-white relative p-2 rounded-md shadow cursor-pointer h-[40px] w-[40px] my-auto">
+          {!!itemCount && (
+            <div
+              className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center"
+              style={{ minWidth: '24px' }}
+            >
+              {itemCount}
+            </div>
+          )}
           <div onClick={onCartClicked}>
-            <BagOutline height='25px' width='25px' />
+            <BagOutline height="25px" width="25px" />
           </div>
         </div>
       </div>
-    </Container >
+    </Container>
   )
 }
 

@@ -18,12 +18,12 @@ function App() {
     },
     {
       path: '/grid',
-      element: <GridComponent >{null}</GridComponent>,
+      element: <GridComponent>{null}</GridComponent>,
     },
     {
       path: '/cart',
-      element: <CartPage />
-    }
+      element: <CartPage />,
+    },
   ])
 
   return <RouterProvider router={router} />

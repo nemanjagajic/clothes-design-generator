@@ -29,14 +29,14 @@ const FaqSection = () => {
 
   return (
     <Container customStyles={'my-16'}>
-      <div className='flex flex-col w-full'>
+      <div className="flex flex-col w-full">
         <h3
-          id='questions'
-          className='mb-10 text-main-black text-4xl font-extrabold'
+          id="questions"
+          className="mb-10 text-main-black text-4xl font-extrabold"
         >
           Vaša pitanja
         </h3>
-        <div className='flex flex-col'>
+        <div className="flex flex-col">
           {questionsAndAnswers.map((questionAndAnswer, index) => (
             <div key={index}>
               <FAQAnswer

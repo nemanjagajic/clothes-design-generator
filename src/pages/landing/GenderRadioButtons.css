@@ -1,10 +1,10 @@
 /* Custom styles for the radio button */
 .form-radio:checked {
-    background-color: #89CFF0;
-    /* Example light blue color */
+  background-color: #89cff0;
+  /* Example light blue color */
 }
 
 .form-radio:checked:focus {
-    /* box-shadow: 0 0 0 2px #89CFF0; */
-    /* Adjust focus ring color */
+  /* box-shadow: 0 0 0 2px #89CFF0; */
+  /* Adjust focus ring color */
 }
