@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { generateImage } from '../../api/imageGenerator'
 import Container from '../../components/shared/Container'
 import Button from '../../components/shared/Button'
@@ -19,7 +19,6 @@ import TShirtSizeSelector from '../../components/shared/TShirtSizeSelector'
 
 const PROGRESS_BAR_FETCHING_INTERVAL_MS = 5000
 const DEFAULT_PROGRESS_INCREMENT = 2
-const QUEUE_FETCHING_INTERVAL_MS = 5000
 
 type ClothesGeneratorTypes = {
   imgGenerationRef: string
@@ -31,10 +30,12 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
   const [isGeneratingImages, setIsGeneratingImages] = useState(false)
   const [generatedImages, setGeneratedImages] = useState<string[]>([])
   const [focusedPhotoIndex, setFocusedPhotoIndex] = useState(0)
-  const [progressBarPercentage, setProgressBarPercentage] = useState(0)
-  const [myIndexInGenerationQueue, setMyIndexInGenerationQueue] = useState(null)
   const [isSelectedImagePreviewModalOpen, setIsSelectedImagePreviewModalOpen] =
     useState(false)
+  const [currentGenerationImageId, setCurrentGenerationImageId] = useState('')
+
+  const progressBarPercentageRef = useRef(0)
+  const [progressBarRenderTrigger, setProgressBarRenderTrigger] = useState(false)
 
   const [searchParams] = useSearchParams()
 
@@ -85,51 +86,36 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
       const {
         data: { progress, response },
       } = await axios.get(
-        `${process.env.REACT_APP_BASE_API_URL}/getImageGenerationProgress`,
+        `${process.env.REACT_APP_BASE_API_URL}/getImageGenerationProgress/${currentGenerationImageId}`,
       )
-      if (progress === 0) {
+      if (progress === 0 && progressBarPercentageRef.current < 97) {
         const randomIncrement = getRandomOneTwoOrThree()
-        setProgressBarPercentage(
-          (prevProgress) => prevProgress + randomIncrement,
-        )
+        progressBarPercentageRef.current += randomIncrement
+        setProgressBarRenderTrigger(prev => !prev)
         return
       }
-      if (progress > 0) {
-        setProgressBarPercentage(progress)
+      if (progress > progressBarPercentageRef.current) {
+        progressBarPercentageRef.current = progress
+        setProgressBarRenderTrigger(prev => !prev)
       }
-      if (progress === 100) {
-        setGeneratedImages(response.imageUrls)
+      if (response.upscaled_urls) {
+        setGeneratedImages(response.upscaled_urls)
         setIsGeneratingImages(false)
+        setCurrentGenerationImageId('')
       }
-    } catch (e) {
-      console.log(e)
-    }
-  }
-
-  const fetchGenerationQueueData = async () => {
-    try {
-      const {
-        data: { imageRequestsQueue },
-      } = await axios.get(
-        `${process.env.REACT_APP_BASE_API_URL}/imageRequestsQueue`,
-      )
-      const myGenerationIndex = imageRequestsQueue.findIndex(
-        (ir: any) => ir.ref === imgGenerationRef,
-      )
-      setMyIndexInGenerationQueue(myGenerationIndex)
     } catch (e) {
       console.log(e)
     }
   }
 
   useEffect(() => {
-    if (!isGeneratingImages || myIndexInGenerationQueue !== 0) return
+    if (!isGeneratingImages) return
     const interval = setInterval(() => {
       fetchAndUpdateProgress()
     }, PROGRESS_BAR_FETCHING_INTERVAL_MS)
     setTimeout(() => {
-      if (progressBarPercentage === 0)
-        setProgressBarPercentage(DEFAULT_PROGRESS_INCREMENT)
+      if (progressBarPercentageRef.current === 0)
+        progressBarPercentageRef.current = DEFAULT_PROGRESS_INCREMENT
     }, 1000)
 
     return () => {
@@ -137,20 +123,7 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
         clearInterval(interval)
       }
     }
-  }, [isGeneratingImages, myIndexInGenerationQueue])
-
-  useEffect(() => {
-    if (!isGeneratingImages || myIndexInGenerationQueue === 0) return
-    const interval = setInterval(() => {
-      fetchGenerationQueueData()
-    }, QUEUE_FETCHING_INTERVAL_MS)
-
-    return () => {
-      if (interval) {
-        clearInterval(interval)
-      }
-    }
-  }, [isGeneratingImages, myIndexInGenerationQueue])
+  }, [isGeneratingImages, currentGenerationImageId])
 
   useEffect(() => {
     toggleBodyScroll(!isSelectedImagePreviewModalOpen)
@@ -163,25 +136,27 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
 
   const clearGeneratedImages = () => {
     setGeneratedImages([])
-    setProgressBarPercentage(0)
-    setMyIndexInGenerationQueue(null)
+    progressBarPercentageRef.current = 0
+    setCurrentGenerationImageId('')
   }
 
-  const handleGenerateImage = () => {
+  const handleGenerateImage = async () => {
     clearGeneratedImages()
     setIsGeneratingImages(true)
     scrollToTShirtContainer()
-    generateImage(description, imgGenerationRef, () => {
+    const response = await generateImage(description, imgGenerationRef, () => {
       setShowBadWord(true)
       setIsGeneratingImages(false)
       scrollToPromptField()
     })
+    if (response?.imageId) {
+      setCurrentGenerationImageId(response.imageId)
+    }
   }
   const scrollToPromptField = () => {
     setTimeout(() => {
       const promptInput = document.getElementById('prompt-input')
       const sectionOffset = promptInput?.offsetTop
-      console.log({ sectionOffset, promptInput })
       if (
         promptInput &&
         !checkIfElementIsInViewPort(promptInput) &&
@@ -311,31 +286,20 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
                 </div>
                 {isGeneratingImages && (
                   <div className="w-full absolute bottom-0">
-                    {!!myIndexInGenerationQueue &&
-                    myIndexInGenerationQueue > 0 ? (
-                      <div>
-                        <div className="text-center py-1 text-sm">
-                          {`Trenutno ${myIndexInGenerationQueue} ljudi kreira svoju majicu`}
-                        </div>
+                    <div className="mb-2 m-auto flex items-center justify-center">
+                      <div className="font-normal text-light-blue">
+                        {progressBarPercentageRef.current}%
                       </div>
-                    ) : (
-                      <>
-                        <div className="mb-2 m-auto flex items-center justify-center">
-                          <div className="font-normal text-light-blue">
-                            {progressBarPercentage}%
-                          </div>
-                        </div>
-                        <div className="w-full bg-gray-200 h-2.5 dark:bg-gray-100 absolute bottom-0 rounded-md">
-                          <div
-                            className="bg-light-blue h-2.5 rounded-full"
-                            style={{
-                              width: `${progressBarPercentage}%`,
-                              transition: 'width 0.3s ease',
-                            }}
-                          ></div>
-                        </div>
-                      </>
-                    )}
+                    </div>
+                    <div className="w-full bg-gray-200 h-2.5 dark:bg-gray-100 absolute bottom-0 rounded-md">
+                      <div
+                        className="bg-light-blue h-2.5 rounded-full"
+                        style={{
+                          width: `${progressBarPercentageRef.current}%`,
+                          transition: 'width 0.3s ease',
+                        }}
+                      ></div>
+                    </div>
                   </div>
                 )}
               </div>
