@@ -88,6 +88,13 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
       } = await axios.get(
         `${process.env.REACT_APP_BASE_API_URL}/getImageGenerationProgress/${currentGenerationImageId}`,
       )
+      if (response.upscaled_urls) {
+        setGeneratedImages(response.upscaled_urls)
+        setIsGeneratingImages(false)
+        setCurrentGenerationImageId('')
+        progressBarPercentageRef.current = 0
+        return
+      }
       if (progress === 0 && progressBarPercentageRef.current < 97) {
         const randomIncrement = getRandomOneTwoOrThree()
         progressBarPercentageRef.current += randomIncrement
@@ -97,11 +104,6 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
       if (progress > progressBarPercentageRef.current) {
         progressBarPercentageRef.current = progress
         setProgressBarRenderTrigger(prev => !prev)
-      }
-      if (response.upscaled_urls) {
-        setGeneratedImages(response.upscaled_urls)
-        setIsGeneratingImages(false)
-        setCurrentGenerationImageId('')
       }
     } catch (e) {
       console.log(e)
