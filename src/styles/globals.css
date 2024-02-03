@@ -18,7 +18,8 @@ body {
 }
 
 .gradient-button-secondary {
-  background: #fff; /* White background */
+  background: #fff;
+  /* White background */
   border: 2px solid #0090f8;
   color: #0090f8;
 }
@@ -35,13 +36,23 @@ body {
 }
 
 @keyframes AnimationName {
-  0%,
+
   100% {
     background-position: 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
+  100% {
+    background-position: 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
 }
 
 .loader {
@@ -49,15 +60,6 @@ body {
   border-radius: 50%;
   background: linear-gradient(#63c2ba, #0090f8, #fc8555);
   animation: animate 1.2s linear infinite;
-}
-
-@keyframes animate {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
 }
 
 .loader span {
@@ -104,6 +106,8 @@ body {
 }
 
 .hide-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }

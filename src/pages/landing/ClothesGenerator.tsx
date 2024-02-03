@@ -70,15 +70,7 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
   }, [generatedImages, focusedPhotoIndex])
 
   const getRandomOneTwoOrThree = () => {
-    const randomDecimal = Math.random()
-
-    if (randomDecimal < 0.3333) {
-      return 1
-    } else if (randomDecimal < 0.6666) {
-      return 2
-    } else {
-      return 3
-    }
+    return Math.floor(Math.random() * 3) + 1;
   }
 
   const fetchAndUpdateProgress = async () => {

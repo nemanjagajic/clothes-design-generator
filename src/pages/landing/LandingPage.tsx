@@ -8,12 +8,14 @@ import TShirtSizes from './TShirtSizes'
 import FAQSection from './FAQSection'
 import OurCustomers from './OurCustomers'
 import Footer from './Footer'
-import { v4 as uuidv4 } from 'uuid'
 import { useItems } from '../../store/ItemsContext'
 import Instructions from './Instructions'
 import ExampleSection from './ExampleSection'
+import { v4 as uuidv4 } from 'uuid'
+import ExamplesGridSection from './ExamplesGridSection'
 
 const imgGenerationRef = uuidv4()
+
 
 const MyComponent = () => {
   const [isCartOpen, setIsCartOpen] = useState(false)
@@ -28,6 +30,7 @@ const MyComponent = () => {
       <Navbar onCartClicked={() => setIsCartOpen(true)} itemCount={itemCount} />
       <HomePageBanner />
       <ExampleSection />
+      <ExamplesGridSection />
       <Instructions />
       <ClothesGenerator imgGenerationRef={imgGenerationRef} />
       <ExamplesCarousel />
