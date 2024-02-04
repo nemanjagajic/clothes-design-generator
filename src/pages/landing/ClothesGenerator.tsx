@@ -16,6 +16,8 @@ import {
   scrollToSection,
 } from '../../utils/pageNavigation'
 import TShirtSizeSelector from '../../components/shared/TShirtSizeSelector'
+import { useWindowWidth } from '../../utils/useWindowWidth'
+import { EXTRA_LARGE_SCREEN, LARGE_SCREEN, MEDIUM_SCREEN } from '../../constants/screenSizes'
 
 const PROGRESS_BAR_FETCHING_INTERVAL_MS = 5000
 const DEFAULT_PROGRESS_INCREMENT = 2
@@ -38,6 +40,8 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
   const [progressBarRenderTrigger, setProgressBarRenderTrigger] = useState(false)
 
   const [searchParams] = useSearchParams()
+
+  const windowWidth = useWindowWidth()
 
   useEffect(() => {
     if (generatedImages.length)
@@ -245,7 +249,7 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
         <div className="flex w-full h-full flex-col xl:flex-row mb-8 px-4 bg">
           <div
             id="t-shirt-container"
-            className="flex flex-col items-center justify-center w-full pt-4 xl:min-w-[50%] relative"
+            className="flex flex-col items-center justify-center w-full pt-4 xl:min-w-[50%] relative xl:px-2"
           >
             {generatedImages && generatedImages.length > 0 ? (
               <>
@@ -310,33 +314,47 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
             </div>
           </div>
 
-          <div className="flex flex-col w-full mt-4 xl:min-w-[50%]">
-            <div className="flex flex-col">
-              <h3 className="font-bold text-[18px]">Izaberi boju majice</h3>
-              <ColorPicker onColorPick={updateColor} />
-            </div>
-            <div className="flex flex-col justify-center mb-4">
-              <h3 className="font-bold text-[18px] mr-4 mb-2">Izaberi pol</h3>
-              <GenderRadioButtons
-                onChange={(gender) => updateCurrentItem({ gender })}
-              />
-            </div>
-            <div className="flex-row md:mt-0 mb-2">
-              <h3 className="font-bold text-[18px] mr-4 mb-2">
-                Izaberi veličinu
-              </h3>
-              <TShirtSizeSelector onSizeChange={updateSize} />
-            </div>
+          <div className="flex xl:justify-center flex-col w-full mt-4 xl:min-w-[50%] relative">
+            {windowWidth >= EXTRA_LARGE_SCREEN && (
+              <div className="absolute h-[95%] w-[1px] bg-neutral-300 mb-[32px]" />
+            )}
+            <div className="lg:pl-10">
+              <div className="flex flex-col">
+                <h3 className="font-bold text-[18px]">Izaberi boju majice</h3>
+                <ColorPicker onColorPick={updateColor} />
+              </div>
+              <div className="flex flex-col justify-center mb-4 mt-4">
+                <h3 className="font-bold text-[18px] mr-4 mb-2">Izaberi pol</h3>
+                <GenderRadioButtons
+                  onChange={(gender) => updateCurrentItem({ gender })}
+                />
+              </div>
+              <div className="flex-row mt-8 mb-2">
+                <h3 className="font-bold text-[18px] mr-4 mb-2">
+                  Izaberi veličinu
+                </h3>
+                <TShirtSizeSelector onSizeChange={updateSize} />
+              </div>
 
-            <div className="flex items-center justify-center w-full mt-5">
-              <Button
-                isMain
-                text={'Dodaj u korpu'}
-                onClick={() => addToCart(currentItem)}
-                customStyles={'w-full'}
-                isDisabled={generatedImages.length === 0}
-                disabledText={'Dodaj u korpu'}
-              />
+              <div className="flex-row mt-8 mb-2">
+                <h3 className="font-bold text-[18px] mr-4 mb-2">
+                  Cena majice
+                </h3>
+                <div className={'flex items-center justify-center bg-dark-blue w-[170px] p-1'}>
+                  <div className={'text-nsm-orange text-[30px]'}>2.190 RSD</div>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-center w-full mt-12">
+                <Button
+                  isMain
+                  text={'Dodaj u korpu'}
+                  onClick={() => addToCart(currentItem)}
+                  customStyles={'w-full'}
+                  isDisabled={generatedImages.length === 0}
+                  disabledText={'Dodaj u korpu'}
+                />
+              </div>
             </div>
           </div>
           {isSelectedImagePreviewModalOpen && (
