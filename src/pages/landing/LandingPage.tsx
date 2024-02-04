@@ -33,8 +33,6 @@ const MyComponent = () => {
       <ExamplesGridSection />
       <Instructions />
       <ClothesGenerator imgGenerationRef={imgGenerationRef} />
-      <ExamplesCarousel />
-      <TShirtSizes />
       <FAQSection />
       <OurCustomers />
       <Footer />

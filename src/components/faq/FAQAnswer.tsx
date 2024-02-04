@@ -14,10 +14,16 @@ const FAQAnswer = ({
   const [isOpen, setIsOpen] = useState(isInitiallyOpen)
 
   return (
-    <div className="flex flex-col w-full mb-6">
+    <div
+      className="flex flex-col w-full mb-6 bg-nsm-gray-300 p-4 rounded-md relative cursor-pointer"
+      onClick={() => setIsOpen(!isOpen)}
+    >
+      {!isOpen && (
+        <div className="absolute inset-0 bg-nsm-gray-300 bg-opacity-60" />
+      )}
       <div className="flex flex-row w-full justify-between">
-        <div className="text-xl font-bold">{question}</div>
-        <div onClick={() => setIsOpen(!isOpen)} className="cursor-pointer">
+      <div className="text-[22px] font-bold">{question}</div>
+        <div>
           {isOpen ? (
             <ChevronUpOutline height="25px" width="25px" />
           ) : (
@@ -25,7 +31,7 @@ const FAQAnswer = ({
           )}
         </div>
       </div>
-      {isOpen && <div className={'text-sm mt-2 text-light-gray'}>{answer}</div>}
+      {isOpen && <div className={'text-md mt-2 font-light'}>{answer}</div>}
     </div>
   )
 }
