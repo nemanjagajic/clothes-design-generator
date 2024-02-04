@@ -29,21 +29,21 @@ const ExampleSection = () => {
         </h2>
         <img
           src={imgArrow1}
-          className="z-20 absolute h-[160px] lg:h-[200px] xl:h-[270px] lg:left-[30px] xl:left-[35px]"
+          className="z-20 absolute h-[160px] lg:h-[200px] xl:h-[270px] lg:left-[30px] xl:left-[35px] 2xl:left-[320px]"
         />
-        <div className="flex justify-center items-center p-2 rounded-md text-[28px] absolute w-[300px] h-[100px] bg-white top-[150px] lg:top-[190px] xl:top-[250px] left-[130px] lg:left-[190px] xl:left-[260px]">
+        <div className="flex justify-center items-center p-2 rounded-md text-[28px] absolute w-[300px] h-[100px] bg-white top-[150px] lg:top-[190px] xl:top-[250px] left-[130px] lg:left-[190px] xl:left-[260px] 2xl:left-[550px]">
           "Pomeranac vija hranu u svemiru"
         </div>
         <img
           src={imgArrow2}
-          className="z-20 absolute h-[70px] lg:h-[80px] xl:h-[100px] top-[260px] lg:top-[310px] xl:top-[340px] left-[200px] lg:left-[230px] xl:left-[490px]"
+          className="z-20 absolute h-[70px] lg:h-[80px] xl:h-[100px] top-[260px] lg:top-[310px] xl:top-[340px] left-[200px] lg:left-[230px] xl:left-[490px] 2xl:left-[820px]"
         />
-        <div className="flex items-center clip-angled-edges p-2 pl-3 text-[28px] absolute w-[210px] text-white h-[40px] bg-nsm-orange top-[300px] lg:top-[360px] xl:top-[400px] left-[350px] lg:left-[400px] xl:left-[700px]">
+        <div className="flex items-center clip-angled-edges p-2 pl-3 text-[28px] absolute w-[210px] text-white h-[40px] bg-nsm-orange top-[300px] lg:top-[360px] xl:top-[400px] left-[350px] lg:left-[400px] xl:left-[700px] 2xl:left-[1030px]">
           Ovo smo dobili
         </div>
         <img
           src={imgArrow3}
-          className="z-20 absolute h-[25px] lg:h-[30px] xl:h-[40px] top-[300px] lg:top-[360px] xl:top-[380px] left-[560px] lg:left-[610px] xl:left-[910px]"
+          className="z-20 absolute h-[25px] lg:h-[30px] xl:h-[40px] top-[300px] lg:top-[360px] xl:top-[380px] left-[560px] lg:left-[610px] xl:left-[910px] 2xl:left-[1250px]"
         />
       </div>
       <img
