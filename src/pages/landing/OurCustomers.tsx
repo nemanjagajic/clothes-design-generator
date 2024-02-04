@@ -1,7 +1,13 @@
 import React from 'react'
-import Container from '../../components/shared/Container'
+import { useWindowWidth } from '../../utils/useWindowWidth'
+import { LARGE_SCREEN } from '../../constants/screenSizes'
+import {
+  ChevronForward
+} from 'react-ionicons'
+import ButtonNavigate from '../../components/shared/ButtonNavigate'
 
 const OurCustomers = () => {
+  const windowWidth = useWindowWidth()
   const renderCustomerImage = (key: number) => (
     <div
       key={key}
@@ -20,11 +26,21 @@ const OurCustomers = () => {
         <h2 className="text-black text-[44px] sm:text-5xl sm:text-center font-bold leading-tight pb-10 pt-24">
           Utisci
         </h2>
-        <div className="flex lg:flex-row flex-col justify-center items-center w-full overflow-x-auto">
-          {Array.from({ length: 3 }).map((_, index) =>
-            renderCustomerImage(index),
-          )}
-        </div>
+        {windowWidth >= LARGE_SCREEN ? (
+          <div className="flex lg:flex-row flex-col justify-center items-center w-full overflow-x-auto">
+            {Array.from({ length: 3 }).map((_, index) =>
+              renderCustomerImage(index),
+            )}
+          </div>
+        ) : (
+          <div>
+            {renderCustomerImage(1)}
+            <div className='flex flex-row items-center justify-center'>
+              <ButtonNavigate direction={"BACK"} />
+              <ButtonNavigate direction={"NEXT"} />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
