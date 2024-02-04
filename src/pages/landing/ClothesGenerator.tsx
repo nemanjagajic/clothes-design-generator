@@ -316,7 +316,7 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
 
           <div className="flex xl:justify-center flex-col w-full mt-4 xl:min-w-[50%] relative">
             {windowWidth >= EXTRA_LARGE_SCREEN && (
-              <div className="absolute h-[95%] w-[1px] bg-neutral-300 mb-[32px]" />
+              <div className="absolute h-[95%] w-[1px] bg-neutral-300 mb-[33px]" />
             )}
             <div className="lg:pl-10">
               <div className="flex flex-col">

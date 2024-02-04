@@ -87,7 +87,7 @@ const Footer = () => {
             className="h-[35px] border p-2 rounded-md text-sm w-full mr-2"
           />
           <Button
-            customStyles={'h-[35px] w-[120px] pb-0 pt-0'}
+            customStyles={'flex items-center justify-center h-[35px] w-[120px] pb-0 pt-0'}
             isMain={true}
             text={'Pošalji'}
             onClick={() => console.log('Posalji')}
