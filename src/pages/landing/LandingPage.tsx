@@ -33,8 +33,8 @@ const MyComponent = () => {
       <ExamplesGridSection />
       <Instructions />
       <ClothesGenerator imgGenerationRef={imgGenerationRef} />
-      <FAQSection />
       <OurCustomers />
+      <FAQSection />
       <Footer />
     </div>
   )

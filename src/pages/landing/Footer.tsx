@@ -99,7 +99,7 @@ const Footer = () => {
   }
 
   return (
-    <Container>
+    <Container customStyles="bg-nsm-gray-300">
       <div className="flex flex-col md:flex-row border border-t-1 border-x-0 border-b-0 border-border-gray mt-24 lg:mt-32 pt-8 pb-12 w-full">
         {renderContactSection()}
         {renderPagesSection()}
