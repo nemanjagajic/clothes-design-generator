@@ -4,6 +4,12 @@ module.exports = {
   safelist: ['h-20', 'w-20'],
   theme: {
     extend: {
+      fontFamily: {
+        custom: [
+          'Courgette',
+          // other fallback fonts
+        ],
+      },
       colors: {
         'dark-blue': '#102E4A',
         'light-blue': '#0090F8',

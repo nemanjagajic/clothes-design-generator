@@ -13,11 +13,11 @@ const InstructionSection = () => {
   }
 
   return (
-    <div className="bg-nsm-gray-300 flex flex-col items-center pt-40 pb-10 px-5">
+    <div className="bg-[#ECEBE4] flex flex-col items-center pt-20 pb-10 px-5">
       <h2 className="text-black text-[44px] sm:text-5xl sm:text-center font-bold leading-tight pb-10">
         <span>Prati korake kako bi i ti</span>
         <div>
-          <span className="italic text-light-blue">napravio svoju</span>
+          <span className="text-[50px] font-custom text-light-blue">napravio svoju</span>
           <span> unikatnu majicu</span>
         </div>
       </h2>

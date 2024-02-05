@@ -104,7 +104,7 @@ const Card: React.FC<ProductCardProps> = ({
             <p className="text-gray-700 text-md">Cena:</p>
           </td>
           <td className="text-left">
-            <p className="ml-3 ">{price * quantity}rsd</p>
+            <p className="ml-3 ">{`${price} x ${quantity}`}rsd</p>
           </td>
         </tr>
       </table>

@@ -1,11 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
+import ImageItem from './ImageItem';
 
 interface ImageListProps {
-    images: string[];
+    images: { src: string, prompt: string }[];
     scrollDirection: 'left' | 'right';
+    hideOnMobile?: boolean
 }
 
-const ImageList: React.FC<ImageListProps> = ({ images, scrollDirection }) => {
+const ImageList: React.FC<ImageListProps> = ({ images, scrollDirection, hideOnMobile = false }) => {
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const [isPaused, setIsPaused] = useState(false);
 
@@ -46,27 +48,26 @@ const ImageList: React.FC<ImageListProps> = ({ images, scrollDirection }) => {
         setIsPaused(false)
     };
 
-
     return (
         <div
             ref={scrollContainerRef}
-            className=" overflow-hidden w-full"
-
+            className={`flex w-full overflow-x-scroll scrollbar-hide ${hideOnMobile ? 'hidden' : ''} md:block`}
         >
-            <div className="flex flex-row">
-                {images.concat(images).map((image, index) => (
-                    <img
-                        key={index}
-                        src={image}
-                        alt={`Image ${index}`}
-                        className='p-2 rounded-xl transition duration-500 ease-in-out transform hover:scale-105 hover:z-20 rounded-xl w-[400px]'
-                        onMouseEnter={handleMouseEnter}
-                        onMouseLeave={handleMouseLeave}
-                    />
-
+            <div className="flex flex-nowrap ">
+                {images.map((image, index) => (
+                    <>
+                        <ImageItem
+                            image={image.src}
+                            key={index}
+                            onMouseEnter={handleMouseEnter}
+                            onMouseLeave={handleMouseLeave}
+                            prompt={image.prompt}
+                        />
+                    </>
                 ))}
             </div>
-        </div>
+
+        </div >
     );
 };
 

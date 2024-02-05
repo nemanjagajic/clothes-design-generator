@@ -6,6 +6,7 @@ import OrderItems from './OrderItems'
 import { useItems } from '../../store/ItemsContext'
 import CartDrawer from '../../components/cart/CartDrawer'
 import RemoveOrderModal from './RemoveOrderModal'
+import Footer from '../landing/Footer'
 
 const CartPage = () => {
   const { items, itemCount, totalPrice } = useItems()
@@ -27,8 +28,8 @@ const CartPage = () => {
         onSurroundingAreaClicked={() => setIsCartOpen(false)}
       />
       <RemoveOrderModal
-        onCancel={() => {}}
-        onRemove={() => {}}
+        onCancel={() => { }}
+        onRemove={() => { }}
         isOpen={false}
       />
       <div className="mt-28 mx-10 lg:mx-24 ">
@@ -70,6 +71,7 @@ const CartPage = () => {
         </div>
         <div></div>
       </div>
+      <Footer />
     </>
   )
 }

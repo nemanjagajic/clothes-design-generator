@@ -1,11 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
+import toastr from 'toastr'
 import { generateImage } from '../../api/imageGenerator'
-import Container from '../../components/shared/Container'
 import Button from '../../components/shared/Button'
 import axios from 'axios'
 import ColorPicker from '../../components/shared/ColorPicker'
 import { Item, useItems } from '../../store/ItemsContext'
-import EmailCard from '../../components/EmailCard/EmailCard'
 import { useSearchParams } from 'react-router-dom'
 // @ts-ignore
 import blackTShirt from '../../assets/images/black-tshirt.png'
@@ -64,7 +63,7 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
       if (imagesFromStorage) {
         setGeneratedImages(JSON.parse(imagesFromStorage))
       }
-    } catch (error) {}
+    } catch (error) { }
   }, [])
 
   const { updateCurrentItem, addToCart, currentItem, userId } = useItems()
@@ -75,6 +74,14 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
 
   const getRandomOneTwoOrThree = () => {
     return Math.floor(Math.random() * 3) + 1;
+  }
+
+  const handleAddToCart = () => {
+    toastr.success("Majica vas čeka u korpi 👕", "Dodato! 🎉", {
+      timeOut: 3000,
+      positionClass: 'toast-bottom-right'
+    })
+    addToCart(currentItem)
   }
 
   const fetchAndUpdateProgress = async () => {
@@ -181,12 +188,18 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
     <div
       key={index}
       className={`flex items-center justify-center border cursor-pointer w-[120px] h-[120px] min-h-[120px] min-w-[120px] sm:w-[140px] sm:h-[140px] sm:min-h-[140px] sm:in-w-[140px]
-      ${
-        index === focusedPhotoIndex
+      ${index === focusedPhotoIndex
           ? 'border-light-blue border-2'
           : 'border-gray-300 border-2'
-      } mr-2 rounded-lg p-1`}
-      onClick={() => setFocusedPhotoIndex(index)}
+        } mr-2 rounded-lg p-1`}
+      onClick={() => {
+        if (focusedPhotoIndex === index) {
+          setIsSelectedImagePreviewModalOpen(true)
+          return
+        }
+        setFocusedPhotoIndex(index)
+      }}
+
     >
       <img src={imageUrl} className="rounded-md" />
     </div>
@@ -195,9 +208,8 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
   const renderEmptyPreviewImage = (index: number) => (
     <div
       key={index}
-      className={`flex items-center justify-center border cursor-pointer border-gray-200 w-[120px] h-[120px] min-h-[120px] min-w-[120px] sm:w-[140px] sm:h-[140px] sm:min-h-[140px] sm:in-w-[140px] mx-2 rounded-md ${
-        isGeneratingImages && gradientBgLoaderStyle
-      }`}
+      className={`flex items-center justify-center border cursor-pointer border-gray-200 w-[120px] h-[120px] min-h-[120px] min-w-[120px] sm:w-[140px] sm:h-[140px] sm:min-h-[140px] sm:in-w-[140px] mx-2 rounded-md ${isGeneratingImages && gradientBgLoaderStyle
+        }`}
     />
   )
 
@@ -269,9 +281,8 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
               >
                 <img width={400} src={blackTShirt} className="px-2 mb-8" />
                 <div
-                  className={`flex items-center justify-center w-[140px] h-[140px] sm:w-[170px] sm:h-[170px] absolute mb-32 sm:mb-40 mr-1 sm:mr-2 rounded-md ${
-                    isGeneratingImages ? 'bg-gray-transparent' : 'bg-gray-200'
-                  }`}
+                  className={`flex items-center justify-center w-[140px] h-[140px] sm:w-[170px] sm:h-[170px] absolute mb-32 sm:mb-40 mr-1 sm:mr-2 rounded-md ${isGeneratingImages ? 'bg-gray-transparent' : 'bg-gray-200'
+                    }`}
                 >
                   {isGeneratingImages && (
                     <div className="loader w-[140px] h-[140px] sm:w-[170px] sm:h-[170px]">
@@ -306,11 +317,11 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
             <div className="flex items-center md:justify-center w-full mt-2 overflow-x-auto pb-3 sm:pb-8 hide-scrollbar">
               {generatedImages.length > 0
                 ? generatedImages.map((imageUrl, index) => {
-                    return renderPreviewImage(imageUrl, index)
-                  })
+                  return renderPreviewImage(imageUrl, index)
+                })
                 : Array.from({ length: 4 }).map((_, index) => {
-                    return renderEmptyPreviewImage(index)
-                  })}
+                  return renderEmptyPreviewImage(index)
+                })}
             </div>
           </div>
 
@@ -336,20 +347,11 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
                 <TShirtSizeSelector onSizeChange={updateSize} />
               </div>
 
-              <div className="flex-row mt-8 mb-2">
-                <h3 className="font-bold text-[18px] mr-4 mb-2">
-                  Cena majice
-                </h3>
-                <div className={'flex items-center justify-center bg-dark-blue w-[170px] p-1'}>
-                  <div className={'text-nsm-orange text-[30px]'}>2.190 RSD</div>
-                </div>
-              </div>
-
-              <div className="flex items-center justify-center w-full mt-12">
+              <div className="flex items-center justify-center w-full mt-5">
                 <Button
                   isMain
                   text={'Dodaj u korpu'}
-                  onClick={() => addToCart(currentItem)}
+                  onClick={handleAddToCart}
                   customStyles={'w-full'}
                   isDisabled={generatedImages.length === 0}
                   disabledText={'Dodaj u korpu'}

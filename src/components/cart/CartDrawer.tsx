@@ -32,16 +32,15 @@ const CartDrawer = ({
   return (
     <div
       ref={drawerRef}
-      className={`fixed z-10 bg-white right-0 top-0 h-full w-[350px] shadow-xl transform ${
-        isCartOpen ? 'translate-x-0' : 'translate-x-full'
-      } transition-transform duration-300`}
+      className={`fixed z-30 bg-white right-0 top-0 h-full w-[350px] shadow-xl transform ${isCartOpen ? 'translate-x-0' : 'translate-x-full'
+        } transition-transform duration-300`}
     >
       <h3 className="font-bold text-xl m-8">Korpa</h3>
       <div className="flex flex-col h-full">
         <div className="overflow-y-auto h-[calc(100%-190px)] p-2">
-          {items.map((item) => {
+          {items.map((item, index) => {
             return (
-              <div>
+              <div key={index}>
                 <Card
                   imageUrl={item.imageUrl!}
                   price={2400}

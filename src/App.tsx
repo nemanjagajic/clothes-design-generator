@@ -4,6 +4,7 @@ import LandingPage from './pages/landing/LandingPage'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import DashboardHome from './pages/dashboard/DashboardHome'
 import CartPage from './pages/cart/CartPage'
+import PurchaseSuccessPage from './pages/success/PurchaseSuccesPage'
 
 function App() {
   const router = createBrowserRouter([
@@ -19,6 +20,7 @@ function App() {
       path: '/cart',
       element: <CartPage />,
     },
+    { path: '/success', element: <PurchaseSuccessPage /> }
   ])
 
   return <RouterProvider router={router} />

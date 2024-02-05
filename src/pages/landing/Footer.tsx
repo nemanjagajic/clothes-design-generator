@@ -77,11 +77,11 @@ const Footer = () => {
         <div className="text-black text-md pb-4 font-bold mt-8 md:mt-0">
           Pošalji nam email
         </div>
-        <div className="text-light-gray text-xs mb-2 lg:mb-0">
+        <div className="text-light-gray text-xs lg:mb-0">
           Pošalji nam email i mi ćemo te obaveštavati o novim artiklima na našem
           sajtu.
         </div>
-        <div className="flex flex-row justify-between w-full">
+        <div className="flex flex-row justify-between w-full mt-2 ">
           <input
             placeholder={'Email'}
             className="h-[35px] border p-2 rounded-md text-sm w-full mr-2"

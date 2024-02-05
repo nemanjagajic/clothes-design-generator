@@ -118,7 +118,8 @@ const Card: React.FC<ProductCardProps> = ({
             <p className="text-gray-700 text-md mx-2">Cena:</p>
           </div>
           <div className="text-center">
-            <p>{price * quantity}rsd</p>
+            {(quantity > 1 ? <p>{`${quantity} x ${price}`}rsd</p> : <p>{`${price}`}rsd</p>)}
+
           </div>
         </div>
       </div>

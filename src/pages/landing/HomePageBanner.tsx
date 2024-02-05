@@ -11,7 +11,7 @@ const HomePageBanner = () => {
           <h2 className="text-white text-[44px] sm:text-5xl font-bold leading-tight">
             <div>Od tvoje mašte do stvarnosti</div>
             <span>Dizajniraj</span>
-            <span className="italic text-light-blue bold">
+            <span className="text-[50px] sm:text-5xl font-custom text-light-blue bold">
               {' '}
               majicu u minuti{''}
             </span>

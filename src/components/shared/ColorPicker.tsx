@@ -18,7 +18,7 @@ const ColorPicker = ({ onColorPick }: ColorPickerProps) => {
   return (
     <div className="flex space-x-2 py-4">
       {Object.keys(colorOptions).map((color: Item['color']) => (
-        <>
+        <div key={color}>
           <ColorCircle
             type={'active'}
             size={'20'}
@@ -27,7 +27,7 @@ const ColorPicker = ({ onColorPick }: ColorPickerProps) => {
             selected={selectedColor === color}
             onClick={() => handleClick(color)}
           />
-        </>
+        </div>
       ))}
     </div>
   )

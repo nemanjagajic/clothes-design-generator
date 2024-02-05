@@ -2,6 +2,7 @@ import axios from 'axios'
 import React from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useItems } from '../../store/ItemsContext'
+import { useNavigate } from 'react-router-dom'
 
 type FormValues = {
   firstName: string
@@ -20,14 +21,16 @@ export default function OrderForm() {
     formState: { errors },
   } = useForm<FormValues>()
   const { items } = useItems()
+  const navigate = useNavigate()
   const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
-    console.log(data)
-    // Submit the form data to your API or server here
     try {
+      navigate('/success')
       await axios.post(`${process.env.REACT_APP_BASE_API_URL}/submitOrder`, {
         ...data,
         items,
       })
+
+      // *** popraviti da se ovaj await resolve-uje pa da funckija nastavi sa brisanjem korpe i toastr-om
     } catch (error) {
       console.log('Error submiting form', error)
     }

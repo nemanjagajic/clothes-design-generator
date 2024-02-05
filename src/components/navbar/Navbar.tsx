@@ -7,7 +7,7 @@ import logo from '../../assets/images/logo3.png'
 import { useNavigate } from 'react-router-dom'
 
 type NavbarTypes = {
-  onCartClicked: () => void
+  onCartClicked: (() => void) | null
   itemCount: number
 }
 
@@ -81,7 +81,7 @@ const Navbar = ({ onCartClicked, itemCount }: NavbarTypes) => {
             </div>
           </div>
         </div>
-        <div className="bg-white relative p-2 rounded-md shadow cursor-pointer h-[40px] w-[40px] my-auto">
+        {!!onCartClicked && (<div className="bg-white relative p-2 rounded-md shadow cursor-pointer h-[40px] w-[40px] my-auto">
           {!!itemCount && (
             <div
               className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center"
@@ -93,7 +93,7 @@ const Navbar = ({ onCartClicked, itemCount }: NavbarTypes) => {
           <div onClick={onCartClicked}>
             <BagOutline height="25px" width="25px" />
           </div>
-        </div>
+        </div>)}
       </div>
     </Container>
   )
