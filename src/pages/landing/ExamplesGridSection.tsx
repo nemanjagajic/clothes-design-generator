@@ -22,11 +22,16 @@ const prompts = ['Astronaut na mesecu pije koktel',
     'Jutrić kafica sa pogledom',
     'Star Wars tematske poštanske markice',
     'Astronaut na mesecu pije koktel',
-
+    '2D morski talasi',
+    'Raphaello from TMNT as a baby',
+    'Avengers bebe',
+    'Beba Rubeus Hagrid',
+    'Beba Draco Malfoy',
+    'Beba Ron Weasley'
 ]
 
 
-const imagePaths = Array.from({ length: 20 }, (_, index) => {
+const imagePaths = Array.from({ length: 26 }, (_, index) => {
     return { src: require(`../../assets/examples/${index + 1}.png`), prompt: prompts[index] }
 
 })
