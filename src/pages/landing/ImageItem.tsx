@@ -38,7 +38,7 @@ const ImageItem: FC<ImageItemProps> = ({ onMouseEnter, onMouseLeave, key, image,
             className='w-full h-full object-cover rounded-md'
         />
         {isFocused && (
-            <p className='w-[250px] text-3xl font-bold absolute bottom-[15px] left-1/2 transform -translate-x-1/2 text-white'>{prompt}</p>
+            <p className='w-[250px] sm:w-[350px] text-3xl font-bold absolute bottom-[15px] left-1/2 transform -translate-x-1/2 text-white'>{prompt}</p>
         )}
         {!isFocused && (<div className="absolute inset-0 pointer-events-none " style={lampStyle}></div>)}
 
