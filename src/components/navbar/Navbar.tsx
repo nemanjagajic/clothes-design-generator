@@ -47,7 +47,7 @@ const Navbar = ({ onCartClicked, itemCount }: NavbarTypes) => {
             <img className="h-[56px]" src={logo} />
           </div>
         </div>
-        <div className="flex flex-row hidden lg:inline-flex">
+        {!!onCartClicked && (<div className="flex flex-row hidden lg:inline-flex">
           <div
             onClick={() => scrollToSection('examples')}
             className="flex justify-center items-center px-8 cursor-pointer"
@@ -80,7 +80,7 @@ const Navbar = ({ onCartClicked, itemCount }: NavbarTypes) => {
               Naši korisnici
             </div>
           </div>
-        </div>
+        </div>)}
         {!!onCartClicked && (<div className="bg-white relative p-2 rounded-md shadow cursor-pointer h-[40px] w-[40px] my-auto">
           {!!itemCount && (
             <div
