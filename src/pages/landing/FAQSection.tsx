@@ -29,7 +29,7 @@ const FaqSection = () => {
 
   return (
     <Container customStyles={'py-16 bg-nsm-gray-100'}>
-      <div className="flex items-center flex-col w-full">
+      <div className="flex items-center flex-col w-full" id="questions">
         <h2 className="text-black text-[44px] sm:text-5xl sm:text-center font-bold leading-tight pb-16">
           Najčešća pitanja
         </h2>

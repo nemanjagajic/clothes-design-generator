@@ -224,7 +224,7 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
   const gradientBgLoaderStyle =
     'bg-gradient-to-r from-very-light-blue via-very-light-blue to-white background-animate'
   return (
-    <div className="min-h-full bg-dark-blue py-4 md:px-8">
+    <div className="min-h-full bg-dark-blue py-4 md:px-8" id="t-shirt-container">
       <div className="bg-nsm-gray-400 rounded-2xl">
         <div
           className="mt-6 flex flex-col md:flex-row w-full px-4 pt-8"
@@ -258,9 +258,8 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
           {/*{!!isGeneratingImages && <EmailCard userId={userId} />}*/}
         </div>
 
-        <div className="flex w-full h-full flex-col xl:flex-row mb-8 px-4 bg">
+        <div className="flex w-full h-full flex-col xl:flex-row mb-8 px-4">
           <div
-            id="t-shirt-container"
             className="flex flex-col items-center justify-center w-full pt-4 xl:min-w-[50%] relative xl:px-2"
           >
             {generatedImages && generatedImages.length > 0 ? (

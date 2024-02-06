@@ -84,7 +84,7 @@ const Navbar = ({ onCartClicked, itemCount }: NavbarTypes) => {
         {!!onCartClicked && (<div className="bg-white relative p-2 rounded-md shadow cursor-pointer h-[40px] w-[40px] my-auto">
           {!!itemCount && (
             <div
-              className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center"
+              className="absolute -top-2 -right-2 bg-blue-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center"
               style={{ minWidth: '24px' }}
             >
               {itemCount}

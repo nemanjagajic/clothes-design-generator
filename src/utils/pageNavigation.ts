@@ -1,7 +1,7 @@
 export const scrollToSection = (sectionId: string) => {
   const sectionOffset = document?.getElementById(sectionId)?.offsetTop
   if (sectionOffset) {
-    window.scrollTo({ top: sectionOffset - 120, behavior: 'smooth' })
+    window.scrollTo({ top: sectionOffset, behavior: 'smooth' })
   }
 }
 
@@ -11,7 +11,7 @@ export const checkIfElementIsInViewPort = (element: HTMLElement) => {
     rect.top >= 0 &&
     rect.left >= 0 &&
     rect.bottom <=
-      (window.innerHeight || document.documentElement.clientHeight) &&
+    (window.innerHeight || document.documentElement.clientHeight) &&
     rect.right <= (window.innerWidth || document.documentElement.clientWidth)
   )
 }

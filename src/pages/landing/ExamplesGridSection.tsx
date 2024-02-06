@@ -27,11 +27,12 @@ const prompts = ['Astronaut na mesecu pije koktel',
     'Avengers bebe',
     'Beba Rubeus Hagrid',
     'Beba Draco Malfoy',
-    'Beba Ron Weasley'
+    'Beba Ron Weasley',
+    'Stara slika u retro stilu, crno-beli, analogni selfi turističkog vanzemaljca potpuno obučenog, sa Ajfelovom kulom u pozadini'
 ]
 
 
-const imagePaths = Array.from({ length: 26 }, (_, index) => {
+const imagePaths = Array.from({ length: 27 }, (_, index) => {
     return { src: require(`../../assets/examples/${index + 1}.png`), prompt: prompts[index] }
 
 })
@@ -41,10 +42,10 @@ const ExamplesGridSection = () => {
 
 
     return (
-        <div className='flex flex-col p-4 bg-[#FAF9F1] relative pb-20  ' ref={gridRef}>
+        <div className='flex flex-col p-4 bg-[#FAF9F1] relative pb-20' ref={gridRef} id="examples">
             <h2 className="w-full text-black text-[44px] sm:text-5xl sm:text-center font-bold leading-tight pb-10 pt-20">
                 <span>Šta su drugi ljudi </span>
-                <span className="text-light-blue text-[50px] sm:text-5xl font-custom">kreirali</span>
+                <span id="primeri" className="text-light-blue text-[50px] sm:text-5xl font-custom">kreirali</span>
             </h2>
             <ImageList images={imagePaths.concat(imagePaths)} scrollDirection='left' />
             <ImageList images={imagePaths.concat(imagePaths).reverse()} scrollDirection='right' hideOnMobile />

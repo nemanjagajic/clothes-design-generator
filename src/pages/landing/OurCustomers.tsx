@@ -21,7 +21,7 @@ const OurCustomers = () => {
   )
 
   return (
-    <div className="bg-white pb-16">
+    <div className="bg-white pb-16" id='our-users'>
       <div className="flex flex-col justify-center items-center w-full">
         <h2 className="text-black text-[44px] sm:text-5xl sm:text-center font-bold leading-tight pb-10 pt-24">
           Utisci

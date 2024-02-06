@@ -4,6 +4,9 @@ module.exports = {
   safelist: ['h-20', 'w-20'],
   theme: {
     extend: {
+      textShadow: {
+        'glow': '0 0 8px rgba(0, 0, 0, 0.8)', // Customize the color and spread as needed
+      },
       fontFamily: {
         custom: [
           'Courgette',
@@ -34,5 +37,14 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities, theme }) {
+      const newUtilities = {
+        '.text-glow': {
+          textShadow: theme('textShadow.glow'),
+        },
+      };
+      addUtilities(newUtilities, ['responsive', 'hover']);
+    },
+  ],
 }
