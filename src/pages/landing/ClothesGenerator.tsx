@@ -42,6 +42,8 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
 
   const windowWidth = useWindowWidth()
 
+  const inputRef = useRef<HTMLTextAreaElement | null>(null)
+
   useEffect(() => {
     if (generatedImages.length)
       localStorage.setItem('images', JSON.stringify(generatedImages))
@@ -146,6 +148,11 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
   }
 
   const handleGenerateImage = async () => {
+    if (!description.trim()) {
+      console.log("FOCUSING", inputRef?.current?.focus)
+      inputRef?.current?.focus()
+      return
+    }
     clearGeneratedImages()
     setIsGeneratingImages(true)
     scrollToTShirtContainer()
@@ -233,6 +240,7 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
           <textarea
             placeholder="Ovde opiši sliku kakvu želiš na majici ispod"
             value={description}
+            ref={inputRef}
             onChange={(e) => setDescription(e.target.value)}
             className="w-full min-h-[100px] md:min-h-[50px] md:h-[50px] border border-gray-300 rounded-md focus:outline-none p-4 md:p-3"
           />
@@ -246,12 +254,12 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
             isMain={false}
             text={'Napravi'}
             onClick={handleGenerateImage}
-            customStyles={'w-full h-[50px] md:w-[300px] md:ml-4'}
+            customStyles={`w-full h-[50px] md:w-[300px] md:ml-4 ${(isGeneratingImages || !description.trim()) && 'bg-gray-300'}`}
             isDisabled={isGeneratingImages || !description.trim()}
             disabledText={
               isGeneratingImages
                 ? 'Slike se generišu...'
-                : 'Napravi sliku za majicu'
+                : 'Napravi'
             }
           />
 

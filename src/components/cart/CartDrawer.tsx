@@ -38,6 +38,7 @@ const CartDrawer = ({
       <h3 className="font-bold text-xl m-8">Korpa</h3>
       <div className="flex flex-col h-full">
         <div className="overflow-y-auto h-[calc(100%-190px)] p-2">
+          {!items.length && <div className='w-full flex justify-center items-center mt-20'><p className="text-gray-600">Korpa je prazna</p></div>}
           {items.map((item, index) => {
             return (
               <div key={index}>
@@ -65,8 +66,10 @@ const CartDrawer = ({
         <div className="absolute bottom-0 w-full h-24 flex items-center justify-center border-t">
           <Button
             isMain
-            customStyles="w-full mx-2"
             text="Kupi"
+            customStyles={`w-full mx-2 h-[50px] md:w-[300px] md:ml-4 ${(!items.length) && 'bg-gray-300'}`}
+            isDisabled={!items.length}
+            disabledText={"Kupi"}
             onClick={() => {
               navigate('/cart')
             }}
