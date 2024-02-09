@@ -44,14 +44,16 @@ const ItemsContext = createContext<{
   totalPrice: number
   itemCount: number
   updateCurrentItem: (itemData: Partial<Item>) => void
+  emptyCart: () => void
   userId: string
 }>({
   items: [defaultItem],
-  addToCart: () => {},
-  removeFromCart: () => {},
-  removeAllFromCart: () => {},
+  addToCart: () => { },
+  removeFromCart: () => { },
+  removeAllFromCart: () => { },
   currentItem: defaultItem,
-  updateCurrentItem: () => {},
+  updateCurrentItem: () => { },
+  emptyCart: () => { },
   totalPrice: 0,
   itemCount: 0,
   userId: '',
@@ -114,6 +116,11 @@ export const ItemsProvider = ({ children }: { children: ReactNode }) => {
         JSON.stringify([...items, { ...newItem, quantity: 1 }]),
       )
     }
+  }
+
+  const emptyCart = () => {
+    setItems([])
+    localStorage.setItem('cart', '[]')
   }
 
   const removeAllFromCart = (itemToRemove: Item) => {
@@ -180,6 +187,7 @@ export const ItemsProvider = ({ children }: { children: ReactNode }) => {
         updateCurrentItem,
         totalPrice,
         itemCount,
+        emptyCart
       }}
     >
       {children}

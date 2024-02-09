@@ -20,17 +20,17 @@ export default function OrderForm() {
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>()
-  const { items } = useItems()
+  const { items, emptyCart } = useItems()
   const navigate = useNavigate()
   const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
     try {
-      navigate('/success')
       await axios.post(`${process.env.REACT_APP_BASE_API_URL}/submitOrder`, {
         ...data,
         items,
       })
+      navigate('/success')
+      emptyCart()
 
-      // *** popraviti da se ovaj await resolve-uje pa da funckija nastavi sa brisanjem korpe i toastr-om
     } catch (error) {
       console.log('Error submiting form', error)
     }
