@@ -17,6 +17,7 @@ import {
 import TShirtSizeSelector from '../../components/shared/TShirtSizeSelector'
 import { useWindowWidth } from '../../utils/useWindowWidth'
 import { EXTRA_LARGE_SCREEN, LARGE_SCREEN, MEDIUM_SCREEN } from '../../constants/screenSizes'
+import GeneratorForm from './GeneratorForm'
 
 const PROGRESS_BAR_FETCHING_INTERVAL_MS = 5000
 const DEFAULT_PROGRESS_INCREMENT = 2
@@ -26,7 +27,6 @@ type ClothesGeneratorTypes = {
 }
 
 const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
-  const [description, setDescription] = useState('')
   const [showBadWord, setShowBadWord] = useState(false)
   const [isGeneratingImages, setIsGeneratingImages] = useState(false)
   const [generatedImages, setGeneratedImages] = useState<string[]>([])
@@ -147,9 +147,8 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
     setCurrentGenerationImageId('')
   }
 
-  const handleGenerateImage = async () => {
+  const handleGenerateImage = async (description: string) => {
     if (!description.trim()) {
-      console.log("FOCUSING", inputRef?.current?.focus)
       inputRef?.current?.focus()
       return
     }
@@ -233,38 +232,12 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
   return (
     <div className="min-h-full bg-dark-blue py-4 md:px-8" id="t-shirt-container">
       <div className="bg-nsm-gray-400 rounded-2xl">
-        <div
-          className="mt-6 flex flex-col md:flex-row w-full px-4 pt-8"
-          id="prompt-input"
-        >
-          <textarea
-            placeholder="Ovde opiši sliku kakvu želiš na majici ispod"
-            value={description}
-            ref={inputRef}
-            onChange={(e) => setDescription(e.target.value)}
-            className="w-full min-h-[100px] md:min-h-[50px] md:h-[50px] border border-gray-300 rounded-md focus:outline-none p-4 md:p-3"
-          />
-          {showBadWord && (
-            <p className="text-[#F00]">
-              *ne možete koristiti psovke ili uvredljive reči
-            </p>
-          )}
-          <br />
-          <Button
-            isMain={false}
-            text={'Napravi'}
-            onClick={handleGenerateImage}
-            customStyles={`w-full h-[50px] md:w-[300px] md:ml-4 ${(isGeneratingImages || !description.trim()) && 'bg-gray-300'}`}
-            isDisabled={isGeneratingImages || !description.trim()}
-            disabledText={
-              isGeneratingImages
-                ? 'Slike se generišu...'
-                : 'Napravi'
-            }
-          />
-
-          {/*{!!isGeneratingImages && <EmailCard userId={userId} />}*/}
-        </div>
+        <GeneratorForm
+          ref={inputRef}
+          showBadWord={showBadWord}
+          onGenerateImage={handleGenerateImage}
+          isDisabled={isGeneratingImages}
+        />
 
         <div className="flex w-full h-full flex-col xl:flex-row mb-8 px-4">
           <div
