@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react'
+import TypingAnimation from '../../components/shared/TypingAnimation';
 
 interface ImageItemProps {
     onMouseEnter: (e: any) => void;
@@ -38,7 +39,7 @@ const ImageItem: FC<ImageItemProps> = ({ onMouseEnter, onMouseLeave, key, image,
             className='w-full h-full object-cover rounded-md'
         />
         {isFocused && (
-            <p className='w-[250px] sm:w-[350px] text-3xl font-bold absolute bottom-[15px] left-1/2 transform -translate-x-1/2 text-gray-100 text-glow'>{prompt}</p>
+            <p className='w-[250px] sm:w-[350px] text-3xl font-bold absolute bottom-[15px] left-1/2 transform -translate-x-1/2 text-gray-100 text-glow'><TypingAnimation text={prompt} speed={50} /></p>
         )}
         {!isFocused && (<div className="absolute inset-0 pointer-events-none " style={lampStyle}></div>)}
 
