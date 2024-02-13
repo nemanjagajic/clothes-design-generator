@@ -66,7 +66,7 @@ const GeneratorForm = forwardRef<HTMLTextAreaElement, GeneratorFormProps>(({ sho
                 isMain={false}
                 text={'Napravi'}
                 onClick={() => handleSubmit(description)}
-                customStyles={`w-full h-[50px] md:w-[300px] md:ml-4 ${(isDisabled || !description.trim() || !captchaValue) && 'bg-gray-300'}`}
+                customStyles={`w-full h-[50px] md:w-[350px] md:ml-4 ${(isDisabled || !description.trim() || !captchaValue) && 'bg-gray-300'}`}
                 isDisabled={isDisabled || !description.trim() || !captchaValue}
                 disabledText={
                     isDisabled

@@ -346,7 +346,7 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
                   isMain
                   text={'Dodaj u korpu'}
                   onClick={handleAddToCart}
-                  customStyles={'w-full'}
+                  customStyles={`w-full ${(generatedImages.length === 0) && 'bg-gray-300'}`}
                   isDisabled={generatedImages.length === 0}
                   disabledText={'Dodaj u korpu'}
                 />
