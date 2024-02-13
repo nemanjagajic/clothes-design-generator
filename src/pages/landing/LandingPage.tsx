@@ -13,6 +13,7 @@ import Instructions from './Instructions'
 import ExampleSection from './ExampleSection'
 import { v4 as uuidv4 } from 'uuid'
 import ExamplesGridSection from './ExamplesGridSection'
+import SizeSection from './SizeSection'
 
 const imgGenerationRef = uuidv4()
 
@@ -34,6 +35,7 @@ const MyComponent = () => {
       <Instructions />
       <ClothesGenerator imgGenerationRef={imgGenerationRef} />
       <OurCustomers />
+      <SizeSection />
       <FAQSection />
       <Footer />
     </div>

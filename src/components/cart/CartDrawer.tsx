@@ -3,6 +3,21 @@ import { useItems } from '../../store/ItemsContext'
 import Card from '../shared/Card'
 import Button from '../shared/Button'
 import { useNavigate } from 'react-router-dom'
+// @ts-ignore
+import blackTShirt from '../../assets/images/black-tshirt.png'
+// @ts-ignore
+import oliveTShirt from '../../assets/images/olive-tshirt.png'
+// @ts-ignore
+import redTShirt from '../../assets/images/red-tshirt.png'
+// @ts-ignore
+import whiteTShirt from '../../assets/images/white-tshirt.png'
+
+const TSHIRTS: { [color: string]: string } = {
+  black: blackTShirt,
+  green: oliveTShirt,
+  red: redTShirt,
+  white: whiteTShirt
+}
 
 type CartDrawerTypes = {
   isCartOpen: boolean
@@ -58,6 +73,7 @@ const CartDrawer = ({
                   }}
                   size={item.size}
                   color={item.color}
+                  shirtSrc={TSHIRTS[item.color]}
                 />
               </div>
             )

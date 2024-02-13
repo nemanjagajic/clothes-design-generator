@@ -8,6 +8,13 @@ import { Item, useItems } from '../../store/ItemsContext'
 import { useSearchParams } from 'react-router-dom'
 // @ts-ignore
 import blackTShirt from '../../assets/images/black-tshirt.png'
+// @ts-ignore
+import oliveTShirt from '../../assets/images/olive-tshirt.png'
+// @ts-ignore
+import redTShirt from '../../assets/images/red-tshirt.png'
+// @ts-ignore
+import whiteTShirt from '../../assets/images/white-tshirt.png'
+
 import { Close } from 'react-ionicons'
 import GenderRadioButtons from './GenderRadioButtons'
 import {
@@ -21,6 +28,13 @@ import GeneratorForm from './GeneratorForm'
 
 const PROGRESS_BAR_FETCHING_INTERVAL_MS = 5000
 const DEFAULT_PROGRESS_INCREMENT = 2
+
+const TSHIRTS: { [color: string]: string } = {
+  black: blackTShirt,
+  green: oliveTShirt,
+  red: redTShirt,
+  white: whiteTShirt
+}
 
 type ClothesGeneratorTypes = {
   imgGenerationRef: string
@@ -245,7 +259,7 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
           >
             {generatedImages && generatedImages.length > 0 ? (
               <>
-                <img width={400} src={blackTShirt} className="px-2 mb-8" />
+                <img width={400} src={TSHIRTS[currentItem.color]} className="px-2 mb-8" />
                 <img
                   className="w-[140px] h-[140px] sm:w-[170px] sm:h-[170px] absolute top-[90px] sm:mb-40 mr-1 sm:mr-2 rounded-md cursor-pointer"
                   onClick={() => setIsSelectedImagePreviewModalOpen(true)}

@@ -2,7 +2,10 @@ import React from 'react'
 import Container from '../../components/shared/Container'
 import Button from '../../components/shared/Button'
 import { scrollToSection } from '../../utils/pageNavigation'
-
+// @ts-ignore
+import facebook from '../../assets/socials/facebook.png'
+// @ts-ignore
+import instagram from '../../assets/socials/instagram.png'
 const Footer = () => {
   const renderSection = (section: React.ReactNode, isMain = false) => (
     <div
@@ -14,10 +17,11 @@ const Footer = () => {
   const renderContactSection = () => {
     const sectionContent = (
       <>
-        <div className="w-[90px] h-[40px] bg-gray-300" />
-        <div>
-          <div className="text-light-gray text-xs pb-4">+381 64 221 492</div>
-          <div className="text-light-gray text-xs">Odštampaj misao</div>
+        <div className="text-black text-md font-bold">
+          <p className='mb-4'>Pozovite nas</p>
+          <div>
+            <a className="text-light-gray text-md font-light " href="tel:+38164221492">+381 64 221 492</a>
+          </div>
         </div>
       </>
     )
@@ -32,19 +36,19 @@ const Footer = () => {
         </div>
         <div
           onClick={() => scrollToSection('examples')}
-          className="text-light-gray text-xs cursor-pointer"
+          className="text-light-gray text-md cursor-pointer"
         >
           Primeri
         </div>
         <div
           onClick={() => scrollToSection('tShirtSizes')}
-          className="text-light-gray text-xs cursor-pointer"
+          className="text-light-gray text-md cursor-pointer"
         >
           Veličine
         </div>
         <div
           onClick={() => scrollToSection('questions')}
-          className="text-light-gray text-xs cursor-pointer"
+          className="text-light-gray text-md cursor-pointer"
         >
           Pitanja
         </div>
@@ -61,9 +65,17 @@ const Footer = () => {
             Zaprati nas
           </div>
           <div className="flex flex-row">
-            <div className="w-[20px] h-[20px] bg-gray-300 mr-2 rounded-sm" />
-            <div className="w-[20px] h-[20px] bg-gray-300 mr-2 rounded-sm" />
-            <div className="w-[20px] h-[20px] bg-gray-300 mr-2 rounded-sm" />
+            <div className="w-[50px] h-[50px] mr-4" >
+              <a href="https://www.facebook.com/nosistamislis" target="_blank" rel="noopener noreferrer">
+                <img src={facebook} alt="Facebook Logo" />
+              </a>
+            </div>
+            <div className="w-[50px] h-[50px]" >
+              <a href="https://www.instagram.com/nosi.sta.mislis/" target="_blank" rel="noopener noreferrer">
+                <img src={instagram} alt="Instagram Logo" />
+              </a>
+
+            </div>
           </div>
         </div>
       </>
@@ -77,7 +89,7 @@ const Footer = () => {
         <div className="text-black text-md pb-4 font-bold mt-8 md:mt-0">
           Pošalji nam email
         </div>
-        <div className="text-light-gray text-xs lg:mb-0">
+        <div className="text-light-gray text-md lg:mb-0">
           Pošalji nam email i mi ćemo te obaveštavati o novim artiklima na našem
           sajtu.
         </div>

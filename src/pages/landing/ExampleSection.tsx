@@ -18,6 +18,7 @@ import imgArrow3Small from '../../assets/images/arrow-3-small.png'
 import imgExampleInputTShirtPomeranian from '../../assets/images/example-input-tshirt-pomeranian.png'
 import { useWindowWidth } from '../../utils/useWindowWidth'
 import { MEDIUM_SCREEN } from '../../constants/screenSizes'
+import TypingAnimation from '../../components/shared/TypingAnimation'
 const ExampleSection = () => {
   const windowWidth = useWindowWidth()
 
@@ -25,14 +26,14 @@ const ExampleSection = () => {
     <>
       <div className="absolute top-40 left-10 z-10">
         <h2 className="text-black text-[44px] sm:text-5xl sm:text-center font-bold leading-tight">
-          Ovo smo mi opisali
+          Ovo smo opisali
         </h2>
         <img
           src={imgArrow1}
           className="z-20 absolute h-[160px] lg:h-[200px] xl:h-[270px] lg:left-[30px] xl:left-[35px] 2xl:left-[320px]"
         />
-        <div className="flex justify-center items-center p-2 rounded-md text-[28px] absolute w-[300px] h-[100px] bg-white top-[150px] lg:top-[190px] xl:top-[250px] left-[130px] lg:left-[190px] xl:left-[260px] 2xl:left-[550px]">
-          "Pomeranac vija hranu u svemiru"
+        <div className=" p-2 rounded-md text-[28px] absolute w-[300px] h-[100px] bg-white top-[150px] lg:top-[190px] xl:top-[250px] left-[130px] lg:left-[190px] xl:left-[260px] 2xl:left-[550px]">
+          <TypingAnimation text="Pomeranac vija hranu u svemiru" speed={50} />
         </div>
         <img
           src={imgArrow2}
@@ -59,7 +60,7 @@ const ExampleSection = () => {
     <div className="w-full h-full">
       <div className="absolute top-20 px-4 z-10">
         <h2 className="text-black text-[44px] font-bold leading-tight">
-          Ovo smo mi opisali
+          Ovo smo opisali
         </h2>
         <img
           src={imgArrow1Small}

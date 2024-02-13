@@ -86,7 +86,7 @@ const Card: React.FC<ProductCardProps> = ({
                 color={color}
                 type="passive"
                 bgClass={colorOptions[color as ColorOption]}
-                size={'5'}
+                size={'md'}
               />
             </div>
           </td>

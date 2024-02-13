@@ -25,6 +25,7 @@ interface ProductCardProps {
   color: Item['color']
   gender: Gender
   onRemoveAll: () => void
+  shirtSrc: string
 }
 
 const Card: React.FC<ProductCardProps> = ({
@@ -37,6 +38,7 @@ const Card: React.FC<ProductCardProps> = ({
   onAdd,
   onRemove,
   onRemoveAll,
+  shirtSrc
 }) => {
   return (
     <div className="m-3 flex flex-col items-center bg-white">
@@ -54,7 +56,7 @@ const Card: React.FC<ProductCardProps> = ({
             />
           </button>
         </div>
-        <img width={300} src={whiteTshirt} />
+        <img width={300} src={shirtSrc} />
         <img
           className="absolute rounded-md top-[60px] left-[90px]"
           width={110}
@@ -90,7 +92,7 @@ const Card: React.FC<ProductCardProps> = ({
               color={color}
               type="passive"
               bgClass={colorOptions[color as ColorOption]}
-              size={'5'}
+              size={'md'}
             />
           </div>
         </div>

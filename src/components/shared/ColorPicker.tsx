@@ -21,7 +21,7 @@ const ColorPicker = ({ onColorPick }: ColorPickerProps) => {
         <div key={color}>
           <ColorCircle
             type={'active'}
-            size={'20'}
+            size={'lg'}
             color={color}
             bgClass={colorOptions[color as ColorOption]}
             selected={selectedColor === color}
