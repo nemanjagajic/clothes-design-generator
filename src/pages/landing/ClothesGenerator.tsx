@@ -244,8 +244,8 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
   const gradientBgLoaderStyle =
     'bg-gradient-to-r from-very-light-blue via-very-light-blue to-white background-animate'
   return (
-    <div className="min-h-full bg-dark-blue py-4 md:px-8" id="t-shirt-container">
-      <div className="bg-nsm-gray-400 rounded-2xl">
+    <div className="min-h-full bg-dark-blue py-4 px-4 md:px-8 lg:px-16 xl:px-32 flex justify-center items-center py-20" id="t-shirt-container">
+      <div className="bg-nsm-gray-400 rounded-2xl sm:max-w-[1440px] px-0 w-full">
         <GeneratorForm
           ref={inputRef}
           showBadWord={showBadWord}
@@ -253,7 +253,7 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
           isDisabled={isGeneratingImages}
         />
 
-        <div className="flex w-full h-full flex-col xl:flex-row mb-8 px-4">
+        <div className="flex w-full h-full flex-col xl:flex-row mb-8 px-4 ">
           <div
             className="flex flex-col items-center justify-center w-full pt-4 xl:min-w-[50%] relative xl:px-2"
           >
@@ -340,7 +340,9 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
                 </h3>
                 <TShirtSizeSelector onSizeChange={updateSize} />
               </div>
-
+              <div className='flex text-[#FAC43C] my-12'>
+                <p className='bg-[#102E4A] right p-2 text-2xl'>{2300 * currentItem.quantity} RSD</p>
+              </div>
               <div className="flex items-center justify-center w-full mt-5">
                 <Button
                   isMain
@@ -354,8 +356,8 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
             </div>
           </div>
           {isSelectedImagePreviewModalOpen && (
-            <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-30 overflow-auto">
-              <div className="relative">
+            <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-30 overflow-auto" onClick={() => setIsSelectedImagePreviewModalOpen(false)}>
+              <div className="relative z-50" onClick={(e) => { e.stopPropagation() }} >
                 <img
                   src={generatedImages[focusedPhotoIndex]}
                   alt="Full view"
@@ -373,7 +375,7 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
           )}
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 

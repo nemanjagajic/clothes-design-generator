@@ -35,7 +35,16 @@ const Navbar = ({ onCartClicked, itemCount }: NavbarTypes) => {
 
   return (
     <Container
-      customStyles={`h-[80px] fixed z-30 top-0 bg-nsm-gray-100 w-full shadow-md transition-transform duration-300 ${visible ? 'transform translate-y-0' : 'transform -translate-y-full'
+      customStyles={`
+      h-[80px]
+      fixed
+      z-30
+      top-0
+      bg-nsm-gray-100
+      w-full
+      shadow-md
+      transition-transform
+      duration-300 ${visible ? 'transform translate-y-0' : 'transform -translate-y-full'
         }`}
     >
       <div className="flex flex-row w-full justify-between">

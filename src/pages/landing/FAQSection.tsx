@@ -12,7 +12,7 @@ const FaqSection = () => {
     {
       question: 'Koliko vremena je potrebno da stigne moja narudžbina?',
       answer:
-        'Vreme isporuke zavisi od vaše lokacije i načina dostave koji odaberete. Uobičajeno, većina narudžbina stiže u roku od 2-4 radnih dana. Pratite informacije o isporuci koje ćete dobiti prilikom naručivanja.',
+        'Vreme isporuke zavisi od vaše lokacije i načina dostave koji odaberete. Uobičajeno, većina narudžbina stiže u roku od 2-4 radnih dana.',
     },
     {
       question: 'Da li mogu da vratim ili zamenim majicu ako nisam zadovoljan?',

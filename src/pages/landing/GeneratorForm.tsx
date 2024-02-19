@@ -19,7 +19,6 @@ const GeneratorForm = forwardRef<HTMLTextAreaElement, GeneratorFormProps>(({ sho
 
     const handleCaptchaChange = async (value: string | null) => {
         setCaptchaValue(value);
-        console.log("Captcha value:", value);
         await axios.post(`${process.env.REACT_APP_BASE_API_URL}/verify-captcha`, {
             captchaValue: value
         })
@@ -33,13 +32,9 @@ const GeneratorForm = forwardRef<HTMLTextAreaElement, GeneratorFormProps>(({ sho
         }
     };
 
-    useEffect(() => {
-        console.log({ description, isDisabled }, !description.trim() || isDisabled)
-    }, [description, isDisabled])
-
     return (
         <div
-            className="mt-6 flex flex-col md:flex-row w-full px-4 pt-8"
+            className="mt-6 flex flex-col lg:flex-row w-full px-4 pt-8"
             id="prompt-input"
         >
             <textarea
@@ -66,7 +61,7 @@ const GeneratorForm = forwardRef<HTMLTextAreaElement, GeneratorFormProps>(({ sho
                 isMain={false}
                 text={'Napravi'}
                 onClick={() => handleSubmit(description)}
-                customStyles={`w-full h-[50px] md:w-[350px] md:ml-4 ${(isDisabled || !description.trim() || !captchaValue) && 'bg-gray-300'}`}
+                customStyles={`w-full h-[50px] sm:w-[350px] sm:ml-4 ${(isDisabled || !description.trim() || !captchaValue) && 'bg-gray-300'}`}
                 isDisabled={isDisabled || !description.trim() || !captchaValue}
                 disabledText={
                     isDisabled

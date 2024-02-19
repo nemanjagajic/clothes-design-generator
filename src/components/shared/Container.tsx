@@ -9,7 +9,7 @@ const Container = ({
 }) => {
   return (
     <div className={`flex justify-center ${customStyles}`}>
-      <div className="flex w-9/12">{children}</div>
+      <div className="flex w-full px-4 md:px-8 lg:px-16 xl:px-32 ">{children}</div>
     </div>
   )
 }

@@ -35,6 +35,9 @@ module.exports = {
       height: {
         20: '30px',
       },
+      screens: {
+        lxl: '1440px'
+      },
     },
   },
   plugins: [

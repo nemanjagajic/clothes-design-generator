@@ -20,7 +20,7 @@ const Footer = () => {
         <div className="text-black text-md font-bold">
           <p className='mb-4'>Pozovite nas</p>
           <div>
-            <a className="text-light-gray text-md font-light " href="tel:+38164221492">+381 64 221 492</a>
+            <a className="text-light-gray text-md font-light " href="tel:+381694733644">+381 69 4733 644</a>
           </div>
         </div>
       </>
@@ -65,12 +65,12 @@ const Footer = () => {
             Zaprati nas
           </div>
           <div className="flex flex-row">
-            <div className="w-[50px] h-[50px] mr-4" >
+            <div className="w-[30px] h-[30px] mr-4" >
               <a href="https://www.facebook.com/nosistamislis" target="_blank" rel="noopener noreferrer">
                 <img src={facebook} alt="Facebook Logo" />
               </a>
             </div>
-            <div className="w-[50px] h-[50px]" >
+            <div className="w-[30px] h-[30px]" >
               <a href="https://www.instagram.com/nosi.sta.mislis/" target="_blank" rel="noopener noreferrer">
                 <img src={instagram} alt="Instagram Logo" />
               </a>
@@ -116,7 +116,6 @@ const Footer = () => {
         {renderContactSection()}
         {renderPagesSection()}
         {renderSocialsSection()}
-        {renderEmailSection()}
       </div>
     </Container>
   )

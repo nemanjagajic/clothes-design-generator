@@ -29,6 +29,8 @@ const ImageItem: FC<ImageItemProps> = ({ onMouseEnter, onMouseLeave, key, image,
 
     return <div
         onMouseEnter={handleMouseEnter}
+        onTouchStart={handleMouseEnter}
+        onTouchEnd={handleMouseLeave}
         onMouseLeave={handleMouseLeave}
         key={key}
         className='flex-shrink-0 p-1 m-1 transition duration-500 ease-in-out transform hover:scale-105 hover:z-20 rounded-xl relative scrollbar-hide sm:w-[440px] w-[300px]'
