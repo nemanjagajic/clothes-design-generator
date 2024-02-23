@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.4269efe6.css",
-    "main.js": "/static/js/main.bfcf73b2.js",
+    "main.js": "/static/js/main.8a70fc93.js",
     "static/media/19.png": "/static/media/19.f9d2417b20f7fa908a5a.png",
     "static/media/11.png": "/static/media/11.ade9ab149df97cba363b.png",
     "static/media/instagram.png": "/static/media/instagram.469cb83ec463191dffdf.png",
@@ -15,6 +15,7 @@
     "static/media/6.png": "/static/media/6.9a4f0dd77c0f711cc69f.png",
     "static/media/21.png": "/static/media/21.dce05d84d7b0c61a7139.png",
     "static/media/15.png": "/static/media/15.8a0b84c3172ac8462d07.png",
+    "static/media/white-tshirt.png": "/static/media/white-tshirt.154b85d207bec342acc5.png",
     "static/media/10.png": "/static/media/10.ca74790e03bcb7f59142.png",
     "static/media/22.png": "/static/media/22.c43e1c965cbe6600d30c.png",
     "static/media/14.png": "/static/media/14.f994a69f9d17749a1c38.png",
@@ -28,12 +29,12 @@
     "static/media/24.png": "/static/media/24.36ecf917e2a05785280f.png",
     "static/media/26.png": "/static/media/26.e295c8905ebe69dffa42.png",
     "static/media/27.png": "/static/media/27.dc2c0ecdcbb3e7b9f34a.png",
-    "static/media/white-tshirt.png": "/static/media/white-tshirt.192f25a1e867063bb2f6.png",
     "static/media/12.png": "/static/media/12.fdea315020e93d43bf77.png",
     "static/media/3.png": "/static/media/3.251df130c3af63141cd2.png",
     "static/media/8.png": "/static/media/8.043f5b5b225bcb79d4bd.png",
     "static/media/black-tshirt.png": "/static/media/black-tshirt.3e3ba86ea011296559c6.png",
     "static/media/black-tshirt-with-arrows.png": "/static/media/black-tshirt-with-arrows.5a1c42ee15e95f6dd4b1.png",
+    "static/media/gray-tshirt.png": "/static/media/gray-tshirt.b5ed86eb27bd01aef03c.png",
     "static/media/logo3.png": "/static/media/logo3.873c84c930f963921e10.png",
     "static/media/olive-tshirt.png": "/static/media/olive-tshirt.c90381c5ced5482a958e.png",
     "static/media/example-input-tshirt-pomeranian.png": "/static/media/example-input-tshirt-pomeranian.e92bbafa7ee267de8a05.png",
@@ -42,10 +43,10 @@
     "static/media/facebook.png": "/static/media/facebook.790642551cd99bb66a7e.png",
     "index.html": "/index.html",
     "main.4269efe6.css.map": "/static/css/main.4269efe6.css.map",
-    "main.bfcf73b2.js.map": "/static/js/main.bfcf73b2.js.map"
+    "main.8a70fc93.js.map": "/static/js/main.8a70fc93.js.map"
   },
   "entrypoints": [
     "static/css/main.4269efe6.css",
-    "static/js/main.bfcf73b2.js"
+    "static/js/main.8a70fc93.js"
   ]
 }

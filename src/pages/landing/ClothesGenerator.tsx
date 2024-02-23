@@ -14,6 +14,8 @@ import oliveTShirt from '../../assets/images/olive-tshirt.png'
 import redTShirt from '../../assets/images/red-tshirt.png'
 // @ts-ignore
 import whiteTShirt from '../../assets/images/white-tshirt.png'
+// @ts-ignore
+import grayTShirt from '../../assets/images/gray-tshirt.png'
 
 import { Close } from 'react-ionicons'
 import GenderRadioButtons from './GenderRadioButtons'
@@ -33,7 +35,8 @@ const TSHIRTS: { [color: string]: string } = {
   black: blackTShirt,
   green: oliveTShirt,
   red: redTShirt,
-  white: whiteTShirt
+  white: whiteTShirt,
+  gray: grayTShirt
 }
 
 type ClothesGeneratorTypes = {
