@@ -32,7 +32,7 @@ export default function OrderForm() {
         name,
         status: items.reduce((acc, item) => {
           return acc + item.price * item.quantity
-        }, 0)
+        }, 0).toString()
       })
       navigate('/success')
       emptyCart()
