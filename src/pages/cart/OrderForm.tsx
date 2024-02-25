@@ -24,9 +24,15 @@ export default function OrderForm() {
   const navigate = useNavigate()
   const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
     try {
+      const { firstName: name, zipCode, address, ...rest } = data
       await axios.post(`${process.env.REACT_APP_BASE_API_URL}/submitOrder`, {
-        ...data,
-        items,
+        ...rest,
+        orderItems: items,
+        address: `${address}, ${zipCode}`,
+        name,
+        status: items.reduce((acc, item) => {
+          return acc + item.price * item.quantity
+        }, 0)
       })
       navigate('/success')
       emptyCart()

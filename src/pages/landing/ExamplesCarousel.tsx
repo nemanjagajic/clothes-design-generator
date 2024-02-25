@@ -67,7 +67,6 @@ const ExamplesCarousel = () => {
       )
     },
     afterChange: (currentSlide: number) => {
-      console.log("current", currentSlide)
       setSelectedSlide(currentSlide)
     },
     nextArrow: (

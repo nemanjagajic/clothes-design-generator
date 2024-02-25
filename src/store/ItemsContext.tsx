@@ -33,6 +33,7 @@ const defaultItem = {
   imageUrl: null,
   price: 2400,
   gender: 'male' as Gender,
+  type: 'tshirt'
 }
 // Create the context
 const ItemsContext = createContext<{
