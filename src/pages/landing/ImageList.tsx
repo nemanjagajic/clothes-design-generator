@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ImageItem from './ImageItem';
+import { isMobile } from "react-device-detect"
 
 interface ImageListProps {
     images: { src: string, prompt: string }[];
@@ -16,7 +17,7 @@ const ImageList: React.FC<ImageListProps> = ({ images, scrollDirection, hideOnMo
         if (!scrollContainer) return;
 
         let isScrolling: boolean;
-
+        let x: number;
         const scrollStep = () => {
             if (!isScrolling || isPaused) return;
 
@@ -28,15 +29,18 @@ const ImageList: React.FC<ImageListProps> = ({ images, scrollDirection, hideOnMo
             } else if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
                 scrollContainer.scrollLeft = 0;
             }
-
-            requestAnimationFrame(scrollStep);
+            if (!isMobile) {
+                x = requestAnimationFrame(scrollStep);
+            }
         };
 
         isScrolling = true;
-        requestAnimationFrame(scrollStep);
-
+        if (!isMobile) {
+            x = requestAnimationFrame(scrollStep);
+        }
         return () => {
             isScrolling = false;
+            cancelAnimationFrame(x)
         };
     }, [scrollDirection, isPaused]);
 
@@ -51,20 +55,17 @@ const ImageList: React.FC<ImageListProps> = ({ images, scrollDirection, hideOnMo
     return (
         <div
             ref={scrollContainerRef}
-            className={`flex w-full overflow-x-scroll scrollbar-hide ${hideOnMobile ? 'hidden' : ''} md:block`}
-        >
+            className={`flex w-full overflow-x-scroll overflow-y-hidden scrollbar-hide ${hideOnMobile ? 'hidden' : ''} md:block`}>
             <div className="flex flex-nowrap ">
                 {images.map((image, index) => (
-                    <>
-                        <ImageItem
-                            image={image.src}
-                            key={index}
-                            onMouseEnter={handleMouseEnter}
-                            onMouseLeave={handleMouseLeave}
-                            prompt={image.prompt}
-                        />
-                    </>
-                ))}
+                    <ImageItem
+                        image={image.src}
+                        key={index}
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                        prompt={image.prompt}
+                    />)
+                )}
             </div>
 
         </div >
