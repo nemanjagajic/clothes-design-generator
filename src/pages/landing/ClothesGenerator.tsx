@@ -276,7 +276,7 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
                   'text-gray-400 font-bold flex justify-center items-center rounded-md max-h-[500px] w-full relative overflow-hidden'
                 }
               >
-                <img width={400} src={blackTShirt} className="px-2 mb-8" />
+                <img width={400} src={TSHIRTS[currentItem.color]} className="px-2 mb-8" />
                 <div
                   className={`flex items-center justify-center w-[140px] h-[140px] sm:w-[170px] sm:h-[170px] absolute mb-32 sm:mb-40 mr-1 sm:mr-2 rounded-md ${isGeneratingImages ? 'bg-gray-transparent' : 'bg-gray-200'
                     }`}

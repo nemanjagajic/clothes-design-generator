@@ -15,16 +15,16 @@ type SizeData = {
 // Sample data for the table
 const sizeData: SizeData = {
     male: [
-        { size: 'S', height: 67, width: 51 },
-        { size: 'M', height: 69, width: 52 },
-        { size: 'L', height: 71, width: 53 },
-        { size: 'XL', height: 74, width: 54 },
+        { size: 'S', height: 70, width: 47 },
+        { size: 'M', height: 72, width: 50 },
+        { size: 'L', height: 76, width: 53 },
+        { size: 'XL', height: 78, width: 57 },
     ],
     female: [
-        { size: 'S', height: 47, width: 41 },
-        { size: 'M', height: 59, width: 42 },
-        { size: 'L', height: 61, width: 53 },
-        { size: 'XL', height: 64, width: 44 },
+        { size: 'S', height: 60, width: 38 },
+        { size: 'M', height: 62, width: 40 },
+        { size: 'L', height: 64, width: 42 },
+        { size: 'XL', height: 66, width: 44 },
     ]
 };
 

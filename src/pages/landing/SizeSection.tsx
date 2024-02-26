@@ -16,13 +16,15 @@ const SizeSection = () => {
             <h2 className="text-black text-[44px] sm:text-5xl sm:text-center font-bold leading-tight pb-10 pt-24">
                 Veličine
             </h2>
-            <ToggleButton leftOption="Muško" rightOption="Žensko" onChange={handleToggleChange} />
 
-            <div className='mt-10 flex justify-center items-center '>
-                <div className='mr-8 hidden sm:block'>
+            <div className='mt-10 flex justify-center items-center flex-col md:flex-row '>
+                <div className='md:mr-8  sm:block'>
                     <img width={350} src={blackTShirtWithArrows} />
                 </div>
-                <SizeChart gender={gender} />
+                <div>
+                    <ToggleButton leftOption="Muško" rightOption="Žensko" onChange={handleToggleChange} />
+                    <SizeChart gender={gender} />
+                </div>
             </div>
         </div>
     )
