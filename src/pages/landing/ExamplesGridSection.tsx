@@ -33,7 +33,7 @@ const prompts = ['Astronaut na mesecu pije koktel',
 
 
 const imagePaths = Array.from({ length: 27 }, (_, index) => {
-    return { src: require(`../../assets/examples/${index + 1}.png`), prompt: prompts[index] }
+    return { src: require(`../../assets/resized_examples/${index + 1}.png`), prompt: prompts[index] }
 
 })
 
