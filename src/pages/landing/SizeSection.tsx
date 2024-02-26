@@ -12,7 +12,7 @@ const SizeSection = () => {
     }
 
     return (
-        <div className='bg-nsm-gray-300 w-full h-full px-4 md:px-8 lg:px-16 xl:px-32 flex flex-col items-center pb-8'>
+        <div id='tShirtSizes' className='bg-nsm-gray-300 w-full h-full px-4 md:px-8 lg:px-16 xl:px-32 flex flex-col items-center pb-8'>
             <h2 className="text-black text-[44px] sm:text-5xl sm:text-center font-bold leading-tight pb-10 pt-24">
                 Veličine
             </h2>
