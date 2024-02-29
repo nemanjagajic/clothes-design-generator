@@ -45,7 +45,7 @@ const ExamplesGridSection = () => {
         <div className='flex flex-col py-4 bg-[#FAF9F1] relative pb-20' ref={gridRef} id="examples">
             <h2 className="w-full px-4 text-black text-[44px] sm:text-5xl sm:text-center font-bold leading-tight pb-10 pt-20">
                 <span>Šta su drugi ljudi </span>
-                <span id="primeri" className="text-light-blue text-[50px] sm:text-5xl font-custom">kreirali</span>
+                <span id="primeri" className="text-light-blue text-[50px] sm:text-5xl italic">kreirali</span>
             </h2>
             <ImageList images={imagePaths.concat(imagePaths)} scrollDirection='left' />
             <ImageList images={imagePaths.concat(imagePaths).reverse()} scrollDirection='right' hideOnMobile />

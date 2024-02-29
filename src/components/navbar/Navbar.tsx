@@ -47,7 +47,7 @@ const Navbar = ({ onCartClicked, itemCount }: NavbarTypes) => {
       duration-300 ${visible ? 'transform translate-y-0' : 'transform -translate-y-full'
         }`}
     >
-      <div className="flex flex-row w-full justify-between">
+      <div className="flex flex-row w-full justify-between text-xl ">
         <div
           className="flex justify-center items-center cursor-pointer"
           onClick={() => navigate('/')}
