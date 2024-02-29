@@ -14,11 +14,14 @@ export const generateImage = async (
     const response = await axios.post(`${baseUrl}/generateImage`, {
       description,
       ref,
-    })
+    }) as any
+
+    if (response.error!) {
+      onError()
+    }
     return response.data
   } catch (e) {
     onError()
-    console.log(e)
     return null
   }
 }

@@ -102,7 +102,7 @@ const Footer = () => {
             customStyles={'flex items-center justify-center h-[35px] w-[120px] pb-0 pt-0'}
             isMain={true}
             text={'Pošalji'}
-            onClick={() => console.log('Posalji')}
+            onClick={() => { }}
           />
         </div>
       </>

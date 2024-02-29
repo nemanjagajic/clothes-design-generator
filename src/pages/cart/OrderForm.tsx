@@ -43,7 +43,7 @@ export default function OrderForm() {
 
     } catch (error) {
       setIsOrdering(false)
-      console.log('Error submiting form', error)
+      console.error('Error submiting form', error)
     }
   }
 

@@ -3,8 +3,9 @@ import { ChevronForward, ChevronBack } from 'react-ionicons'
 
 type ButtonNavigateTypes = {
   direction: "NEXT" | "BACK"
+  onClick: () => void
 }
-const ButtonNavigate = ({ direction = "NEXT" }: ButtonNavigateTypes) => {
+const ButtonNavigate = ({ direction = "NEXT", onClick }: ButtonNavigateTypes) => {
   const [isHovered, setIsHovered] = useState(false)
 
   return (
@@ -18,12 +19,14 @@ const ButtonNavigate = ({ direction = "NEXT" }: ButtonNavigateTypes) => {
           color={isHovered ? 'white' : '#0090F8'}
           height="30px"
           width="30px"
+          onClick={onClick}
         />
       ) : (
         <ChevronBack
           color={isHovered ? 'white' : '#0090F8'}
           height="30px"
           width="30px"
+          onClick={onClick}
         />
       )}
     </div>
