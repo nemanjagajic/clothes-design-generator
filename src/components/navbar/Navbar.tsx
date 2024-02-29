@@ -86,11 +86,11 @@ const Navbar = ({ onCartClicked, itemCount }: NavbarTypes) => {
             className="flex justify-center items-center px-8 cursor-pointer"
           >
             <div className="text-nsm-gray-200 hover:text-light-blue transition-text duration-200">
-              Naši korisnici
+              Utisci
             </div>
           </div>
         </div>)}
-        {!!onCartClicked && (<div className="bg-white relative p-2 rounded-md shadow cursor-pointer h-[40px] w-[40px] my-auto">
+        {!!onCartClicked && (<div id={'cart-button'} onClick={onCartClicked} className="bg-white relative p-2 rounded-md shadow cursor-pointer h-[40px] w-[40px] my-auto">
           {!!itemCount && (
             <div
               className="absolute -top-2 -right-2 bg-blue-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center"
@@ -99,7 +99,7 @@ const Navbar = ({ onCartClicked, itemCount }: NavbarTypes) => {
               {itemCount}
             </div>
           )}
-          <div onClick={onCartClicked}>
+          <div>
             <BagOutline height="25px" width="25px" />
           </div>
         </div>)}

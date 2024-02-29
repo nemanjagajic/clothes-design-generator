@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useItems } from '../../store/ItemsContext'
 import { useNavigate } from 'react-router-dom'
@@ -15,6 +15,8 @@ type FormValues = {
 }
 
 export default function OrderForm() {
+  const [isOrdering, setIsOrdering] = useState(false)
+
   const {
     register,
     handleSubmit,
@@ -24,6 +26,7 @@ export default function OrderForm() {
   const navigate = useNavigate()
   const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
     try {
+      setIsOrdering(true)
       const { firstName: name, zipCode, address, ...rest } = data
       await axios.post(`${process.env.REACT_APP_BASE_API_URL}/submitOrder`, {
         ...rest,
@@ -34,10 +37,12 @@ export default function OrderForm() {
           return acc + item.price * item.quantity
         }, 0).toString()
       })
+      setIsOrdering(false)
       navigate('/success')
       emptyCart()
 
     } catch (error) {
+      setIsOrdering(false)
       console.log('Error submiting form', error)
     }
   }
@@ -135,10 +140,11 @@ export default function OrderForm() {
           )}
 
           <button
+            disabled={isOrdering}
             type="submit"
-            className="bg-blue-500 text-white py-2 px-4 rounded"
+            className={`text-white py-2 px-4 rounded ${isOrdering ? 'cursor-not-allowed bg-gray-300' : 'cursor-pointer bg-blue-500'}`}
           >
-            Poruči
+            {isOrdering ? 'Porudžbina se obrađuje...' : 'Poruči'}
           </button>
         </form>
       </div>

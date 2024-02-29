@@ -35,7 +35,7 @@ const CartDrawer = ({
   const navigate = useNavigate()
   useEffect(() => {
     const handleClickOutside = (event: any) => {
-      if (drawerRef.current && !drawerRef.current.contains(event.target)) {
+      if (drawerRef.current && !drawerRef.current.contains(event.target) && !event.target.closest('#cart-button')) {
         onSurroundingAreaClicked()
       }
     }
@@ -82,7 +82,7 @@ const CartDrawer = ({
             )
           })}
         </div>
-        <div className="absolute bottom-0 w-full h-24 flex items-center justify-center border-t">
+        <div className={`absolute bottom-0 w-full h-24 flex items-center justify-center`}>
           <Button
             isMain
             text="Kupi"

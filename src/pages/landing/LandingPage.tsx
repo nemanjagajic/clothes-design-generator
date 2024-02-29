@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CartDrawer from '../../components/cart/CartDrawer'
 import Navbar from '../../components/navbar/Navbar'
 import HomePageBanner from './HomePageBanner'
@@ -26,7 +26,7 @@ const MyComponent = () => {
         isCartOpen={isCartOpen}
         onSurroundingAreaClicked={() => setIsCartOpen(false)}
       />
-      <Navbar onCartClicked={() => setIsCartOpen(true)} itemCount={itemCount} />
+      <Navbar onCartClicked={() => setIsCartOpen(isOpen => !isOpen)} itemCount={itemCount} />
       <HomePageBanner />
       <ExampleSection />
       <ExamplesGridSection />
