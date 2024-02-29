@@ -6,8 +6,8 @@ interface SizeSelectorProps {
 }
 
 const SizeSelector: React.FC<SizeSelectorProps> = ({ onSizeChange }) => {
-  const sizes: SizeOption[] = ['XS', 'S', 'M', 'L', 'XL', 'XXL'] // Define the available sizes
-  const [selectedSize, setSelectedSize] = useState<SizeOption>('L') // Initial selected size
+  const sizes: SizeOption[] = ['S', 'M', 'L', 'XL']
+  const [selectedSize, setSelectedSize] = useState<SizeOption>('L')
 
   const handleSizeChange = (size: SizeOption) => {
     setSelectedSize(size)
@@ -20,11 +20,10 @@ const SizeSelector: React.FC<SizeSelectorProps> = ({ onSizeChange }) => {
         <button
           key={size}
           onClick={() => handleSizeChange(size)}
-          className={`px-4 py-2 rounded border border-nsm-gray-500 ${
-            selectedSize === size
-              ? 'bg-light-blue text-white'
-              : 'bg-white text-gray-700 border-gray-300'
-          }`}
+          className={`px-4 py-2 rounded border border-nsm-gray-500 ${selectedSize === size
+            ? 'bg-light-blue text-white'
+            : 'bg-white text-gray-700 border-gray-300'
+            }`}
         >
           {size}
         </button>

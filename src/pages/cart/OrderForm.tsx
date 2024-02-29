@@ -38,7 +38,7 @@ export default function OrderForm() {
       emptyCart()
 
     } catch (error) {
-      console.log('Error submiting form', error)
+      console.error('Error submiting form', error)
     }
   }
 

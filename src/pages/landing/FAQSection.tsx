@@ -10,21 +10,25 @@ const FaqSection = () => {
         'Naručivanje majice sa generisanom slikom je jednostavno. Prvo, unesite željeni tekst ili frazu u odgovarajuće polje na našoj početnoj stranici. Zatim prilagodite opcije kao što su veličina i boja majice. Kliknite na dugme "Naruči" i pratite upute za unos podataka za dostavu i plaćanje.',
     },
     {
-      question: 'Koliko vremena je potrebno da stigne moja narudžbina?',
+      question: 'Koliko vremena je potrebno da stigne moja narudžbina i koje su opcije plaćanja?',
       answer:
-        'Vreme isporuke zavisi od vaše lokacije i načina dostave koji odaberete. Uobičajeno, većina narudžbina stiže u roku od 2-4 radnih dana.',
+        'Vreme isporuke zavisi od vaše lokacije i izabranog načina dostave, pri čemu većina narudžbina stiže u roku od 2-4 radna dana. Što se tiče plaćanja, trenutno je moguće platiti pouzećem.',
     },
     {
       question: 'Da li mogu da vratim ili zamenim majicu ako nisam zadovoljan?',
       answer:
-        'Nažalost, ne prihvatamo povrate ni zamene za majice koje su već naručene i isporučene, osim u slučaju da je proizvod fizički oštećen ili ima grešku u štampanju. Molimo vas da pažljivo razmislite o svojoj narudžbini pre nego što je potvrdite, jer nakon što je procesuirana, nije moguće izvršiti povrat ili zamenu iz razloga kao što su promena mišljenja ili nezadovoljstvo dizajnom. Sve informacije o uslovima povrata i zamene možete pronaći u našim uslovima korišćenja.',
+        'Ukoliko primetite bilo kakvo fizičko oštećenje na majici po prijemu, obezbedićemo zamenu. Međutim, zbog jedinstvene prirode svake porudžbine, ne možemo prihvatiti povratak ili zamenu iz drugih razloga. Hvala na razumevanju.',
     },
     {
       question:
         'Da li postoji ograničenje u vezi sa dužinom teksta koji mogu da unesem?',
       answer:
-        'Ne, nemamo strogo ograničenje u vezi sa dužinom teksta koji možete uneti. Možete koristiti tekst koji vam najbolje odgovara kako biste opisali svoju zamisao ili poruku za generisanje slike na majici. Međutim, savetujemo da budete razumni u dužini teksta kako biste osigurali da se tekst lepo i pregledno prikaže na majici i da se jasno prenese vaša zamisao ili poruka. Ukoliko imate bilo kakvih pitanja ili nedoumica u vezi sa dužinom teksta, slobodno nas kontaktirajte, i rado ćemo vam pomoći.',
+        'Možete uneti tekst željene dužine za dizajn vaše majice; ne postoji ograničenje. Ipak, naš sistem automatski sprečava upotrebu psovki ili uvredljivih reči, pa takvi izrazi neće biti prihvaćeni.',
     },
+    {
+      question: "Kako se održavaju majice sa štampom i da li postoji poseban način pranja da bi štampa trajala duže?",
+      answer: "Za očuvanje kvaliteta štampe na vašim majicama, preporučujemo pranje na 30 stepeni sa unutrašnje strane i sušenje na niskoj temperaturi ili prirodno sušenje bez direktnog izlaganja suncu. Izbegavajte upotrebu izbeljivača i direktno peglanje preko štampe da bi se dizajn održao jasnim i postojanim što duže vreme."
+    }
   ]
 
   return (

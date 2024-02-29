@@ -252,6 +252,7 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
         <GeneratorForm
           ref={inputRef}
           showBadWord={showBadWord}
+          setShowBadWord={setShowBadWord}
           onGenerateImage={handleGenerateImage}
           isDisabled={isGeneratingImages}
         />

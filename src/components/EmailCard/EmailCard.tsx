@@ -21,10 +21,10 @@ const EmailCard = ({ userId }: EmailCardProps) => {
         },
       })
       .then((data) => {
-        console.log('Email saved', data)
+        // console.log('Email saved', data)
       })
       .catch((error) => {
-        console.log('Error sending mail', error)
+        // console.log('Error sending mail', error)
       })
   }
 
