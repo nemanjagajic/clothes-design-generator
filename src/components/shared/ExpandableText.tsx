@@ -1,28 +1,24 @@
 import React, { useState } from 'react';
 
-interface Props {
+interface ExpandableTextProps {
     text: string;
-    maxLength: number;
 }
 
-const ExpandableText: React.FC<Props> = ({ text, maxLength }) => {
+const ExpandableText: React.FC<ExpandableTextProps> = ({ text }) => {
     const [isExpanded, setIsExpanded] = useState(false);
 
-    const toggleIsExpanded = () => {
-        setIsExpanded(!isExpanded);
-    };
+    const shouldTruncate = text.length > 130;
+    const displayText = isExpanded || !shouldTruncate ? text : `${text.substring(0, 97)}...`;
 
     return (
         <div>
-            <div className={`transition-height duration-300 ease-in-out overflow-scroll ${isExpanded ? 'max-h-screen' : 'max-h-[4.5rem]'}`}>
-                <p>{text}</p>
-            </div>
-            {text.length > maxLength && (
+            <p>{displayText}</p>
+            {shouldTruncate && (
                 <button
-                    onClick={toggleIsExpanded}
-                    className="ml-2 mt-2 text-gray-600 cursor-pointer"
+                    className="mt-2 text-blue-500 hover:text-blue-700 transition-colors duration-200"
+                    onClick={() => setIsExpanded(!isExpanded)}
                 >
-                    {isExpanded ? 'See Less' : 'See More'}
+                    {isExpanded ? 'Smanji' : 'Prikaži više'}
                 </button>
             )}
         </div>

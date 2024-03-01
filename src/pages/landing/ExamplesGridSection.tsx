@@ -28,11 +28,12 @@ const prompts = ['Astronaut na mesecu pije koktel',
     'Beba Rubeus Hagrid',
     'Beba Draco Malfoy',
     'Beba Ron Weasley',
-    'Stara slika u retro stilu, crno-beli, analogni selfi turističkog vanzemaljca potpuno obučenog, sa Ajfelovom kulom u pozadini'
+    'Stara slika u retro stilu, crno-beli, analogni selfi turističkog vanzemaljca potpuno obučenog, sa Ajfelovom kulom u pozadini',
+    'Kosturi na rege koncertu'
 ]
 
 
-const imagePaths = Array.from({ length: 27 }, (_, index) => {
+const imagePaths = Array.from({ length: 28 }, (_, index) => {
     return { src: require(`../../assets/resized_examples/${index + 1}.png`), prompt: prompts[index] }
 
 })

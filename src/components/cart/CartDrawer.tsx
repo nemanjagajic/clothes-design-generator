@@ -85,10 +85,10 @@ const CartDrawer = ({
         <div className={`absolute bottom-0 w-full h-24 flex items-center justify-center`}>
           <Button
             isMain
-            text="Kupi"
+            text="Poruči"
             customStyles={`w-full mx-2 h-[50px] md:w-[300px] md:ml-4 ${(!items.length) && 'bg-gray-300'}`}
             isDisabled={!items.length}
-            disabledText={"Kupi"}
+            disabledText={"Poruči"}
             onClick={() => {
               navigate('/cart')
             }}

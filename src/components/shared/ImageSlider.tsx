@@ -39,7 +39,7 @@ const ImageSlider: React.FC<ImageSliderProps> = () => {
             <img src={image} alt="" />
             <div className='absolute bottom-0 w-full p-3 bg-nsm-gray-300 rounded-b-xl'>
                 <div className='text-[22px] pb-2'>{name}</div>
-                <ExpandableText text={description} maxLength={100} />
+                <ExpandableText text={description} />
             </div>
         </div >
     ), [])

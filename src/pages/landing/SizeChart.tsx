@@ -73,7 +73,7 @@ const SizeChart: React.FC<{ gender: "male" | "female" }> = ({ gender }) => {
                 </table>
             </div>
             <div className="px-5 py-5 text-xs text-gray-500 italic">
-                *Imajte na umu da se majice mogu skupiti 2 - 3%
+                *Imajte na umu da se majice mogu skupiti 2 do 3%
             </div>
         </div>
     );
