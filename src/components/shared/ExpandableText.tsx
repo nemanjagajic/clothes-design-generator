@@ -7,8 +7,8 @@ interface ExpandableTextProps {
 const ExpandableText: React.FC<ExpandableTextProps> = ({ text }) => {
     const [isExpanded, setIsExpanded] = useState(false);
 
-    const shouldTruncate = text.length > 130;
-    const displayText = isExpanded || !shouldTruncate ? text : `${text.substring(0, 97)}...`;
+    const shouldTruncate = text.length > 90;
+    const displayText = isExpanded || !shouldTruncate ? text : `${text.substring(0, 87)}...`;
 
     return (
         <div>
