@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.8b6a0fd4.css",
-    "main.js": "/static/js/main.0d1eb2e3.js",
+    "main.css": "/static/css/main.da88c19f.css",
+    "main.js": "/static/js/main.b6919307.js",
     "static/media/instagram.png": "/static/media/instagram.469cb83ec463191dffdf.png",
     "static/media/19.png": "/static/media/19.17f44aa5b78fa2a779eb.png",
     "static/media/red-tshirt.png": "/static/media/red-tshirt.3dec783ee53dbdcb56a1.png",
@@ -46,11 +46,11 @@
     "static/media/Courgette-Regular.ttf": "/static/media/Courgette-Regular.f99d9948a486f6270149.ttf",
     "static/media/facebook.png": "/static/media/facebook.790642551cd99bb66a7e.png",
     "index.html": "/index.html",
-    "main.8b6a0fd4.css.map": "/static/css/main.8b6a0fd4.css.map",
-    "main.0d1eb2e3.js.map": "/static/js/main.0d1eb2e3.js.map"
+    "main.da88c19f.css.map": "/static/css/main.da88c19f.css.map",
+    "main.b6919307.js.map": "/static/js/main.b6919307.js.map"
   },
   "entrypoints": [
-    "static/css/main.8b6a0fd4.css",
-    "static/js/main.0d1eb2e3.js"
+    "static/css/main.da88c19f.css",
+    "static/js/main.b6919307.js"
   ]
 }
