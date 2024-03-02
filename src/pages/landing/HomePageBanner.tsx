@@ -18,10 +18,9 @@ const HomePageBanner = () => {
             <div>nosiš na majici</div>
           </h2>
         </div>
-        <p className="text-white text-xl">
-          Kada opišeš Ai će kreirati četiri verzije slike za manje od
+        <p className="text-white md:text-xl mb-10 max-w-[500px] md:text-center">
+          Kada opišeš Ai će kreirati četiri verzije slike za manje od minut, izaberi koja ti se najviše sviđa i poruči
         </p>
-        <p className="text-white mb-10 text-xl">minut, izaberi koja ti se najviše sviđa i poruči</p>
         <Button
           text={'Napravi svoj dizajn majice'}
           onClick={() => scrollToSection('t-shirt-container')}
