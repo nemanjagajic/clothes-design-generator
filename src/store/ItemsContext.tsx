@@ -31,7 +31,7 @@ const defaultItem = {
   quantity: 1,
   color: 'white',
   imageUrl: null,
-  price: 2400,
+  price: 2300,
   gender: 'male' as Gender,
   type: 'tshirt'
 }

@@ -1,6 +1,5 @@
-import React, { Dispatch, SetStateAction, forwardRef, useEffect, useRef, useState } from 'react'
+import React, { Dispatch, SetStateAction, forwardRef, useState } from 'react'
 import Button from '../../components/shared/Button'
-import ReCAPTCHA from 'react-google-recaptcha';
 import axios from 'axios';
 
 
@@ -15,22 +14,22 @@ const GeneratorForm = forwardRef<HTMLTextAreaElement, GeneratorFormProps>(({ sho
 
     const [description, setDescription] = useState('')
 
-    const [captchaValue, setCaptchaValue] = useState<string | null>(null);
-    const captchaRef = useRef<ReCAPTCHA>(null);
-
-    const handleCaptchaChange = async (value: string | null) => {
-        setCaptchaValue(value);
-        await axios.post(`${process.env.REACT_APP_BASE_API_URL}/verify-captcha`, {
-            captchaValue: value
-        })
-    };
-
     const handleSubmit = (description: string) => {
-        onGenerateImage(description)
-        setShowBadWord(false)
-        setCaptchaValue(null);
-        if (captchaRef.current) {
-            captchaRef.current.reset();
+        //@ts-ignore
+        if (window.grecaptcha) {
+            //@ts-ignore
+            window.grecaptcha.ready(() => {
+                //@ts-ignore
+                window.grecaptcha
+                    .execute(process.env.REACT_APP_CAPTCHA_SITE_KEY, { action: 'submit' })
+                    .then(async (value: string) => {
+                        await axios.post(`${process.env.REACT_APP_BASE_API_URL}/verify-captcha`, {
+                            captchaValue: value
+                        })
+                        onGenerateImage(description)
+                        setShowBadWord(false)
+                    });
+            });
         }
     };
 
@@ -56,18 +55,13 @@ const GeneratorForm = forwardRef<HTMLTextAreaElement, GeneratorFormProps>(({ sho
             </div>
             <br />
             <div className='mx-2 mb-2'>
-                <ReCAPTCHA
-                    ref={captchaRef}
-                    sitekey={process.env.REACT_APP_CAPTCHA_SITE_KEY || ''}
-                    onChange={handleCaptchaChange}
-                />
             </div>
             <Button
                 isMain={false}
                 text={'Napravi'}
                 onClick={() => handleSubmit(description)}
-                customStyles={`w-full h-[50px] sm:w-[350px] sm:ml-4 ${(isDisabled || !description.trim() || !captchaValue) && 'bg-gray-300'}`}
-                isDisabled={isDisabled || !description.trim() || !captchaValue}
+                customStyles={`w-full h-[50px] sm:w-[350px] sm:ml-4 ${(isDisabled || !description.trim()) && 'bg-gray-300'}`}
+                isDisabled={isDisabled || !description.trim()}
                 disabledText={
                     isDisabled
                         ? 'Slike se generišu...'
