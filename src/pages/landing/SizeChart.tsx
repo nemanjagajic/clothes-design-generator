@@ -3,6 +3,7 @@ import React from 'react';
 // Define the types for your data
 type SizeRow = {
     size: string;
+    weightRange: string,
     height: number;
     width: number;
 };
@@ -15,16 +16,18 @@ type SizeData = {
 // Sample data for the table
 const sizeData: SizeData = {
     male: [
-        { size: 'S', height: 70, width: 47 },
-        { size: 'M', height: 72, width: 50 },
-        { size: 'L', height: 76, width: 53 },
-        { size: 'XL', height: 78, width: 57 },
+        { size: 'S', weightRange: '(do 65kg)', height: 70, width: 47 },
+        { size: 'M', weightRange: '(65-75kg)', height: 72, width: 50 },
+        { size: 'L', weightRange: '(75-85kg)', height: 76, width: 53 },
+        { size: 'XL', weightRange: '(85-95kg)', height: 78, width: 57 },
+        { size: 'XXL', weightRange: '(95-115kg)', height: 86, width: 69 },
     ],
     female: [
-        { size: 'S', height: 60, width: 38 },
-        { size: 'M', height: 62, width: 40 },
-        { size: 'L', height: 64, width: 42 },
-        { size: 'XL', height: 66, width: 44 },
+        { size: 'S', weightRange: '(do 50kg)', height: 60, width: 38 },
+        { size: 'M', weightRange: '(50-55kg)', height: 62, width: 40 },
+        { size: 'L', weightRange: '(55-65kg)', height: 64, width: 42 },
+        { size: 'XL', weightRange: '(65-75kg)', height: 66, width: 44 },
+        { size: 'XXL', weightRange: '(75-85kg)', height: 68, width: 46 },
     ]
 };
 
@@ -52,19 +55,22 @@ const SizeChart: React.FC<{ gender: "male" | "female" }> = ({ gender }) => {
                     <tbody>
                         {sizeData[gender].map((row, index) => (
                             <tr key={index} className="px-4">
-                                <td className="px-5 py-5 border-b border-gray-300 bg-[#ECEBE4] text-lg">
-                                    <div className="flex items-center justify-center ">
-                                        <div className="ml-3">
-                                            <p className="text-gray-900 whitespace-no-wrap font-bold">
+                                <td className="md:px-5 py-5 border-b border-gray-300 bg-[#ECEBE4] text-lg">
+                                    <div className="flex items-center justify-center">
+                                        <div className="md:ml-3 flex flex-row items-center justify-center">
+                                            <p className="text-gray-900 whitespace-no-wrap font-bold mr-2">
                                                 {row.size}
+                                            </p>
+                                            <p className="text-gray-500 whitespace-no-wrap text-sm md:text-base">
+                                                {row.weightRange}
                                             </p>
                                         </div>
                                     </div>
                                 </td>
-                                <td className="px-5 py-5 border-b border-gray-300 bg-[#ECEBE4] text-lg text-center">
+                                <td className="md:px-5 py-5 border-b border-gray-300 bg-[#ECEBE4] text-lg text-center">
                                     <p className="text-gray-900 whitespace-no-wrap">{row.height}</p>
                                 </td>
-                                <td className="px-5 py-5 border-b border-gray-300 bg-[#ECEBE4] text-lg text-center">
+                                <td className="md:px-5 py-5 border-b border-gray-300 bg-[#ECEBE4] text-lg text-center">
                                     <p className="text-gray-900 whitespace-no-wrap">{row.width}</p>
                                 </td>
                             </tr>
