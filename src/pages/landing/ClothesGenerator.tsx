@@ -28,7 +28,6 @@ import TShirtSizeSelector from '../../components/shared/TShirtSizeSelector'
 import { useWindowWidth } from '../../utils/useWindowWidth'
 import { EXTRA_LARGE_SCREEN, LARGE_SCREEN, MEDIUM_SCREEN } from '../../constants/screenSizes'
 import GeneratorForm from './GeneratorForm'
-import { addItemToHistory } from '../../components/history/utils'
 
 const PROGRESS_BAR_FETCHING_INTERVAL_MS = 5000
 const DEFAULT_PROGRESS_INCREMENT = 2
