@@ -19,13 +19,13 @@ const GenderRadioButtons = ({ onChange }: GenderRadioBUttonProps) => {
         onClick={() => setGender('male' as Gender)}
         className={`px-4 py-2 rounded ${gender === 'male' ? 'bg-light-blue text-white' : 'bg-white text-gray-700 border border-nsm-gray-500'}`}
       >
-        Musko
+        Muški
       </button>
       <button
         onClick={() => setGender('female' as Gender)}
         className={`px-4 py-2 rounded ${gender === 'female' ? 'bg-light-blue text-white' : 'bg-white text-gray-700 border border-nsm-gray-500'}`}
       >
-        Zensko
+        Ženski
       </button>
     </div>
   )

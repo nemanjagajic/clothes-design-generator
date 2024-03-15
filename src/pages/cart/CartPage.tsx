@@ -27,11 +27,6 @@ const CartPage = () => {
         isCartOpen={isCartOpen}
         onSurroundingAreaClicked={() => setIsCartOpen(false)}
       />
-      <RemoveOrderModal
-        onCancel={() => { }}
-        onRemove={() => { }}
-        isOpen={false}
-      />
       <div className="mt-28 mx-10 lg:mx-24 ">
         <h1 className="text-5xl font-bold leading-tight">Završi kupovinu</h1>
         <div className="mt-12 ">
@@ -40,7 +35,7 @@ const CartPage = () => {
             stigne na tvoju adresu. Cena poštarine je{' '}
           </span>
           <span className="text-black text-base font-semibold font-['Segoe UI']">
-            250 Rsd
+            450Rsd
           </span>
           <span className="text-neutral-500 text-base font-normal font-['Segoe UI']">
             {' '}

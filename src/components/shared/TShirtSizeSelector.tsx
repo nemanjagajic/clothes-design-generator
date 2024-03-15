@@ -1,12 +1,17 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { SizeOption } from '../../store/ItemsContext'
 
 interface SizeSelectorProps {
   onSizeChange: (size: SizeOption) => void
+  type: "male" | "female"
 }
 
-const SizeSelector: React.FC<SizeSelectorProps> = ({ onSizeChange }) => {
-  const sizes: SizeOption[] = ['S', 'M', 'L', 'XL']
+const SizeSelector: React.FC<SizeSelectorProps> = ({ onSizeChange, type }) => {
+  const sizes: SizeOption[] = useMemo(() => {
+    return type === 'male' ? ['S', 'M', 'L', 'XL', 'XXL'] : ['S', 'M', 'L', 'XL']
+  }, [type])
+
+
   const [selectedSize, setSelectedSize] = useState<SizeOption>('L')
 
   const handleSizeChange = (size: SizeOption) => {

@@ -27,7 +27,6 @@ const sizeData: SizeData = {
         { size: 'M', weightRange: '(50-55kg)', height: 62, width: 40 },
         { size: 'L', weightRange: '(55-65kg)', height: 64, width: 42 },
         { size: 'XL', weightRange: '(65-75kg)', height: 66, width: 44 },
-        { size: 'XXL', weightRange: '(75-85kg)', height: 68, width: 46 },
     ]
 };
 
@@ -78,8 +77,8 @@ const SizeChart: React.FC<{ gender: "male" | "female" }> = ({ gender }) => {
                     </tbody>
                 </table>
             </div>
-            <div className="px-5 py-5 text-xs text-gray-500 italic">
-                *Imajte na umu da se majice mogu skupiti 2 do 3%
+            <div className="px-5 py-5 text-lg text-gray-500 italic">
+                <b>*Imajte na umu da se majice mogu skupiti do 5%</b>
             </div>
         </div>
     );

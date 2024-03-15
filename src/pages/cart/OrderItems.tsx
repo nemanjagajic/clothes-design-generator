@@ -24,7 +24,7 @@ const OrderItems = ({ items }: OrderItemsProps) => {
               onRemoveAll={() => {
                 removeAllFromCart(item)
               }}
-              price={2400}
+              price={2300}
             />
           </div>
         )

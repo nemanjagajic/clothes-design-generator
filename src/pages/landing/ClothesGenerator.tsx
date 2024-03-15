@@ -16,6 +16,7 @@ import redTShirt from '../../assets/images/red-tshirt.png'
 import whiteTShirt from '../../assets/images/white-tshirt.png'
 // @ts-ignore
 import grayTShirt from '../../assets/images/gray-tshirt.png'
+import { InformationCircleOutline } from 'react-ionicons'
 
 import { Close } from 'react-ionicons'
 import GenderRadioButtons from './GenderRadioButtons'
@@ -27,6 +28,7 @@ import TShirtSizeSelector from '../../components/shared/TShirtSizeSelector'
 import { useWindowWidth } from '../../utils/useWindowWidth'
 import { EXTRA_LARGE_SCREEN, LARGE_SCREEN, MEDIUM_SCREEN } from '../../constants/screenSizes'
 import GeneratorForm from './GeneratorForm'
+import { addItemToHistory } from '../../components/history/utils'
 
 const PROGRESS_BAR_FETCHING_INTERVAL_MS = 5000
 const DEFAULT_PROGRESS_INCREMENT = 2
@@ -53,11 +55,12 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
   const [currentGenerationImageId, setCurrentGenerationImageId] = useState('')
 
   const progressBarPercentageRef = useRef(0)
-  const [progressBarRenderTrigger, setProgressBarRenderTrigger] = useState(false)
 
   const [searchParams] = useSearchParams()
 
   const windowWidth = useWindowWidth()
+
+  // const promptRef = useRef('')
 
   const inputRef = useRef<HTMLTextAreaElement | null>(null)
 
@@ -111,6 +114,7 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
         `${process.env.REACT_APP_BASE_API_URL}/getImageGenerationProgress/${currentGenerationImageId}`,
       )
       if (response.upscaled_urls) {
+        // addItemToHistory({ prompt: promptRef.current, imageLinks: response.upscaled_urls })
         setGeneratedImages(response.upscaled_urls)
         setIsGeneratingImages(false)
         setCurrentGenerationImageId('')
@@ -120,12 +124,10 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
       if (progress === 0 && progressBarPercentageRef.current < 97) {
         const randomIncrement = getRandomOneTwoOrThree()
         progressBarPercentageRef.current += randomIncrement
-        setProgressBarRenderTrigger(prev => !prev)
         return
       }
       if (progress > progressBarPercentageRef.current) {
         progressBarPercentageRef.current = progress
-        setProgressBarRenderTrigger(prev => !prev)
       }
     } catch (e) {
       console.log(e)
@@ -172,6 +174,7 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
     clearGeneratedImages()
     setIsGeneratingImages(true)
     scrollToTShirtContainer()
+    // promptRef.current = description.trim()
     const response = await generateImage(description, imgGenerationRef, () => {
       setShowBadWord(true)
       setIsGeneratingImages(false)
@@ -339,10 +342,21 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
                 />
               </div>
               <div className="flex-row mt-8 mb-2">
-                <h3 className="font-bold text-[18px] mr-4 mb-2">
-                  Izaberi veličinu
-                </h3>
-                <TShirtSizeSelector onSizeChange={updateSize} />
+                <div className='flex'>
+                  <h3 className="font-bold text-[18px] mr-4 mb-2">
+                    Izaberi veličinu
+                  </h3>
+                  <div onClick={() => { scrollToSection('tShirtSizes') }}>
+                    <InformationCircleOutline
+                      color={'#00000'}
+                      title={"Pogledaj veličine"}
+                      height="25px"
+                      width="25px"
+
+                    />
+                  </div>
+                </div>
+                <TShirtSizeSelector onSizeChange={updateSize} type={currentItem.gender} />
               </div>
               <div className='flex text-[#FAC43C] my-12'>
                 <p className='bg-[#102E4A] right p-2 text-2xl'>{2300 * currentItem.quantity} RSD</p>

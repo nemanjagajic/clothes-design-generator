@@ -48,7 +48,7 @@ const ExamplesGridSection = () => {
                 <span>Šta su drugi ljudi </span>
                 <span id="primeri" className="text-light-blue text-[50px] sm:text-5xl italic">kreirali</span>
             </h2>
-            <ImageList images={imagePaths.concat(imagePaths)} scrollDirection='left' />
+            <ImageList images={imagePaths.concat(imagePaths)} scrollDirection='right' />
             <ImageList images={imagePaths.concat(imagePaths).reverse()} scrollDirection='right' hideOnMobile />
 
         </div>
