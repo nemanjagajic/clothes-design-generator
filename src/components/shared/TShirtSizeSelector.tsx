@@ -8,8 +8,8 @@ interface SizeSelectorProps {
 
 const SizeSelector: React.FC<SizeSelectorProps> = ({ onSizeChange, type }) => {
   const sizes: SizeOption[] = useMemo(() => {
-    return type === 'male' ? ['S', 'M', 'L', 'XL', 'XXL'] : ['S', 'M', 'L', 'XL']
-  }, [type])
+    return ['S', 'M', 'L', 'XL', 'XXL']
+  }, [])
 
 
   const [selectedSize, setSelectedSize] = useState<SizeOption>('L')

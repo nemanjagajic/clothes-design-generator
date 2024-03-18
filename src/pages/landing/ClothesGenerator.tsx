@@ -26,8 +26,9 @@ import {
 } from '../../utils/pageNavigation'
 import TShirtSizeSelector from '../../components/shared/TShirtSizeSelector'
 import { useWindowWidth } from '../../utils/useWindowWidth'
-import { EXTRA_LARGE_SCREEN, LARGE_SCREEN, MEDIUM_SCREEN } from '../../constants/screenSizes'
+import { EXTRA_LARGE_SCREEN } from '../../constants/screenSizes'
 import GeneratorForm from './GeneratorForm'
+// import { addItemToHistory } from '../../components/history/utils'
 
 const PROGRESS_BAR_FETCHING_INTERVAL_MS = 5000
 const DEFAULT_PROGRESS_INCREMENT = 2
@@ -53,7 +54,7 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
     useState(false)
   const [currentGenerationImageId, setCurrentGenerationImageId] = useState('')
 
-  const progressBarPercentageRef = useRef(0)
+  const [progressBarPercentage, setProgressBarPercentage] = useState(0)
 
   const [searchParams] = useSearchParams()
 
@@ -117,16 +118,16 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
         setGeneratedImages(response.upscaled_urls)
         setIsGeneratingImages(false)
         setCurrentGenerationImageId('')
-        progressBarPercentageRef.current = 0
+        setProgressBarPercentage(0)
         return
       }
-      if (progress === 0 && progressBarPercentageRef.current < 97) {
+      if (progress === 0 && progressBarPercentage < 97) {
         const randomIncrement = getRandomOneTwoOrThree()
-        progressBarPercentageRef.current += randomIncrement
+        setProgressBarPercentage((prev => prev + randomIncrement))
         return
       }
-      if (progress > progressBarPercentageRef.current) {
-        progressBarPercentageRef.current = progress
+      if (progress > progressBarPercentage) {
+        setProgressBarPercentage(progress)
       }
     } catch (e) {
       console.log(e)
@@ -139,8 +140,8 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
       fetchAndUpdateProgress()
     }, PROGRESS_BAR_FETCHING_INTERVAL_MS)
     setTimeout(() => {
-      if (progressBarPercentageRef.current === 0)
-        progressBarPercentageRef.current = DEFAULT_PROGRESS_INCREMENT
+      if (progressBarPercentage === 0)
+        setProgressBarPercentage(DEFAULT_PROGRESS_INCREMENT)
     }, 1000)
 
     return () => {
@@ -161,7 +162,7 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
 
   const clearGeneratedImages = () => {
     setGeneratedImages([])
-    progressBarPercentageRef.current = 0
+    setProgressBarPercentage(0)
     setCurrentGenerationImageId('')
   }
 
@@ -297,14 +298,14 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
                   <div className="w-full absolute bottom-0">
                     <div className="mb-2 m-auto flex items-center justify-center">
                       <div className="font-normal text-light-blue">
-                        {progressBarPercentageRef.current}%
+                        {progressBarPercentage}%
                       </div>
                     </div>
                     <div className="w-full bg-gray-200 h-2.5 dark:bg-gray-100 absolute bottom-0 rounded-md">
                       <div
                         className="bg-light-blue h-2.5 rounded-full"
                         style={{
-                          width: `${progressBarPercentageRef.current}%`,
+                          width: `${progressBarPercentage}%`,
                           transition: 'width 0.3s ease',
                         }}
                       ></div>
@@ -331,27 +332,26 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
             )}
             <div className="lg:pl-10">
               <div className="flex flex-col">
-                <h3 className="font-bold text-[18px]">Izaberi boju majice</h3>
+                <h3 className="font-bold text-[23px]">Boja majice</h3>
                 <ColorPicker onColorPick={updateColor} />
               </div>
               <div className="flex flex-col justify-center mb-4 mt-4">
-                <h3 className="font-bold text-[18px] mr-4 mb-2">Izaberi pol</h3>
+                <h3 className="font-bold text-[23px] mr-4 mb-2">Pol</h3>
                 <GenderRadioButtons
                   onChange={(gender) => updateCurrentItem({ gender })}
                 />
               </div>
               <div className="flex-row mt-8 mb-2">
-                <div className='flex'>
-                  <h3 className="font-bold text-[18px] mr-4 mb-2">
-                    Izaberi veličinu
+                <div className='flex items-center'>
+                  <h3 className="font-bold text-[23px] mr-4 mb-2">
+                    Veličina
                   </h3>
-                  <div onClick={() => { scrollToSection('tShirtSizes') }}>
+                  <div className={'mb-2'} onClick={() => { scrollToSection('tShirtSizes') }}>
                     <InformationCircleOutline
                       color={'#00000'}
                       title={"Pogledaj veličine"}
-                      height="25px"
-                      width="25px"
-
+                      height="30px"
+                      width="30px"
                     />
                   </div>
                 </div>

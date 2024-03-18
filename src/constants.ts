@@ -2,7 +2,7 @@
 export const colorOptions = {
   white: 'bg-white',
   black: 'bg-black',
-  green: 'bg-[#595906]',
+  green: 'bg-[#768b6f]',
   red: 'bg-[#b91010]',
   gray: 'bg-[#3a3a39]',
 }
