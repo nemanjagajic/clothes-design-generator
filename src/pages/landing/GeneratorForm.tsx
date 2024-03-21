@@ -1,21 +1,22 @@
 import React, { Dispatch, SetStateAction, forwardRef, useEffect, useMemo, useState, useRef, useCallback } from 'react'
 import Button from '../../components/shared/Button'
 import axios from 'axios';
-import { CloseOutline } from 'react-ionicons'
+import { CloseOutline, TimerOutline } from 'react-ionicons'
 import Timer from '../../components/timer/Timer';
-
 
 interface GeneratorFormProps {
     showBadWord: boolean
     isDisabled: boolean
     setShowBadWord: Dispatch<SetStateAction<boolean>>
     onGenerateImage: (description: string) => void
+    onHistoryClicked?: (() => void) | null
+
 }
 
 const TIME_LIMIT = 12 * 60 * 60 * 1000; // 12 hours in milliseconds
 const RETRIES = 5
 
-const GeneratorForm = forwardRef<HTMLTextAreaElement, GeneratorFormProps>(({ showBadWord, setShowBadWord, isDisabled, onGenerateImage }, ref) => {
+const GeneratorForm = forwardRef<HTMLTextAreaElement, GeneratorFormProps>(({ showBadWord, setShowBadWord, isDisabled, onGenerateImage, onHistoryClicked }, ref) => {
 
     const [description, setDescription] = useState('');
     const [isGenerationLimitReached, setIsGenerationLimitReached] = useState(false)
@@ -132,17 +133,13 @@ const GeneratorForm = forwardRef<HTMLTextAreaElement, GeneratorFormProps>(({ sho
 
     const disabledButtonText = useMemo(() => {
         if (isDisabled) {
-            return 'Slike se generišu...'
+            return 'Kreiranje...'
         }
 
         if (!isGenerationLimitReached) {
             return 'Napravi'
         }
     }, [isDisabled, isGenerationLimitReached])
-
-    const generationsLeft = useMemo(() => {
-        return RETRIES - clickData.count
-    }, [clickData.count])
 
     const resetTimer = (count: number = 0) => {
         setIsGenerationLimitReached(false)
@@ -161,10 +158,10 @@ const GeneratorForm = forwardRef<HTMLTextAreaElement, GeneratorFormProps>(({ sho
 
     return (
         <div
-            className="mt-6 flex flex-col lg:flex-row w-full px-4 pt-8"
+            className="mt-6 flex flex-col lg:flex-row w-full px-4 pt-8 justify-center"
             id="prompt-input"
         >
-            <div className="relative w-full md:w-[1/2]">
+            <div className="relative w-full md:w-1/2 ">
                 {showGenerationsLeftMessage && (
                     <div
                         ref={messageRef}
@@ -206,15 +203,30 @@ const GeneratorForm = forwardRef<HTMLTextAreaElement, GeneratorFormProps>(({ sho
             <br />
             <div className="mx-2 mb-2">
             </div>
-            {(shouldDisplayTimer) ? <Timer onTimeout={resetTimer} seconds={timeInSeconds} /> : (<Button
-                isMain={false}
-                text={'Napravi'}
-                onClick={() => handleSubmit(description)}
-                customStyles={`w-full h-[50px] sm:w-[350px] sm:ml-4 ${(isDisabled || !description.trim()) && 'bg-gray-300'}`}
-                isDisabled={isDisabled || shouldDisplayTimer || !description.trim()}
-                disabledText={disabledButtonText}
-            />)}
-
+            <div className='flex'>
+                {(shouldDisplayTimer) ? <Timer onTimeout={resetTimer} seconds={timeInSeconds} /> : (
+                    <Button
+                        isMain={false}
+                        text={'Napravi'}
+                        onClick={() => handleSubmit(description)}
+                        customStyles={`w-full h-[50px] sm:w-[200px] sm:ml-4 ${(isDisabled || !description.trim()) && 'bg-gray-300'}`}
+                        isDisabled={isDisabled || shouldDisplayTimer || !description.trim()}
+                        disabledText={disabledButtonText}
+                    />)}
+                {!!onHistoryClicked && (
+                    <div id={'history-button'} onClick={onHistoryClicked} className="flex justify-center items-center bg-white border-2 mx-2 p-2 rounded-sm shadow cursor-pointer h-[50px] w-[140px]">
+                        <div className="mr-2 text-lg text-gray-800">Istorija</div>
+                        <div>
+                            <TimerOutline
+                                color={'#00000'}
+                                title={"Istorija"}
+                                height="30px"
+                                width="30px"
+                            />
+                        </div>
+                    </div>
+                )}
+            </div>
         </div>
     )
 })

@@ -41,12 +41,12 @@ const Timer: React.FC<TimerProps> = ({ onTimeout, seconds }) => {
 
     return (
         <div className="flex-col items-center justify-center">
-            <div className="flex items-center justify-center rounded-tl-lg rounded-tr-lg w-64 h-16 bg-white shadow-black">
+            <div className="flex items-center justify-center rounded-tl-lg rounded-tr-lg w-[230px] h-16 bg-white shadow-black">
                 <p className="text-xl text-center font-bold text-gray-800">
                     Dostigao si limit od 5 pokušaja. Nastavi za:
                 </p>
             </div>
-            <div className="flex items-center justify-center rounded-bl-lg rounded-br-lg w-64 h-16 bg-dark-blue shadow-black">
+            <div className="flex items-center justify-center rounded-bl-lg rounded-br-lg w-[230px] h-16 bg-dark-blue shadow-black">
                 <p className="text-4xl font-bold text-white">
                     {formatTime(secondsLeft)}
                 </p>

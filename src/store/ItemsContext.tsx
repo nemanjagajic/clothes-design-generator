@@ -1,8 +1,6 @@
 import React, {
   createContext,
-  Dispatch,
   ReactNode,
-  SetStateAction,
   useContext,
   useEffect,
   useMemo,
@@ -27,7 +25,7 @@ export type Item = {
   gender: Gender
 }
 const defaultItem = {
-  size: 'M' as SizeOption,
+  size: 'L' as SizeOption,
   quantity: 1,
   color: 'white',
   imageUrl: null,

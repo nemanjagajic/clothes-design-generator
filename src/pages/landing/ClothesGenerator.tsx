@@ -28,6 +28,8 @@ import TShirtSizeSelector from '../../components/shared/TShirtSizeSelector'
 import { useWindowWidth } from '../../utils/useWindowWidth'
 import { EXTRA_LARGE_SCREEN } from '../../constants/screenSizes'
 import GeneratorForm from './GeneratorForm'
+import { addItemToHistory } from '../../components/history/utils'
+import { useHistory } from '../../components/history/HistoryContext'
 // import { addItemToHistory } from '../../components/history/utils'
 
 const PROGRESS_BAR_FETCHING_INTERVAL_MS = 5000
@@ -43,31 +45,27 @@ const TSHIRTS: { [color: string]: string } = {
 
 type ClothesGeneratorTypes = {
   imgGenerationRef: string
+  onHistoryClicked?: (() => void) | null
 }
 
-const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
+const ClothesGenerator = ({ imgGenerationRef, onHistoryClicked }: ClothesGeneratorTypes) => {
   const [showBadWord, setShowBadWord] = useState(false)
   const [isGeneratingImages, setIsGeneratingImages] = useState(false)
-  const [generatedImages, setGeneratedImages] = useState<string[]>([])
   const [focusedPhotoIndex, setFocusedPhotoIndex] = useState(0)
   const [isSelectedImagePreviewModalOpen, setIsSelectedImagePreviewModalOpen] =
     useState(false)
   const [currentGenerationImageId, setCurrentGenerationImageId] = useState('')
-
+  const { currentImages, updateCurrentImages, setCurrentImages } = useHistory()
   const [progressBarPercentage, setProgressBarPercentage] = useState(0)
 
   const [searchParams] = useSearchParams()
 
   const windowWidth = useWindowWidth()
 
-  // const promptRef = useRef('')
+  const promptRef = useRef('')
 
   const inputRef = useRef<HTMLTextAreaElement | null>(null)
-
-  useEffect(() => {
-    if (generatedImages.length)
-      localStorage.setItem('images', JSON.stringify(generatedImages))
-  }, [generatedImages])
+  const { addHistoryItem } = useHistory();
 
   useEffect(() => {
     const img0 = decodeURIComponent(searchParams.get('img0')!)
@@ -76,14 +74,14 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
     const img3 = decodeURIComponent(searchParams.get('img3')!)
 
     if (img0 !== 'null') {
-      setGeneratedImages([img0, img1, img2, img3])
+      updateCurrentImages([img0, img1, img2, img3])
       return
     }
 
     try {
       const imagesFromStorage = localStorage.getItem('images')
       if (imagesFromStorage) {
-        setGeneratedImages(JSON.parse(imagesFromStorage))
+        setCurrentImages(JSON.parse(imagesFromStorage))
       }
     } catch (error) { }
   }, [])
@@ -91,8 +89,8 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
   const { updateCurrentItem, addToCart, currentItem, userId } = useItems()
 
   useEffect(() => {
-    updateCurrentItem({ imageUrl: generatedImages[focusedPhotoIndex] })
-  }, [generatedImages, focusedPhotoIndex])
+    updateCurrentItem({ imageUrl: currentImages[focusedPhotoIndex] })
+  }, [currentImages, focusedPhotoIndex])
 
   const getRandomOneTwoOrThree = () => {
     return Math.floor(Math.random() * 3) + 1;
@@ -114,8 +112,8 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
         `${process.env.REACT_APP_BASE_API_URL}/getImageGenerationProgress/${currentGenerationImageId}`,
       )
       if (response.upscaled_urls) {
-        // addItemToHistory({ prompt: promptRef.current, imageLinks: response.upscaled_urls })
-        setGeneratedImages(response.upscaled_urls)
+        addHistoryItem({ prompt: promptRef.current, imageLinks: response.upscaled_urls })
+        updateCurrentImages(response.upscaled_urls)
         setIsGeneratingImages(false)
         setCurrentGenerationImageId('')
         setProgressBarPercentage(0)
@@ -161,7 +159,7 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
   }
 
   const clearGeneratedImages = () => {
-    setGeneratedImages([])
+    setCurrentImages([])
     setProgressBarPercentage(0)
     setCurrentGenerationImageId('')
   }
@@ -174,7 +172,7 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
     clearGeneratedImages()
     setIsGeneratingImages(true)
     scrollToTShirtContainer()
-    // promptRef.current = description.trim()
+    promptRef.current = description.trim()
     const response = await generateImage(description, imgGenerationRef, () => {
       setShowBadWord(true)
       setIsGeneratingImages(false)
@@ -258,20 +256,21 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
           setShowBadWord={setShowBadWord}
           onGenerateImage={handleGenerateImage}
           isDisabled={isGeneratingImages}
+          onHistoryClicked={onHistoryClicked}
         />
 
         <div className="flex w-full h-full flex-col xl:flex-row mb-8 px-4 ">
           <div
             className="flex flex-col items-center justify-center w-full pt-4 xl:min-w-[50%] relative xl:px-2"
           >
-            {generatedImages && generatedImages.length > 0 ? (
+            {currentImages && currentImages.length > 0 ? (
               <>
                 <img width={400} src={TSHIRTS[currentItem.color]} className="px-2 mb-8" />
                 <img
                   className="w-[140px] h-[140px] sm:w-[170px] sm:h-[170px] absolute top-[90px] sm:mb-40 mr-1 sm:mr-2 rounded-md cursor-pointer"
                   onClick={() => setIsSelectedImagePreviewModalOpen(true)}
                   width={170}
-                  src={generatedImages[focusedPhotoIndex]}
+                  src={currentImages[focusedPhotoIndex]}
                 />
               </>
             ) : (
@@ -316,8 +315,8 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
             )}
 
             <div className="flex items-center md:justify-center w-full mt-2 overflow-x-auto pb-3 sm:pb-8 hide-scrollbar">
-              {generatedImages.length > 0
-                ? generatedImages.map((imageUrl, index) => {
+              {currentImages.length > 0
+                ? currentImages.map((imageUrl, index) => {
                   return renderPreviewImage(imageUrl, index)
                 })
                 : Array.from({ length: 4 }).map((_, index) => {
@@ -365,8 +364,8 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
                   isMain
                   text={'Dodaj u korpu'}
                   onClick={handleAddToCart}
-                  customStyles={`w-full ${(generatedImages.length === 0) && 'bg-gray-300'}`}
-                  isDisabled={generatedImages.length === 0}
+                  customStyles={`w-full ${(currentImages.length === 0) && 'bg-gray-300'}`}
+                  isDisabled={currentImages.length === 0}
                   disabledText={'Dodaj u korpu'}
                 />
               </div>
@@ -376,7 +375,7 @@ const ClothesGenerator = ({ imgGenerationRef }: ClothesGeneratorTypes) => {
             <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-30 overflow-auto" onClick={() => setIsSelectedImagePreviewModalOpen(false)}>
               <div className="relative z-50" onClick={(e) => { e.stopPropagation() }} >
                 <img
-                  src={generatedImages[focusedPhotoIndex]}
+                  src={currentImages[focusedPhotoIndex]}
                   alt="Full view"
                   className="object-contain mx-auto my-0"
                   style={{ maxHeight: 'calc(100vh - 2rem)' }}

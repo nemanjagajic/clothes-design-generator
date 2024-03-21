@@ -10,10 +10,7 @@ import imgArrow2 from '../../assets/images/arrow-2.png'
 import imgArrow3 from '../../assets/images/arrow-3.png'
 // @ts-ignore
 import imgArrow1Small from '../../assets/images/arrow-1-small.png'
-// @ts-ignore
-import imgArrow2Small from '../../assets/images/arrow-2-small.png'
-// @ts-ignore
-import imgArrow3Small from '../../assets/images/arrow-3-small.png'
+
 // @ts-ignore
 import imgExampleInputTShirtPomeranian from '../../assets/images/example-input-tshirt-pomeranian.png'
 import { useWindowWidth } from '../../utils/useWindowWidth'

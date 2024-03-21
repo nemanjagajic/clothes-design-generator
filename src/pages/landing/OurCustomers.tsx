@@ -1,9 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useWindowWidth } from '../../utils/useWindowWidth'
 import { LARGE_SCREEN } from '../../constants/screenSizes'
-import {
-  ChevronForward
-} from 'react-ionicons'
 //@ts-ignore
 import minja from '../../assets/testimonials/minja.png'
 //@ts-ignore

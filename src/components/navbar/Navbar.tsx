@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import Container from '../shared/Container'
-import { BagOutline } from 'react-ionicons'
 import { scrollToSection } from '../../utils/pageNavigation'
 // @ts-ignore
 import logo from '../../assets/images/logo3.png'
 import { useNavigate } from 'react-router-dom'
+import { TimerOutline, BagHandleOutline } from 'react-ionicons'
 
 type NavbarTypes = {
   onCartClicked: (() => void) | null
+  onHistoryClicked?: (() => void) | null
   itemCount: number
 }
 
-const Navbar = ({ onCartClicked, itemCount }: NavbarTypes) => {
+const Navbar = ({ onCartClicked, itemCount, onHistoryClicked
+}: NavbarTypes) => {
   const navigate = useNavigate()
 
   const [visible, setVisible] = useState(true)
@@ -90,19 +92,37 @@ const Navbar = ({ onCartClicked, itemCount }: NavbarTypes) => {
             </div>
           </div>
         </div>)}
-        {!!onCartClicked && (<div id={'cart-button'} onClick={onCartClicked} className="bg-white relative p-2 rounded-md shadow cursor-pointer h-[40px] w-[40px] my-auto">
-          {!!itemCount && (
-            <div
-              className="absolute -top-2 -right-2 bg-blue-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center"
-              style={{ minWidth: '24px' }}
-            >
-              {itemCount}
+        <div className='flex'>
+          {!!onHistoryClicked && (
+            <div id={'history-button'} onClick={onHistoryClicked} className="bg-white mx-2 flex justify-center items-center relative p-2 rounded-md shadow cursor-pointer h-[40px] w-[40px] my-auto">
+              <TimerOutline
+                color={'#00000'}
+                title={"Istorija"}
+                height="30px"
+                width="30px"
+              />
+            </div>)}
+          {!!onCartClicked && (
+            <div id={'cart-button'} onClick={onCartClicked} className="bg-white mx-2 flex justify-center items-center relative rounded-md shadow cursor-pointer h-[40px] w-[40px] my-auto">
+              {!!itemCount && (
+                <div
+                  className="absolute -top-2 -right-2 bg-blue-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center"
+                  style={{ minWidth: '24px' }}
+                >
+                  {itemCount}
+                </div>
+              )}
+              <div className='flex items-center justify-center'>
+                <BagHandleOutline
+                  color={'#00000'}
+                  title={"cart"}
+                  height="30px"
+                  width="30px"
+                />
+              </div>
             </div>
           )}
-          <div>
-            <BagOutline height="25px" width="25px" />
-          </div>
-        </div>)}
+        </div>
       </div>
     </Container>
   )
