@@ -30,6 +30,7 @@ import { EXTRA_LARGE_SCREEN } from '../../constants/screenSizes'
 import GeneratorForm from './GeneratorForm'
 import { addItemToHistory } from '../../components/history/utils'
 import { useHistory } from '../../components/history/HistoryContext'
+import ErrorPage from '../error/ErrorPage'
 // import { addItemToHistory } from '../../components/history/utils'
 
 const PROGRESS_BAR_FETCHING_INTERVAL_MS = 5000
@@ -250,15 +251,15 @@ const ClothesGenerator = ({ imgGenerationRef, onHistoryClicked }: ClothesGenerat
   return (
     <div className="min-h-full bg-dark-blue py-4 px-4 md:px-8 lg:px-16 xl:px-32 flex justify-center items-center py-20" id="t-shirt-container">
       <div className="bg-nsm-gray-400 rounded-2xl sm:max-w-[1440px] px-0 w-full">
-        <GeneratorForm
+        {/* <GeneratorForm
           ref={inputRef}
           showBadWord={showBadWord}
           setShowBadWord={setShowBadWord}
           onGenerateImage={handleGenerateImage}
           isDisabled={isGeneratingImages}
           onHistoryClicked={onHistoryClicked}
-        />
-
+        /> */}
+        <ErrorPage onHistoryClicked={onHistoryClicked} />
         <div className="flex w-full h-full flex-col xl:flex-row mb-8 px-4 ">
           <div
             className="flex flex-col items-center justify-center w-full pt-4 xl:min-w-[50%] relative xl:px-2"
