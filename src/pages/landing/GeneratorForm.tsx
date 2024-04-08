@@ -44,7 +44,7 @@ const GeneratorForm = forwardRef<HTMLTextAreaElement, GeneratorFormProps>(
     const [showGenerationsLeftMessage, setShowGenerationsLeftMessage] =
       useState(false)
 
-    const [shape, setShape] = useState<'square' | 'rectangle'>('rectangle')
+    const [shape, setShape] = useState<'square' | 'rectangle'>('square')
 
     useEffect(() => {
       if (
@@ -241,10 +241,10 @@ const GeneratorForm = forwardRef<HTMLTextAreaElement, GeneratorFormProps>(
             onChange={(e) => setDescription(e.target.value)}
             className="w-full min-h-[100px] md:min-h-[50px] md:h-[50px] border border-gray-300 rounded-md focus:outline-none p-4 md:p-3 text-xl border-2 border-blue-300 font-mono shadow-xl"
           />
-          <div className="w-full flex items-center my-8 justify-center sm:justify-start">
+          {/* <div className="w-full flex items-center my-8 justify-center sm:justify-start">
             <h3 className="text-2xl mr-4 font-bold">Oblik printa: </h3>
             <ImageShape shape={shape} onChange={setShape} />
-          </div>
+          </div> */}
           {showBadWord && (
             <p className="text-[#F00]">
               *ne možete koristiti psovke ili uvredljive reči
