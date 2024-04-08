@@ -220,12 +220,14 @@ const ClothesGenerator = ({
   const renderPreviewImage = (imageUrl: string, index: number) => (
     <div
       key={index}
-      className={`flex items-center justify-center border cursor-pointer w-[120px] h-[120px] min-h-[120px] min-w-[120px] sm:w-[140px] sm:h-[140px] sm:min-h-[140px] sm:in-w-[140px]
+      className={`flex items-center justify-center border cursor-pointer 
+      min-w-[120px] 
+      sm:min-h-[140px] sm:min-w-[140px]
       ${
         index === focusedPhotoIndex
-          ? 'border-light-blue border-2'
+          ? 'border-light-blue border-4 shadow-xl'
           : 'border-gray-300 border-2'
-      } mr-2 rounded-lg p-1`}
+      } mr-1 rounded-md`}
       onClick={() => {
         if (focusedPhotoIndex === index) {
           setIsSelectedImagePreviewModalOpen(true)
@@ -234,7 +236,7 @@ const ClothesGenerator = ({
         setFocusedPhotoIndex(index)
       }}
     >
-      <img src={imageUrl} className="rounded-md" />
+      <img src={imageUrl} className="rounded-sm  sm:w-auto" />
     </div>
   )
 
@@ -272,8 +274,8 @@ const ClothesGenerator = ({
           onHistoryClicked={onHistoryClicked}
         />
         {/* <ErrorPage onHistoryClicked={onHistoryClicked} /> */}
-        <div className="flex w-full h-full flex-col xl:flex-row mb-8 px-4 ">
-          <div className="flex flex-col items-center justify-center w-full pt-4 xl:min-w-[50%] relative xl:px-2">
+        <div className="flex w-full h-full flex-col xl:flex-row mb-8">
+          <div className="flex xl:w-2/3 flex-col items-center justify-center w-full pt-4 relative xl:px-2">
             {currentImages && currentImages.length > 0 ? (
               <>
                 <img
@@ -282,9 +284,10 @@ const ClothesGenerator = ({
                   className="px-2 mb-8"
                 />
                 <img
-                  className="w-[140px] h-[140px] sm:w-[170px] sm:h-[170px] absolute top-[90px] sm:mb-40 mr-1 sm:mr-2 rounded-md cursor-pointer"
+                  className={`w-[140px] max-h-[255px]
+                  sm:w-[170px] max-h-[255px]
+                  absolute top-[90px] sm:mb-40 mr-1 sm:mr-2 rounded-md cursor-pointer`}
                   onClick={() => setIsSelectedImagePreviewModalOpen(true)}
-                  width={170}
                   src={currentImages[focusedPhotoIndex]}
                 />
               </>
@@ -300,7 +303,7 @@ const ClothesGenerator = ({
                   className="px-2 mb-8"
                 />
                 <div
-                  className={`flex items-center justify-center w-[140px] h-[140px] sm:w-[170px] sm:h-[170px] absolute mb-32 sm:mb-40 mr-1 sm:mr-2 rounded-md ${
+                  className={`flex items-center justify-center w-[170px] h-[170px] absolute mb-32 sm:mb-40 mr-1 sm:mr-2 rounded-md ${
                     isGeneratingImages ? 'bg-gray-transparent' : 'bg-gray-200'
                   }`}
                 >
@@ -345,7 +348,7 @@ const ClothesGenerator = ({
             </div>
           </div>
 
-          <div className="flex xl:justify-center flex-col w-full mt-4 xl:min-w-[50%] relative">
+          <div className="xl:w-1/3 flex xl:justify-center flex-col w-full relative mr-4 px-4">
             {windowWidth >= EXTRA_LARGE_SCREEN && (
               <div className="absolute h-[95%] w-[1px] bg-neutral-300 mb-[33px]" />
             )}
