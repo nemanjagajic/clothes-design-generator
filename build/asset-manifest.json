@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.feb3996d.css",
-    "main.js": "/static/js/main.40828715.js",
+    "main.css": "/static/css/main.2557f98c.css",
+    "main.js": "/static/js/main.cf5e42c2.js",
     "static/media/instagram.png": "/static/media/instagram.469cb83ec463191dffdf.png",
     "static/media/19.png": "/static/media/19.17f44aa5b78fa2a779eb.png",
     "static/media/red-tshirt.png": "/static/media/red-tshirt.3dec783ee53dbdcb56a1.png",
@@ -18,12 +18,12 @@
     "static/media/vlada.png": "/static/media/vlada.62e3d158f553a3314e51.png",
     "static/media/5.png": "/static/media/5.e724ef34609c5663e362.png",
     "static/media/18.png": "/static/media/18.887227695a5951d40a62.png",
-    "static/media/9.png": "/static/media/9.aa4917c130faadb64f08.png",
+    "static/media/25.png": "/static/media/25.aa4917c130faadb64f08.png",
     "static/media/2.png": "/static/media/2.e25800e5e508c312d9d7.png",
     "static/media/21.png": "/static/media/21.9a74d9ea2605e1114d54.png",
     "static/media/6.png": "/static/media/6.cc3ff480e66ec78287ce.png",
     "static/media/13.png": "/static/media/13.8bc343cd41c8984cc040.png",
-    "static/media/25.png": "/static/media/25.2c52269ad9a13cba0f01.png",
+    "static/media/9.png": "/static/media/9.2c52269ad9a13cba0f01.png",
     "static/media/example-input-tshirt-pomeranian.png": "/static/media/example-input-tshirt-pomeranian.e92bbafa7ee267de8a05.png",
     "static/media/17.png": "/static/media/17.fc5f3fe3563b4b94e4e8.png",
     "static/media/22.png": "/static/media/22.9f552ae461f4feee8730.png",
@@ -31,14 +31,14 @@
     "static/media/10.png": "/static/media/10.135dfed6990468cdc708.png",
     "static/media/23.png": "/static/media/23.e85724e5f02da0a74f3f.png",
     "static/media/4.png": "/static/media/4.90d2883e9b49eaa2301c.png",
-    "static/media/1.png": "/static/media/1.05eaca8388082bf54162.png",
+    "static/media/24.png": "/static/media/24.05eaca8388082bf54162.png",
     "static/media/15.png": "/static/media/15.23c8f03dd07491eb1303.png",
     "static/media/14.png": "/static/media/14.33bad281b5a5022570d8.png",
     "static/media/3.png": "/static/media/3.ec3e15f3c0c2c470f613.png",
     "static/media/12.png": "/static/media/12.636aaeec216886bd356f.png",
     "static/media/8.png": "/static/media/8.12645c2c823b9191770a.png",
     "static/media/26.png": "/static/media/26.74f438d96e7d22559ab4.png",
-    "static/media/24.png": "/static/media/24.fb8313384eeaa24fbe96.png",
+    "static/media/1.png": "/static/media/1.fb8313384eeaa24fbe96.png",
     "static/media/27.png": "/static/media/27.73bfb9a45d1952ac4620.png",
     "static/media/7.png": "/static/media/7.925c33134024cf82b202.png",
     "static/media/16.png": "/static/media/16.401c06eeae7c9c13e84b.png",
@@ -46,11 +46,11 @@
     "static/media/Courgette-Regular.ttf": "/static/media/Courgette-Regular.f99d9948a486f6270149.ttf",
     "static/media/facebook.png": "/static/media/facebook.790642551cd99bb66a7e.png",
     "index.html": "/index.html",
-    "main.feb3996d.css.map": "/static/css/main.feb3996d.css.map",
-    "main.40828715.js.map": "/static/js/main.40828715.js.map"
+    "main.2557f98c.css.map": "/static/css/main.2557f98c.css.map",
+    "main.cf5e42c2.js.map": "/static/js/main.cf5e42c2.js.map"
   },
   "entrypoints": [
-    "static/css/main.feb3996d.css",
-    "static/js/main.40828715.js"
+    "static/css/main.2557f98c.css",
+    "static/js/main.cf5e42c2.js"
   ]
 }
