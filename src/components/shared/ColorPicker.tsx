@@ -8,7 +8,7 @@ interface ColorPickerProps {
 }
 
 const ColorPicker = ({ onColorPick }: ColorPickerProps) => {
-  const [selectedColor, setSelectedColor] = useState<string>('white')
+  const [selectedColor, setSelectedColor] = useState<string>('black')
 
   const handleClick = (color: string) => {
     setSelectedColor(color)

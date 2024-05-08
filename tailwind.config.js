@@ -5,7 +5,7 @@ module.exports = {
   theme: {
     extend: {
       textShadow: {
-        'glow': '0 0 8px rgba(0, 0, 0, 0.8)', // Customize the color and spread as needed
+        glow: '0 0 8px rgba(0, 0, 0, 0.8)', // Customize the color and spread as needed
       },
       fontFamily: {
         custom: [
@@ -28,7 +28,7 @@ module.exports = {
         'light-gray': '#6B6B6B',
         'border-gray': '#D9D9D9',
         'nsm-orange': '#FAC43C',
-        'nsm-orange-100': '#F8CC5B'
+        'nsm-orange-100': '#F8CC5B',
       },
       width: {
         20: '30px',
@@ -37,7 +37,7 @@ module.exports = {
         20: '30px',
       },
       screens: {
-        lxl: '1440px'
+        lxl: '1440px',
       },
     },
   },
@@ -47,8 +47,8 @@ module.exports = {
         '.text-glow': {
           textShadow: theme('textShadow.glow'),
         },
-      };
-      addUtilities(newUtilities, ['responsive', 'hover']);
+      }
+      addUtilities(newUtilities, ['responsive', 'hover'])
     },
   ],
 }
