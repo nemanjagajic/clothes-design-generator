@@ -56,7 +56,6 @@ body {
 }
 
 @keyframes AnimationName {
-
   100% {
     background-position: 50%;
   }
@@ -72,7 +71,6 @@ body {
   50% {
     background-position: 100% 50%;
   }
-
 }
 
 @keyframes animate {

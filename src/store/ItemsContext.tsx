@@ -27,11 +27,11 @@ export type Item = {
 const defaultItem = {
   size: 'L' as SizeOption,
   quantity: 1,
-  color: 'white',
+  color: 'black',
   imageUrl: null,
   price: 2300,
   gender: 'male' as Gender,
-  type: 'tshirt'
+  type: 'tshirt',
 }
 // Create the context
 const ItemsContext = createContext<{
@@ -47,12 +47,12 @@ const ItemsContext = createContext<{
   userId: string
 }>({
   items: [defaultItem],
-  addToCart: () => { },
-  removeFromCart: () => { },
-  removeAllFromCart: () => { },
+  addToCart: () => {},
+  removeFromCart: () => {},
+  removeAllFromCart: () => {},
   currentItem: defaultItem,
-  updateCurrentItem: () => { },
-  emptyCart: () => { },
+  updateCurrentItem: () => {},
+  emptyCart: () => {},
   totalPrice: 0,
   itemCount: 0,
   userId: '',
@@ -186,7 +186,7 @@ export const ItemsProvider = ({ children }: { children: ReactNode }) => {
         updateCurrentItem,
         totalPrice,
         itemCount,
-        emptyCart
+        emptyCart,
       }}
     >
       {children}
