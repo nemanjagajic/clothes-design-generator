@@ -39,15 +39,17 @@ const LandingPage = () => {
         onSurroundingAreaClicked={() => setIsHistoryOpen(false)}
       />
       <Navbar
-        onHistoryClicked={() => setIsHistoryOpen(isOpen => !isOpen)}
-        onCartClicked={() => setIsCartOpen(isOpen => !isOpen)}
-        itemCount={itemCount} />
+        onHistoryClicked={() => setIsHistoryOpen((isOpen) => !isOpen)}
+        onCartClicked={() => setIsCartOpen((isOpen) => !isOpen)}
+        itemCount={itemCount}
+      />
       <HomePageBanner />
       <ExampleSection />
-      <ExamplesGridSection />
       <Instructions />
-      <ClothesGenerator onHistoryClicked={() => setIsHistoryOpen(isOpen => !isOpen)}
-        imgGenerationRef={imgGenerationRef} />
+      <ClothesGenerator
+        onHistoryClicked={() => setIsHistoryOpen((isOpen) => !isOpen)}
+        imgGenerationRef={imgGenerationRef}
+      />
       <SizeSection />
       <OurCustomers />
       <FAQSection />

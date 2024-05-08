@@ -1,0 +1,33 @@
+.slick-slide {
+  /* Add your custom styles here */
+  border-radius: 5px;
+  /* margin-left: 3px;
+  margin-right: 3px; */
+}
+.container {
+  width: 300px; /* Set the width of the container */
+  height: 200px; /* Set the height of the container */
+  overflow: hidden; /* Hide the overflow of the image */
+  position: relative; /* Ensure the absolute positioning of the image */
+}
+
+.image-wrapper {
+  position: absolute; /* Position the image absolutely within the container */
+  top: 0; /* Position from top */
+  left: 0; /* Position from left */
+  width: 400px; /* Set the width of the image larger than the container */
+  height: 300px; /* Set the height of the image larger than the container */
+}
+.slick-prev {
+  left: 7px !important;
+  z-index: 2;
+}
+.slick-next {
+  right: 25px !important;
+  z-index: 2;
+}
+
+.slick-next::before,
+.slick-prev::before {
+  content: none;
+}

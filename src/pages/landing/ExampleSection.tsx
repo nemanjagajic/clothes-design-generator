@@ -39,9 +39,9 @@ const ExampleSection = () => {
           xl:left-[180px]
           lxl:left-[180px]
           2xl:left-[150px]"
-
         />
-        <div className="p-2
+        <div
+          className="p-2
           border-4
           border-[#f8cc5b]
           rounded-md
@@ -58,7 +58,8 @@ const ExampleSection = () => {
           xl:top-[250px]
           xl:left-[400px]
           lxl:left-[400px]
-          2xl:left-[370px]">
+          2xl:left-[370px]"
+        >
           <TypingAnimation text="Pomeranac vija hranu u svemiru" speed={50} />
         </div>
         <img
@@ -83,7 +84,8 @@ const ExampleSection = () => {
             2xl:left-[520px]
           "
         />
-        <div className="
+        <div
+          className="
           flex
           items-center
           clip-angled-edges
@@ -105,7 +107,8 @@ const ExampleSection = () => {
           xl:left-[570px]
           lxl:left-[570px]
           2xl:left-[680px]
-        ">
+        "
+        >
           Ovo smo dobili
         </div>
         <img
@@ -163,7 +166,7 @@ const ExampleSection = () => {
   )
 
   return (
-    <div className="relative flex w-full min-h-screen bg-nsm-gray-100">
+    <div className="relative flex w-full min-h-screen bg-[#FAF9F1]">
       {windowWidth > MEDIUM_SCREEN
         ? renderDesktopContent()
         : renderMobileContent()}
