@@ -6,10 +6,17 @@ import './SliderStyle.css'
 import PrevArrow from './PrevArrow'
 import NextArrow from './NextArrow'
 import { useEffect, useRef, useState } from 'react'
-//@ts-ignore
-import whiteShirt from '../../../assets/images/Tshirt_white.png'
-//@ts-ignore
-import blackShirt from '../../../assets/images/Tshirt_black.png'
+// @ts-ignore
+import blackTShirt from '../../../assets/images/black-tshirt.png'
+// @ts-ignore
+import oliveTShirt from '../../../assets/images/olive-tshirt.png'
+// @ts-ignore
+import redTShirt from '../../../assets/images/red-tshirt.png'
+// @ts-ignore
+import whiteTShirt from '../../../assets/images/white-tshirt.png'
+// @ts-ignore
+import grayTShirt from '../../..//assets/images/gray-tshirt.png'
+const TSHIRTS = [blackTShirt, oliveTShirt, redTShirt, whiteTShirt, grayTShirt]
 
 const prompts = [
   'Beba Rubeus Hagrid',
@@ -27,7 +34,7 @@ const prompts = [
   'Petlovi kao italijanska mafija',
   'Barbie Mona Lisa',
   'Pomeranac vija hranu u svemiru',
-  'Apstraktna umetnost u stilu Pabla pikasa, boje crvena, žuta i plava',
+  'Umetnost u stilu Pabla pikasa, crvena, žuta i plava',
   'Vanzemaljac "Miss Univerzuma"',
   'Jutrić kafica sa pogledom',
   'Star Wars tematske poštanske markice',
@@ -38,7 +45,7 @@ const prompts = [
   'Astronaut na mesecu pije koktel',
   'Novak Djokovic se bori sa penzionerima za piletinu u Lidlu',
   'Beba Ron Weasley',
-  'Stara slika u retro stilu, crno-beli, analogni selfi turističkog vanzemaljca',
+  'Stara slika u retro stilu, crno beli selfi vanzemaljca turiste',
   'Kosturi na rege koncertu',
 ]
 
@@ -59,8 +66,7 @@ const ShirtSlider = () => {
     speed: 1000,
     autoplay: true,
     slidesToShow: slidesToShow,
-    autoplaySpeed: 2000, // Set your desired autoplay speed in milliseconds
-    // 3 seconds
+    autoplaySpeed: 2000,
     centerMode: true,
     centerPadding: '10px', // Adjust as needed
     prevArrow: <PrevArrow />, // Custom previous arrow component
@@ -94,7 +100,7 @@ const ShirtSlider = () => {
           slidesToShow: 1,
           slidesToScroll: 1,
           centerMode: true,
-          centerPadding: '15px',
+          centerPadding: '10',
           swipeToSlide: true,
           speed: 1000,
         },
@@ -118,8 +124,8 @@ const ShirtSlider = () => {
       if (sliderRef.current) {
         //@ts-ignore
         const containerWidth = sliderRef.current.clientWidth
-        const slideWidth = containerWidth < 768 ? 410 : 410
-        const slidesToShow = Math.floor(containerWidth / slideWidth) // Replace YOUR_SLIDE_WIDTH with your actual slide width
+        const slideWidth = 410
+        const slidesToShow = Math.floor(containerWidth / slideWidth)
         setSlidesToShow(slidesToShow)
       }
     }
@@ -138,11 +144,7 @@ const ShirtSlider = () => {
     <div ref={sliderRef}>
       <Slider {...settings}>
         {imagePaths.map((img, index) => (
-          <SliderItem
-            key={img.src}
-            {...img}
-            shirtSrc={index % 2 === 1 ? whiteShirt : blackShirt}
-          />
+          <SliderItem key={img.src} {...img} shirtSrc={TSHIRTS[index % 5]} />
         ))}
       </Slider>
     </div>
