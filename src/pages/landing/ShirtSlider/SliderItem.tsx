@@ -24,7 +24,7 @@ const SliderItem = ({ src, prompt, shirtSrc }: SliderItemProps) => {
             sm:left-[80px]
           "
           >
-            <img className="rounded-md" src={src} />
+            <img className="rounded-md secure" src={src} />
           </div>
         </div>
       </div>
