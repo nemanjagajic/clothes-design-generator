@@ -285,7 +285,7 @@ const ClothesGenerator = ({
                 />
                 <div
                   className="w-[160px] max-h-[255px]
-                  sm:w-[170px] max-h-[255px] z-[20] border-2
+                  sm:w-[170px] max-h-[255px] z-[20]
                   absolute top-[90px] sm:mb-40 mr-1 sm:mr-2 rounded-md cursor-pointer"
                   onClick={() => {
                     setIsSelectedImagePreviewModalOpen(true)

@@ -14,10 +14,8 @@
   display: none;
 }
 
-@media (max-width: 768px) {
-  img.secure {
-    pointer-events: none;
-  }
+img.secure {
+  pointer-events: none;
 }
 
 /* For IE, Edge and Firefox */
