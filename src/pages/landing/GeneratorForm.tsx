@@ -142,32 +142,38 @@ const GeneratorForm = forwardRef<HTMLTextAreaElement, GeneratorFormProps>(
 
     const handleSubmit = (description: string) => {
       if (checkAndIncreaseGenerationLimit()) {
-        // @ts-ignore
-        if (window.grecaptcha) {
-          //@ts-ignore
-          window.grecaptcha.ready(() => {
-            //@ts-ignore
-            window.grecaptcha
-              .execute(process.env.REACT_APP_CAPTCHA_SITE_KEY, {
-                action: 'submit',
-              })
-              .then(async (value: string) => {
-                await axios.post(
-                  `${process.env.REACT_APP_BASE_API_URL}/verify-captcha`,
-                  {
-                    captchaValue: value,
-                  },
-                )
-
-                const prompt =
+        const prompt =
                   shape === 'rectangle'
                     ? description + ' --ar 2:3'
                     : description
                 onGenerateImage(prompt)
                 setShowBadWord(false)
-              })
-          })
-        }
+        // @ts-ignore
+        // if (window.grecaptcha) {
+        //   //@ts-ignore
+        //   window.grecaptcha.ready(() => {
+        //     //@ts-ignore
+        //     window.grecaptcha
+        //       .execute(process.env.REACT_APP_CAPTCHA_SITE_KEY, {
+        //         action: 'submit',
+        //       })
+        //       .then(async (value: string) => {
+        //         await axios.post(
+        //           `${process.env.REACT_APP_BASE_API_URL}/verify-captcha`,
+        //           {
+        //             captchaValue: value,
+        //           },
+        //         )
+
+        //         const prompt =
+        //           shape === 'rectangle'
+        //             ? description + ' --ar 2:3'
+        //             : description
+        //         onGenerateImage(prompt)
+        //         setShowBadWord(false)
+        //       })
+        //   })
+        // }
       }
     }
 
