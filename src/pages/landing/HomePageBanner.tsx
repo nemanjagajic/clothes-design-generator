@@ -11,7 +11,7 @@ const HomePageBanner = () => {
         <div className="flex flex-col w-full items-center justify-center">
           <div className="flex flex-col sm:w-2/3 items-center pb-4 md:pt-8 md:pb-6 md:text-center">
             <h2 className="text-white text-start text-[44px] sm:text-7xl font-bold leading-tight sm:text-center">
-              Dizajniraj svoju unikatnu majicu za 30s{' '}
+              Dizajniraj svoju unikatnu majicu za 30 sekundi{' '}
               <hr className="border-none" /> uz pomoć AI
             </h2>
           </div>
