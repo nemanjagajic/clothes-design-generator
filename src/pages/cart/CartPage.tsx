@@ -54,11 +54,11 @@ const CartPage = () => {
               </div>
               <div className="flex justify-between py-2">
                 <span>Dostava</span>
-                <span>400 RSD</span>
+                <span>do 450rsd</span>
               </div>
               <div className="flex justify-between border-t-2 pt-2">
                 <span className="font-bold">Ukupno:</span>
-                <span className="font-bold">{totalPrice + 400} RSD</span>
+                <span className="font-bold">{totalPrice + 450}rsd</span>
               </div>
             </div>
           </div>
