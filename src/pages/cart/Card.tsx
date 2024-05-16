@@ -22,6 +22,7 @@ interface ProductCardProps {
   size: SizeOption
   color: Item['color']
   gender: Gender
+  uploadedFileSrc: string | null
   onRemoveAll: () => void
 }
 
@@ -35,11 +36,12 @@ const Card: React.FC<ProductCardProps> = ({
   onRemove,
   gender,
   onRemoveAll,
+  uploadedFileSrc
 }) => {
   return (
     <div className="my-1 flex items-center bg-white">
       <div className="flex shadow-lg my-4 mr-4 rounded-md overflow-hidden">
-        <img src={imageUrl!} width={'150px'} alt="Product" className="secure" />
+        <img src={uploadedFileSrc || imageUrl!} width={'150px'} alt="Product" className="secure" />
       </div>
       <table>
         <tr>

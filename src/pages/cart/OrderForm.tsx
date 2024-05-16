@@ -28,15 +28,43 @@ export default function OrderForm() {
     try {
       setIsOrdering(true)
       const { firstName: name, zipCode, address, ...rest } = data
-      await axios.post(`${process.env.REACT_APP_BASE_API_URL}/submitOrder`, {
-        ...rest,
-        orderItems: items,
-        address: `${address}, ${zipCode}`,
-        name,
-        status: items.reduce((acc, item) => {
-          return acc + item.price * item.quantity
-        }, 0).toString()
-      })
+          // Create FormData object
+    const formData = new FormData();
+
+    // Append other data
+    for (const key in rest) {
+      if (rest.hasOwnProperty(key)) {
+        formData.append(key, rest[key]);
+      }
+    }
+    formData.append('name', name);
+    formData.append('address', `${address}, ${zipCode}`);
+
+    // Append each order item and their respective properties
+    items.forEach((item, index) => {
+      formData.append(`orderItems[${index}][color]`, item.color);
+      formData.append(`orderItems[${index}][size]`, item.size);
+      formData.append(`orderItems[${index}][quantity]`, item.quantity.toString());
+      formData.append(`orderItems[${index}][price]`, item.price.toString());
+      formData.append(`orderItems[${index}][gender]`, item.gender);
+      if (item.uploadedFile) {
+        formData.append(`orderItems[${index}][uploadedFile]`, item.uploadedFile);
+      } else {
+        formData.append(`orderItems[${index}][imageUrl]`, item.imageUrl || 'null');
+      }
+    });
+
+    // Calculate status
+    const status = items.reduce((acc, item) => {
+      return acc + item.price * item.quantity;
+    }, 0).toString();
+    formData.append('status', status);
+
+    await axios.post(`${process.env.REACT_APP_BASE_API_URL}/submitOrder`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
       setIsOrdering(false)
       navigate('/success')
       emptyCart()

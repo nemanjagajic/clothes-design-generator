@@ -1,4 +1,4 @@
-import React, {
+import {
   Dispatch,
   SetStateAction,
   forwardRef,
@@ -9,10 +9,9 @@ import React, {
   useCallback,
 } from 'react'
 import Button from '../../components/shared/Button'
-import axios from 'axios'
 import { CloseOutline, TimerOutline } from 'react-ionicons'
 import Timer from '../../components/timer/Timer'
-import ImageShape from '../../components/ImageShape'
+import UploadPhotoButton from './ImageGenerator/UploadPhotoButton'
 
 interface GeneratorFormProps {
   showBadWord: boolean
@@ -20,6 +19,7 @@ interface GeneratorFormProps {
   setShowBadWord: Dispatch<SetStateAction<boolean>>
   onGenerateImage: (description: string) => void
   onHistoryClicked?: (() => void) | null
+  onUpload: (file: File) => void
 }
 
 const TIME_LIMIT = 12 * 60 * 60 * 1000 // 12 hours in milliseconds
@@ -33,6 +33,7 @@ const GeneratorForm = forwardRef<HTMLTextAreaElement, GeneratorFormProps>(
       isDisabled,
       onGenerateImage,
       onHistoryClicked,
+      onUpload
     },
     ref,
   ) => {
@@ -206,7 +207,7 @@ const GeneratorForm = forwardRef<HTMLTextAreaElement, GeneratorFormProps>(
 
     return (
       <div
-        className="mt-6 flex flex-col lg:flex-row w-full px-4 pt-8 justify-center"
+        className="my-6 flex flex-col lg:flex-row w-full px-4 pt-8 justify-center"
         id="prompt-input"
       >
         <div className="relative w-full md:w-1/2">
@@ -259,7 +260,7 @@ const GeneratorForm = forwardRef<HTMLTextAreaElement, GeneratorFormProps>(
         </div>
         <br />
         <div className="mx-2 mb-2"></div>
-        <div className="flex">
+        <div className="sm:flex flex-col sm:flex-row sm:space-y-0 space-y-4">
           {shouldDisplayTimer ? (
             <Timer onTimeout={resetTimer} seconds={timeInSeconds} />
           ) : (
@@ -274,23 +275,26 @@ const GeneratorForm = forwardRef<HTMLTextAreaElement, GeneratorFormProps>(
               disabledText={disabledButtonText}
             />
           )}
-          {!!onHistoryClicked && (
-            <div
-              id={'history-button'}
-              onClick={onHistoryClicked}
-              className="flex justify-center items-center bg-white border-2 mx-2 p-2 rounded-sm shadow cursor-pointer h-[50px] w-[140px]"
-            >
-              <div className="mr-2 text-lg text-gray-800">Istorija</div>
-              <div>
-                <TimerOutline
-                  color={'#00000'}
-                  title={'Istorija'}
-                  height="30px"
-                  width="30px"
-                />
+          <div className="flex">
+            <UploadPhotoButton onUpload={onUpload}/>
+            {!!onHistoryClicked && (
+              <div
+                id={'history-button'}
+                onClick={onHistoryClicked}
+                className="flex justify-center items-center bg-white border-2 mx-2 p-2 rounded-sm shadow cursor-pointer h-[50px] w-[140px]"
+              >
+                <div className="mr-2 text-lg text-gray-800">Istorija</div>
+                <div>
+                  <TimerOutline
+                    color={'#00000'}
+                    title={'Istorija'}
+                    height="30px"
+                    width="30px"
+                  />
+                </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
     )

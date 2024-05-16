@@ -7,6 +7,7 @@ import React, {
   useState,
 } from 'react'
 import { v4 as uuidv4 } from 'uuid'
+import { convertFileToSrc } from '../pages/landing/ImageGenerator/utils'
 
 export type SizeOption = 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL'
 export type Gender = 'male' | 'female'
@@ -23,6 +24,8 @@ export type Item = {
   quantity: number
   price: number
   gender: Gender
+  uploadedFile: File | null
+  uploadedFileSrc: string | null
 }
 const defaultItem = {
   size: 'L' as SizeOption,
@@ -32,6 +35,8 @@ const defaultItem = {
   price: 2300,
   gender: 'male' as Gender,
   type: 'tshirt',
+  uploadedFile: null,
+  uploadedFileSrc: null
 }
 // Create the context
 const ItemsContext = createContext<{
@@ -45,6 +50,7 @@ const ItemsContext = createContext<{
   updateCurrentItem: (itemData: Partial<Item>) => void
   emptyCart: () => void
   userId: string
+  updateFile: (file: File | null)=> void
 }>({
   items: [defaultItem],
   addToCart: () => {},
@@ -56,12 +62,13 @@ const ItemsContext = createContext<{
   totalPrice: 0,
   itemCount: 0,
   userId: '',
+  updateFile: () => {}
 })
 
 // Implement the Provider
 export const ItemsProvider = ({ children }: { children: ReactNode }) => {
   const [items, setItems] = useState<Item[]>([])
-  const [currentItem, setcurrentItem] = useState<Item>(defaultItem)
+  const [currentItem, setCurrentItem] = useState<Item>(defaultItem)
 
   useEffect(() => {
     const userId = localStorage.getItem('userId')
@@ -83,36 +90,58 @@ export const ItemsProvider = ({ children }: { children: ReactNode }) => {
 
   const updateCurrentItem = (itemData: Partial<Item>) => {
     if (!currentItem) {
-      setcurrentItem(itemData as Item)
+      setCurrentItem(itemData as Item)
       return
     }
 
-    setcurrentItem((prevcurrentItem) => ({
+    setCurrentItem((prevcurrentItem) => ({
       ...prevcurrentItem!,
       ...itemData,
     }))
   }
 
+  const updateFile = (file: File | null) => { 
+    convertFileToSrc(file, (src) => {
+      setCurrentItem((prevcurrentItem) => ({
+        ...prevcurrentItem!,
+        uploadedFile: file,
+        uploadedFileSrc: src as string
+      }))
+     })
+   }
+
   const addToCart = (newItem: Item) => {
-    if (!newItem?.imageUrl) return
+    if (!newItem?.imageUrl && !newItem?.uploadedFileSrc) return
     const existingIndex = items.findIndex(
       (item) =>
         item.imageUrl === newItem.imageUrl &&
         item.color === newItem.color &&
         item.size === newItem.size &&
-        item.gender === newItem.gender,
+        item.gender === newItem.gender && 
+        item.uploadedFileSrc === newItem.uploadedFileSrc
     )
 
     if (existingIndex !== -1) {
       const updatedItems = [...items]
       updatedItems[existingIndex].quantity += 1
       setItems(updatedItems)
-      localStorage.setItem('cart', JSON.stringify(updatedItems))
+      localStorage.setItem('cart', JSON.stringify(updatedItems.map(item => {
+        const {uploadedFile, uploadedFileSrc, ...rest} = item
+        return rest
+      })))
+
     } else {
       setItems([...items, { ...newItem, quantity: 1 }])
+      const itemsWithoutFile = items.map(item => {
+        const { uploadedFile, uploadedFileSrc, ...rest} = item
+        return rest
+      })
+
+      const { uploadedFile, uploadedFileSrc, ...rest } = newItem
+      console.log("ITEMS WITHOUT", itemsWithoutFile)
       localStorage.setItem(
         'cart',
-        JSON.stringify([...items, { ...newItem, quantity: 1 }]),
+        JSON.stringify([...itemsWithoutFile, { ...rest, quantity: 1 }]),
       )
     }
   }
@@ -129,11 +158,16 @@ export const ItemsProvider = ({ children }: { children: ReactNode }) => {
           item.imageUrl === itemToRemove.imageUrl &&
           item.color === itemToRemove.color &&
           item.size === itemToRemove.size &&
-          item.gender === itemToRemove.gender
+          item.gender === itemToRemove.gender &&
+          item.uploadedFileSrc === itemToRemove.uploadedFileSrc
+
         ),
     )
     setItems(updatedItems)
-    localStorage.setItem('cart', JSON.stringify(updatedItems))
+    localStorage.setItem('cart', JSON.stringify(updatedItems.map(item => {
+        const {uploadedFile, uploadedFileSrc, ...rest} = item
+        return rest
+      })))
   }
 
   const totalPrice = useMemo(() => {
@@ -144,6 +178,7 @@ export const ItemsProvider = ({ children }: { children: ReactNode }) => {
 
   const itemCount = useMemo(() => {
     return items.reduce((acc, item) => {
+      console.log("ITEMS", items)
       return acc + item.quantity
     }, 0)
   }, [items])
@@ -171,7 +206,10 @@ export const ItemsProvider = ({ children }: { children: ReactNode }) => {
     }, [] as Item[])
     setItems(updatedItems)
 
-    localStorage.setItem('cart', JSON.stringify(updatedItems))
+    localStorage.setItem('cart', JSON.stringify(updatedItems.map(item => {
+        const {uploadedFile, uploadedFileSrc, ...rest} = item
+        return rest
+    })))
   }
 
   return (
@@ -187,6 +225,7 @@ export const ItemsProvider = ({ children }: { children: ReactNode }) => {
         totalPrice,
         itemCount,
         emptyCart,
+        updateFile
       }}
     >
       {children}

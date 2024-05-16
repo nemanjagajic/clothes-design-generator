@@ -22,6 +22,7 @@ const LandingPage = () => {
   const [isHistoryOpen, setIsHistoryOpen] = useState(false)
   const { itemCount } = useItems()
   const [modalOpen, setModalOpen] = useState(false)
+    console.log("IDEMO RADIMo", itemCount)
 
   return (
     <div className="App">

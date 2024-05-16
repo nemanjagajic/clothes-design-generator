@@ -28,9 +28,11 @@ import TShirtSizeSelector from '../../components/shared/TShirtSizeSelector'
 import { useWindowWidth } from '../../utils/useWindowWidth'
 import { EXTRA_LARGE_SCREEN } from '../../constants/screenSizes'
 import GeneratorForm from './GeneratorForm'
-import { addItemToHistory } from '../../components/history/utils'
 import { useHistory } from '../../components/history/HistoryContext'
 import ErrorPage from '../error/ErrorPage'
+import ShirtWithPrint from './ImageGenerator/ShirtWithPrint'
+import PercentageLoader from './ImageGenerator/PercentageLoader'
+import ImageUpload from './ImageGenerator/ImagePlacer'
 // import { addItemToHistory } from '../../components/history/utils'
 
 const PROGRESS_BAR_FETCHING_INTERVAL_MS = 5000
@@ -90,7 +92,7 @@ const ClothesGenerator = ({
     } catch (error) {}
   }, [])
 
-  const { updateCurrentItem, addToCart, currentItem, userId } = useItems()
+  const { updateCurrentItem, addToCart, currentItem, updateFile } = useItems()
 
   useEffect(() => {
     updateCurrentItem({ imageUrl: currentImages[focusedPhotoIndex] })
@@ -229,6 +231,7 @@ const ClothesGenerator = ({
           : 'border-gray-300 border-2'
       } mr-1 rounded-md`}
       onClick={() => {
+        updateFile(null)
         if (focusedPhotoIndex === index) {
           setIsSelectedImagePreviewModalOpen(true)
           return
@@ -272,78 +275,32 @@ const ClothesGenerator = ({
           onGenerateImage={handleGenerateImage}
           isDisabled={isGeneratingImages}
           onHistoryClicked={onHistoryClicked}
+          onUpload={updateFile}
         />
         {/* <ErrorPage onHistoryClicked={onHistoryClicked} /> */}
         <div className="flex w-full h-full flex-col xl:flex-row mb-8">
           <div className="flex xl:w-2/3 flex-col items-center justify-center w-full pt-4 relative xl:px-2">
-            {currentImages && currentImages.length > 0 ? (
-              <>
-                <img
-                  width={400}
-                  src={TSHIRTS[currentItem.color]}
-                  className="px-2 mb-8"
-                />
-                <div
-                  className="w-[160px] max-h-[255px]
-                  sm:w-[170px] max-h-[255px] z-[20]
-                  absolute top-[90px] sm:mb-40 mr-1 sm:mr-2 rounded-md cursor-pointer"
-                  onClick={() => {
-                    setIsSelectedImagePreviewModalOpen(true)
-                  }}
-                >
-                  <img
-                    className={`secure w-[160px] max-h-[255px]
-                  sm:w-[170px] max-h-[255px]
-                   sm:mb-40 mr-1 sm:mr-2 rounded-md cursor-pointer`}
-                    src={currentImages[focusedPhotoIndex]}
-                  />
+              <ShirtWithPrint 
+                shirtSrc={TSHIRTS[currentItem.color]}
+                printSrc={currentItem.uploadedFileSrc || currentImages[focusedPhotoIndex]}
+                onClick={() => setIsSelectedImagePreviewModalOpen(true)}
+                isLoading={isGeneratingImages}
+              />
+              {!(currentItem.uploadedFileSrc || currentImages[focusedPhotoIndex] ) && (
+                <div className="absolute top-[90px]">
+                  <ImageUpload onUpload={updateFile}/>
                 </div>
-              </>
-            ) : (
+              )}
               <div
                 className={
-                  'text-gray-400 font-bold flex justify-center items-center rounded-md max-h-[500px] w-full relative overflow-hidden'
+                  'relative w-full px-12 flex justify-center'
                 }
               >
-                <img
-                  width={400}
-                  src={TSHIRTS[currentItem.color]}
-                  className="px-2 mb-8"
-                />
-                <div
-                  className={`flex items-center justify-center w-[170px] h-[170px] absolute mb-32 sm:mb-40 mr-1 sm:mr-2 rounded-md ${
-                    isGeneratingImages ? 'bg-gray-transparent' : 'bg-gray-200'
-                  }`}
-                >
-                  {isGeneratingImages && (
-                    <div className="loader w-[140px] h-[140px] sm:w-[170px] sm:h-[170px]">
-                      <span></span>
-                      <span></span>
-                      <span></span>
-                      <span></span>
-                    </div>
-                  )}
-                </div>
                 {isGeneratingImages && (
-                  <div className="w-full absolute bottom-0">
-                    <div className="mb-2 m-auto flex items-center justify-center">
-                      <div className="font-normal text-light-blue">
-                        {progressBarPercentage}%
-                      </div>
-                    </div>
-                    <div className="w-full bg-gray-200 h-2.5 dark:bg-gray-100 absolute bottom-0 rounded-md">
-                      <div
-                        className="bg-light-blue h-2.5 rounded-full"
-                        style={{
-                          width: `${progressBarPercentage}%`,
-                          transition: 'width 0.3s ease',
-                        }}
-                      ></div>
-                    </div>
-                  </div>
+                  <PercentageLoader number={progressBarPercentage} />
                 )}
               </div>
-            )}
+              
 
             <div className="flex items-center md:justify-center w-full mt-2 overflow-x-auto pb-3 sm:pb-8 hide-scrollbar">
               {currentImages.length > 0
@@ -354,6 +311,10 @@ const ClothesGenerator = ({
                     return renderEmptyPreviewImage(index)
                   })}
             </div>
+
+
+
+            
           </div>
 
           <div className="xl:w-1/3 flex xl:justify-center flex-col w-full relative mr-4 px-4">
@@ -404,7 +365,7 @@ const ClothesGenerator = ({
                   text={'Dodaj u korpu'}
                   onClick={handleAddToCart}
                   customStyles={`w-full ${currentImages.length === 0 && 'bg-gray-300'}`}
-                  isDisabled={currentImages.length === 0}
+                  isDisabled={currentImages.length === 0 && !currentItem.uploadedFileSrc}
                   disabledText={'Dodaj u korpu'}
                 />
               </div>
@@ -422,7 +383,7 @@ const ClothesGenerator = ({
                 }}
               >
                 <img
-                  src={currentImages[focusedPhotoIndex]}
+                  src={currentItem.uploadedFileSrc || currentImages[focusedPhotoIndex]}
                   alt="Full view"
                   className="object-contain mx-auto my-0 secure"
                   style={{ maxHeight: 'calc(100vh - 2rem)' }}

@@ -12,7 +12,7 @@ const OrderItems = ({ items }: OrderItemsProps) => {
     <div className="overflow-y-auto h-[500px] p-2 mt-4">
       {items.map((item) => {
         return (
-          <div className="flex items-center justify-center">
+          <div key={`${item.imageUrl} ${item.uploadedFileSrc}`} className="flex items-center justify-center">
             <Card
               {...item}
               onAdd={() => {
