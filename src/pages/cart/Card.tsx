@@ -39,7 +39,7 @@ const Card: React.FC<ProductCardProps> = ({
   return (
     <div className="my-1 flex items-center bg-white">
       <div className="flex shadow-lg my-4 mr-4 rounded-md overflow-hidden">
-        <img src={imageUrl!} width={'150px'} alt="Product" />
+        <img src={imageUrl!} width={'150px'} alt="Product" className="secure" />
       </div>
       <table>
         <tr>

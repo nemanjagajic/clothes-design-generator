@@ -236,7 +236,7 @@ const ClothesGenerator = ({
         setFocusedPhotoIndex(index)
       }}
     >
-      <img src={imageUrl} className="rounded-sm sm:w-auto" />
+      <img src={imageUrl} className="rounded-sm sm:w-auto secure" />
     </div>
   )
 
@@ -283,13 +283,21 @@ const ClothesGenerator = ({
                   src={TSHIRTS[currentItem.color]}
                   className="px-2 mb-8"
                 />
-                <img
-                  className={`w-[140px] max-h-[255px]
+                <div
+                  className="w-[160px] max-h-[255px]
+                  sm:w-[170px] max-h-[255px] z-[20]
+                  absolute top-[90px] sm:mb-40 mr-1 sm:mr-2 rounded-md cursor-pointer"
+                  onClick={() => {
+                    setIsSelectedImagePreviewModalOpen(true)
+                  }}
+                >
+                  <img
+                    className={`secure w-[160px] max-h-[255px]
                   sm:w-[170px] max-h-[255px]
-                  absolute top-[90px] sm:mb-40 mr-1 sm:mr-2 rounded-md cursor-pointer`}
-                  onClick={() => setIsSelectedImagePreviewModalOpen(true)}
-                  src={currentImages[focusedPhotoIndex]}
-                />
+                   sm:mb-40 mr-1 sm:mr-2 rounded-md cursor-pointer`}
+                    src={currentImages[focusedPhotoIndex]}
+                  />
+                </div>
               </>
             ) : (
               <div
@@ -416,7 +424,7 @@ const ClothesGenerator = ({
                 <img
                   src={currentImages[focusedPhotoIndex]}
                   alt="Full view"
-                  className="object-contain mx-auto my-0"
+                  className="object-contain mx-auto my-0 secure"
                   style={{ maxHeight: 'calc(100vh - 2rem)' }}
                 />
                 <div

@@ -38,7 +38,7 @@ const Card: React.FC<ProductCardProps> = ({
   onAdd,
   onRemove,
   onRemoveAll,
-  shirtSrc
+  shirtSrc,
 }) => {
   return (
     <div className="m-3 flex flex-col items-center bg-white">
@@ -58,7 +58,7 @@ const Card: React.FC<ProductCardProps> = ({
         </div>
         <img width={300} src={shirtSrc} />
         <img
-          className="absolute rounded-md top-[60px] left-[90px]"
+          className="absolute rounded-md top-[60px] left-[90px] secure"
           width={110}
           src={imageUrl}
         />
@@ -120,8 +120,11 @@ const Card: React.FC<ProductCardProps> = ({
             <p className="text-gray-700 text-md mx-2">Cena:</p>
           </div>
           <div className="text-center">
-            {(quantity > 1 ? <p>{`${quantity} x ${price}`}rsd</p> : <p>{`${price}`}rsd</p>)}
-
+            {quantity > 1 ? (
+              <p>{`${quantity} x ${price}`}rsd</p>
+            ) : (
+              <p>{`${price}`}rsd</p>
+            )}
           </div>
         </div>
       </div>
