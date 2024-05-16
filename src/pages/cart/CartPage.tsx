@@ -1,11 +1,10 @@
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Navbar from '../../components/navbar/Navbar'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import OrderForm from './OrderForm'
 import OrderItems from './OrderItems'
 import { useItems } from '../../store/ItemsContext'
 import CartDrawer from '../../components/cart/CartDrawer'
-import RemoveOrderModal from './RemoveOrderModal'
 import Footer from '../landing/Footer'
 
 const CartPage = () => {
@@ -55,11 +54,11 @@ const CartPage = () => {
               </div>
               <div className="flex justify-between py-2">
                 <span>Dostava</span>
-                <span>240 RSD</span>
+                <span>400 RSD</span>
               </div>
               <div className="flex justify-between border-t-2 pt-2">
                 <span className="font-bold">Ukupno:</span>
-                <span className="font-bold">{totalPrice + 240} RSD</span>
+                <span className="font-bold">{totalPrice + 400} RSD</span>
               </div>
             </div>
           </div>
