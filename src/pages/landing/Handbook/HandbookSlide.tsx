@@ -13,6 +13,7 @@ const HandbookSlide = ({ src, prompt, color }: HandbookSlideProps) => {
         alt=""
         src={src}
         className="
+          secure
           sm:w-[350px]
           sm:h-[350px]
           md:w-[400px]

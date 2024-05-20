@@ -80,7 +80,7 @@ const Handbook = () => {
     speed: 1000,
     autoplay: true,
     autoplaySpeed: 5500,
-    pauseOnFocus: true,
+    pauseOnHover: true,
     slidesToScroll: 1,
     lazyLoad: 'progressive' as LazyLoadTypes,
     prevArrow: <PrevArrow />, // Custom previous arrow component
