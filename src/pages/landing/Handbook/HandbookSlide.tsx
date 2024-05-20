@@ -4,11 +4,19 @@ interface HandbookSlideProps {
   src: string
   prompt: string
   color: string
+  onTouchStart: () => void
+  onTouchEnd: () => void
 }
 
-const HandbookSlide = ({ src, prompt, color }: HandbookSlideProps) => {
+const HandbookSlide = ({
+  src,
+  prompt,
+  color,
+  onTouchStart,
+  onTouchEnd,
+}: HandbookSlideProps) => {
   return (
-    <div>
+    <div onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
       <img
         alt=""
         src={src}

@@ -8,6 +8,7 @@ import NextArrow from '../ShirtSlider/NextArrow'
 import HandbookSlide from './HandbookSlide'
 import { CheckmarkCircle, CloseCircle } from 'react-ionicons'
 import HandbookList from './HandbookList'
+import { useRef } from 'react'
 
 const incorrectPrompts = [
   'Aleksandar Vucic ucesnik Slagalice',
@@ -19,8 +20,8 @@ const incorrectPrompts = [
 
 const promptsCorrect = [
   'Rep grupa devojaka sa naočarama za sunce u jaknama',
-  'Polje lala sa devojkom koja ima šešir i zalaskom sunca',
-  'Vođnja bicikla u prirodi po putu',
+  'Polje lala sa devojkom koja ima šešir i zalazak sunca',
+  'Vožnja biciklom u prirodi po putu',
   'Zvezde padalice u prirodi',
   'Goku na oblaku koji leti i smeje se u 2D',
   'Dva nasmejana zuba u stilu 3D animacije piju čaj',
@@ -75,12 +76,32 @@ const notCorrectPaths: { src: string; prompt: string }[] = Array.from(
 )
 
 const Handbook = () => {
+  let sliderRefOk = useRef(null)
+  let sliderRefNotOk = useRef(null)
+
+  const playOk = () => {
+    //@ts-ignore
+    sliderRefOk?.slickPlay()
+  }
+  const pauseOk = () => {
+    //@ts-ignore
+    sliderRefOk?.slickPause()
+  }
+
+  const playNotOk = () => {
+    //@ts-ignore
+    sliderRefNotOk?.slickPlay()
+  }
+  const pauseNotOk = () => {
+    //@ts-ignore
+    sliderRefNotOk?.slickPause()
+  }
+
   const settings: Settings = {
     infinite: true,
     speed: 1000,
     autoplay: true,
-    autoplaySpeed: 5500,
-    pauseOnHover: true,
+    autoplaySpeed: 1500,
     slidesToScroll: 1,
     lazyLoad: 'progressive' as LazyLoadTypes,
     prevArrow: <PrevArrow />, // Custom previous arrow component
@@ -114,11 +135,15 @@ const Handbook = () => {
           >
             <Slider
               {...settings}
+              //@ts-ignore
+              ref={(slider) => (sliderRefOk = slider)}
               className="flex sm:max-h-[450px] max-h-[320px] items-center jusfify-center"
             >
               {correctPaths.map((img, index) => (
                 <div key={img.prompt} className="">
                   <HandbookSlide
+                    onTouchStart={pauseOk}
+                    onTouchEnd={playOk}
                     src={img.src}
                     color="#0090F8"
                     prompt={promptsCorrect[index]}
@@ -169,6 +194,8 @@ const Handbook = () => {
           >
             <Slider
               {...settings}
+              //@ts-ignore
+              ref={(slider) => (sliderRefNotOk = slider)}
               className="flex   sm:w-[350px]
             sm:h-[350px]
             md:w-[400px]
@@ -181,6 +208,8 @@ const Handbook = () => {
               {notCorrectPaths.map((img, index) => (
                 <div key={img.prompt} className=" ">
                   <HandbookSlide
+                    onTouchStart={pauseNotOk}
+                    onTouchEnd={playNotOk}
                     src={img.src}
                     color={'#ED2626'}
                     prompt={incorrectPrompts[index]}
