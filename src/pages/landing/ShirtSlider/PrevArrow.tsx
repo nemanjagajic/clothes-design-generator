@@ -8,7 +8,7 @@ const PrevArrow = (props: {
   return (
     <div className={props.className}>
       <div
-        className="rounded-full bg-white w-[40px] h-[40px] flex items-center justify-center"
+        className="group-hover:flex hidden rounded-full bg-white w-[40px] h-[40px] flex items-center justify-center"
         onClick={props.onClick}
       >
         <ArrowBackOutline

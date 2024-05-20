@@ -1,4 +1,4 @@
-import Slider from 'react-slick'
+import Slider, { LazyLoadTypes } from 'react-slick'
 import SliderItem from './SliderItem'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
@@ -62,6 +62,7 @@ const ShirtSlider = () => {
   const sliderRef = useRef(null)
   const [slidesToShow, setSlidesToShow] = useState(1)
   const settings = {
+    lazyLoad: 'progressive' as LazyLoadTypes,
     infinite: true,
     speed: 1000,
     autoplay: true,
@@ -71,6 +72,7 @@ const ShirtSlider = () => {
     centerPadding: '10px', // Adjust as needed
     prevArrow: <PrevArrow />, // Custom previous arrow component
     nextArrow: <NextArrow />,
+    pauseOnHover: false,
     responsive: [
       {
         breakpoint: 830,
@@ -141,7 +143,7 @@ const ShirtSlider = () => {
   }, [])
 
   return (
-    <div ref={sliderRef}>
+    <div ref={sliderRef} className='group'>
       <Slider {...settings}>
         {imagePaths.map((img, index) => (
           <SliderItem key={img.src} {...img} shirtSrc={TSHIRTS[index % 5]} />

@@ -166,7 +166,7 @@ const ExampleSection = () => {
   )
 
   return (
-    <div className="relative flex w-full min-h-screen bg-[#FAF9F1]">
+    <div className="relative flex w-full min-h-screen bg-nsm-gray-300">
       {windowWidth > MEDIUM_SCREEN
         ? renderDesktopContent()
         : renderMobileContent()}

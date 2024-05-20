@@ -2,13 +2,13 @@ import StarIcon from '../../../components/icons/StarIcon'
 
 interface SliderItemProps {
   src: string
-  shirtSrc: string
+  shirtSrc?: string
   prompt: string
 }
 
 const SliderItem = ({ src, prompt, shirtSrc }: SliderItemProps) => {
   return (
-    <div className="mx-2  ">
+    <div className="mx-2">
       <div
         className="rounded-lg
            bg-[#001D38]
@@ -23,7 +23,7 @@ const SliderItem = ({ src, prompt, shirtSrc }: SliderItemProps) => {
         "
       >
         <div className="w-full">
-          <div
+          {shirtSrc && (<div
             className="
               w-[400px]
               sm:w-[500px]
@@ -36,7 +36,7 @@ const SliderItem = ({ src, prompt, shirtSrc }: SliderItemProps) => {
             "
           >
             <img src={shirtSrc} />
-          </div>
+          </div>)}
           <div
             className="
               absolute 
@@ -68,7 +68,7 @@ const SliderItem = ({ src, prompt, shirtSrc }: SliderItemProps) => {
         <div
           className="
             relative
-            border-2
+            border-[3px]
             left-[10px]
             w-[300px]
             sm:w-[380px]
@@ -84,7 +84,7 @@ const SliderItem = ({ src, prompt, shirtSrc }: SliderItemProps) => {
             px-2
             py-4
             text-md
-            rounded-md"
+            rounded-xl"
         >
           <div className="relative left-[0px] mr-2">
             <StarIcon color={'#0090F8'} />

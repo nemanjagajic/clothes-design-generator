@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import CartDrawer from '../../components/cart/CartDrawer'
 import Navbar from '../../components/navbar/Navbar'
 import HomePageBanner from './HomePageBanner'
@@ -8,12 +8,12 @@ import OurCustomers from './OurCustomers'
 import Footer from './Footer'
 import { useItems } from '../../store/ItemsContext'
 import Instructions from './Instructions'
-import ExampleSection from './ExampleSection'
 import { v4 as uuidv4 } from 'uuid'
-import ExamplesGridSection from './ExamplesGridSection'
 import SizeSection from './SizeSection'
-import RemoveOrderModal from '../cart/RemoveOrderModal'
 import HistoryDrawer from '../../components/history/HistoryDrawer'
+import Handbook from './Handbook/Handbook'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 
 const imgGenerationRef = uuidv4()
 
@@ -21,7 +21,6 @@ const LandingPage = () => {
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [isHistoryOpen, setIsHistoryOpen] = useState(false)
   const { itemCount } = useItems()
-  const [modalOpen, setModalOpen] = useState(false)
 
   return (
     <div className="App">
@@ -44,7 +43,7 @@ const LandingPage = () => {
         itemCount={itemCount}
       />
       <HomePageBanner />
-      <ExampleSection />
+      <Handbook />
       <Instructions />
       <ClothesGenerator
         onHistoryClicked={() => setIsHistoryOpen((isOpen) => !isOpen)}

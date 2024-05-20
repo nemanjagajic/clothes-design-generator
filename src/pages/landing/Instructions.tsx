@@ -14,11 +14,13 @@ const InstructionSection = () => {
 
   return (
     <div className="bg-nsm-gray-100 flex flex-col items-center pt-20 pb-10 px-4 w-full">
-      <div className='sm:max-w-[1440px] w-full px-4 md:px-8 lg:px-16 xl:px-32'>
+      <div className="sm:max-w-[1440px] w-full  md:px-8 lg:px-16 xl:px-32">
         <h2 className="text-black text-[44px] sm:text-5xl sm:text-center font-bold leading-tight pb-10">
           <span>Prati korake kako bi i ti</span>
           <div>
-            <span className="text-[50px] italic text-light-blue">napravio svoju</span>
+            <span className="text-[50px] italic text-light-blue">
+              napravio svoju
+            </span>
             <span> unikatnu majicu</span>
           </div>
         </h2>
