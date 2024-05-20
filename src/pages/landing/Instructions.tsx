@@ -31,7 +31,7 @@ const InstructionSection = () => {
           )}
           {renderStep(
             2,
-            "Pritisni dugme 'Generiši' i za minut dobijaš vizual tvoje majice.",
+            "Pritisni dugme 'Generiši' i za pola minuta dobijaš vizual tvoje majice.",
           )}
           {renderStep(
             3,
