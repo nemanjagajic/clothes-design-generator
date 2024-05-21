@@ -51,6 +51,9 @@ const ClothesGenerator = ({
   onHistoryClicked,
 }: ClothesGeneratorTypes) => {
   const [showBadWord, setShowBadWord] = useState(false)
+  const [isBadPrompt, setIsBadPrompt] = useState(false)
+  const [intervalId, setIntervalId] = useState<NodeJS.Timer | null>(null)
+
   const [isGeneratingImages, setIsGeneratingImages] = useState(false)
   const [focusedPhotoIndex, setFocusedPhotoIndex] = useState(0)
   const [isSelectedImagePreviewModalOpen, setIsSelectedImagePreviewModalOpen] =
@@ -108,41 +111,55 @@ const ClothesGenerator = ({
   const fetchAndUpdateProgress = async () => {
     try {
       if (currentGenerationImageId) {
-        const {
-          data: { progress, response },
-        } = await axios.get(
+        const { data } = await axios.get(
           `${process.env.REACT_APP_BASE_API_URL}/getImageGenerationProgress/${currentGenerationImageId}`,
         )
-        if (response.upscaled_urls) {
+
+        if (data?.response.upscaled_urls) {
           addHistoryItem({
             prompt: promptRef.current,
-            imageLinks: response.upscaled_urls,
+            imageLinks: data?.response.upscaled_urls,
           })
-          updateCurrentImages(response.upscaled_urls)
+          updateCurrentImages(data?.response.upscaled_urls)
           setIsGeneratingImages(false)
           setCurrentGenerationImageId('')
           setProgressBarPercentage(0)
           return
         }
-        if (progress === 0 && progressBarPercentage < 97) {
+        if (data?.progress === 0 && progressBarPercentage < 97) {
           const randomIncrement = getRandomOneTwoOrThree()
           setProgressBarPercentage((prev) => prev + randomIncrement)
           return
         }
-        if (progress > progressBarPercentage) {
-          setProgressBarPercentage(progress)
+        if (data?.progress > progressBarPercentage) {
+          setProgressBarPercentage(data?.progress)
         }
       }
     } catch (e) {
+      setShowBadWord(true)
+      setIsBadPrompt(true)
+      setIsGeneratingImages(false)
+      setProgressBarPercentage(0)
+      scrollToPromptField()
+
       console.log(e)
     }
   }
 
   useEffect(() => {
     if (!isGeneratingImages) return
+    if (isBadPrompt) {
+      if (intervalId) {
+        clearInterval(intervalId)
+      }
+      return
+    }
     const interval = setInterval(() => {
       fetchAndUpdateProgress()
     }, PROGRESS_BAR_FETCHING_INTERVAL_MS)
+
+    setIntervalId(interval)
+
     setTimeout(() => {
       if (progressBarPercentage === 0)
         setProgressBarPercentage(DEFAULT_PROGRESS_INCREMENT)
@@ -153,7 +170,7 @@ const ClothesGenerator = ({
         clearInterval(interval)
       }
     }
-  }, [isGeneratingImages, currentGenerationImageId])
+  }, [isGeneratingImages, currentGenerationImageId, isBadPrompt])
 
   useEffect(() => {
     toggleBodyScroll(!isSelectedImagePreviewModalOpen)

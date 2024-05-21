@@ -9,10 +9,8 @@ import React, {
   useCallback,
 } from 'react'
 import Button from '../../components/shared/Button'
-import axios from 'axios'
 import { CloseOutline, TimerOutline } from 'react-ionicons'
 import Timer from '../../components/timer/Timer'
-import ImageShape from '../../components/ImageShape'
 
 interface GeneratorFormProps {
   showBadWord: boolean
@@ -143,11 +141,9 @@ const GeneratorForm = forwardRef<HTMLTextAreaElement, GeneratorFormProps>(
     const handleSubmit = (description: string) => {
       if (checkAndIncreaseGenerationLimit()) {
         const prompt =
-                  shape === 'rectangle'
-                    ? description + ' --ar 2:3'
-                    : description
-                onGenerateImage(prompt)
-                setShowBadWord(false)
+          shape === 'rectangle' ? description + ' --ar 2:3' : description
+        onGenerateImage(prompt)
+        setShowBadWord(false)
         // @ts-ignore
         // if (window.grecaptcha) {
         //   //@ts-ignore
@@ -247,13 +243,17 @@ const GeneratorForm = forwardRef<HTMLTextAreaElement, GeneratorFormProps>(
             onChange={(e) => setDescription(e.target.value)}
             className="w-full min-h-[100px] md:min-h-[50px] md:h-[50px] border border-gray-300 rounded-md focus:outline-none p-4 md:p-3 text-xl border-2 border-blue-300 shadow-xl"
           />
+          <p className="text-gray-500">
+            * Koristite neošišanu latinicu (Š, Ð, Č, Ž, Ć)
+          </p>
+
           {/* <div className="w-full flex items-center my-8 justify-center sm:justify-start">
             <h3 className="text-2xl mr-4 font-bold">Oblik printa: </h3>
             <ImageShape shape={shape} onChange={setShape} />
           </div> */}
           {showBadWord && (
             <p className="text-[#F00]">
-              *ne možete koristiti psovke ili uvredljive reči
+              *ne možete koristiti uvredljive reči ili opise
             </p>
           )}
         </div>

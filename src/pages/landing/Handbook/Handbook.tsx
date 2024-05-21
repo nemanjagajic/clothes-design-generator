@@ -48,8 +48,6 @@ const whatAICantDo = {
     ' Ceca, Aleksandar Vučić, Miloš Obilić, Karađorđe... ',
   'Eksplicitni sadržaj': ' Erotski sadržaj, psovke, uvrede, groteksni sadržaj',
   'Zastave i grbovi': ' Državne zastave, klubske, itd.',
-  'Tekst na slici':
-    ' Tekst kao deo slike trenutno nije moguć, Ai ne ume da piše :)',
   'Transparentne slike': ' Slike bez pozadine',
 }
 
