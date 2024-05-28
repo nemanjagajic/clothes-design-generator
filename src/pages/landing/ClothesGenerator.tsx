@@ -29,6 +29,7 @@ import { useWindowWidth } from '../../utils/useWindowWidth'
 import { EXTRA_LARGE_SCREEN } from '../../constants/screenSizes'
 import GeneratorForm from './GeneratorForm'
 import { useHistory } from '../../components/history/HistoryContext'
+import ErrorPage from '../error/ErrorPage'
 
 const PROGRESS_BAR_FETCHING_INTERVAL_MS = 5000
 const DEFAULT_PROGRESS_INCREMENT = 2
@@ -279,15 +280,15 @@ const ClothesGenerator = ({
       id="t-shirt-container"
     >
       <div className="bg-nsm-gray-400 rounded-2xl sm:max-w-[1440px] px-0 w-full">
-        <GeneratorForm
+        {/* <GeneratorForm
           ref={inputRef}
           showBadWord={showBadWord}
           setShowBadWord={setShowBadWord}
           onGenerateImage={handleGenerateImage}
           isDisabled={isGeneratingImages}
           onHistoryClicked={onHistoryClicked}
-        />
-        {/* <ErrorPage onHistoryClicked={onHistoryClicked} /> */}
+        /> */}
+        <ErrorPage onHistoryClicked={onHistoryClicked} />
         <div className="flex w-full h-full flex-col xl:flex-row mb-8">
           <div className="flex xl:w-2/3 flex-col items-center justify-center w-full pt-4 relative xl:px-2">
             {currentImages && currentImages.length > 0 ? (
