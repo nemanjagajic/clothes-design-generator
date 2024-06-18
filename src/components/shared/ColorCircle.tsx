@@ -23,7 +23,7 @@ const ColorCircle = ({
     <button
       key={color}
       disabled={type === 'passive'}
-      className={`h-10 w-10 rounded-full ${bgClass} ${selected ? 'ring-4' : 'ring-2'} ${size === 'md' ? 'h-5 w-5' : 'h-10 w-10'}`}
+      className={`h-6 w-6 rounded-full ${bgClass} ${selected ? 'ring-4' : 'ring-2'} ${size === 'md' ? 'h-6 w-6' : 'h-5 w-5'}`}
       onClick={() => onClick(color)}
       aria-label={`Select ${color}`}
     />

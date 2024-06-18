@@ -5,11 +5,8 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import {
   LARGE_SCREEN,
-  MEDIUM_SCREEN,
-  SMALL_SCREEN,
 } from '../../constants/screenSizes'
-// @ts-ignore
-import logo from '../../assets/images/logo3.png'
+
 // @ts-ignore
 import imgFrog from '../../assets/images/example-frog.png'
 // @ts-ignore

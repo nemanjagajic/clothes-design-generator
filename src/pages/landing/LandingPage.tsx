@@ -43,7 +43,7 @@ const LandingPage = () => {
         itemCount={itemCount}
       />
       <HomePageBanner />
-      <Handbook />
+      {/* <Handbook /> */}
       <Instructions />
       <ClothesGenerator
         onHistoryClicked={() => setIsHistoryOpen((isOpen) => !isOpen)}

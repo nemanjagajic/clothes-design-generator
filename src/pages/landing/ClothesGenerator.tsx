@@ -7,15 +7,45 @@ import ColorPicker from '../../components/shared/ColorPicker'
 import { Item, useItems } from '../../store/ItemsContext'
 import { useSearchParams } from 'react-router-dom'
 // @ts-ignore
-import blackTShirt from '../../assets/images/black-tshirt.png'
+import blackTShirt from '../../assets/shirts/black.png'
 // @ts-ignore
-import oliveTShirt from '../../assets/images/olive-tshirt.png'
+import oliveTShirt from '../../assets/shirts/green.png'
 // @ts-ignore
-import redTShirt from '../../assets/images/red-tshirt.png'
+import redTShirt from '../../assets/shirts/red.png'
 // @ts-ignore
-import whiteTShirt from '../../assets/images/white-tshirt.png'
+import whiteTShirt from '../../assets/shirts/white.png'
 // @ts-ignore
-import grayTShirt from '../../assets/images/gray-tshirt.png'
+import grayTShirt from '../../assets/shirts/gray.png'
+// @ts-ignore
+import lightGrayTShirt from '../../assets/shirts/lightgray.png'
+// @ts-ignore
+import yellowTShirt from '../../assets/shirts/yellow.png'
+// @ts-ignore
+import pinkTShirt from '../../assets/shirts/pink.png'
+// @ts-ignore
+import blueTShirt from '../../assets/shirts/blue.png'
+
+
+// @ts-ignore
+import blackTShirtF from '../../assets/shirts/black_f.png'
+// @ts-ignore
+import oliveTShirtF from '../../assets/shirts/green_f.png'
+// @ts-ignore
+import redTShirtF from '../../assets/shirts/red_f.png'
+// @ts-ignore
+import whiteTShirtF from '../../assets/shirts/white_f.png'
+// @ts-ignore
+import grayTShirtF from '../../assets/shirts/gray_f.png'
+// @ts-ignore
+import lightGrayTShirtF from '../../assets/shirts/lightgray_f.png'
+// @ts-ignore
+import yellowTShirtF from '../../assets/shirts/yellow_f.png'
+// @ts-ignore
+import pinkTShirtF from '../../assets/shirts/pink_f.png'
+// @ts-ignore
+import blueTShirtF from '../../assets/shirts/blue_f.png'
+
+
 import { InformationCircleOutline } from 'react-ionicons'
 
 import { Close } from 'react-ionicons'
@@ -40,7 +70,25 @@ const TSHIRTS: { [color: string]: string } = {
   red: redTShirt,
   white: whiteTShirt,
   gray: grayTShirt,
+  pink: pinkTShirt,
+  blue: blueTShirt,
+  lightGray: lightGrayTShirt,
+  yellow: yellowTShirt
 }
+
+const TSHIRTS_F: { [color: string]: string } = {
+  black: blackTShirtF,
+  green: oliveTShirtF,
+  red: redTShirtF,
+  white: whiteTShirtF,
+  gray: grayTShirtF,
+  pink: pinkTShirtF,
+  blue: blueTShirtF,
+  lightGray: lightGrayTShirtF,
+  yellow: yellowTShirtF,
+}
+
+
 
 type ClothesGeneratorTypes = {
   imgGenerationRef: string
@@ -272,6 +320,8 @@ const ClothesGenerator = ({
     updateCurrentItem({ size })
   }
 
+  const aditionalStyle = currentItem.gender === 'female' ? 'left-[30%] top-[100px]' : 'left-[28%] top-[100px]'
+
   const gradientBgLoaderStyle =
     'bg-gradient-to-r from-very-light-blue via-very-light-blue to-white background-animate'
   return (
@@ -292,71 +342,81 @@ const ClothesGenerator = ({
         <div className="flex w-full h-full flex-col xl:flex-row mb-8">
           <div className="flex xl:w-2/3 flex-col items-center justify-center w-full pt-4 relative xl:px-2">
             {currentImages && currentImages.length > 0 ? (
-              <>
+              <div className="relative">
                 <img
                   width={400}
-                  src={TSHIRTS[currentItem.color]}
-                  className="px-2 mb-8"
+                  src={
+                    currentItem.gender === 'male'
+                      ? TSHIRTS[currentItem.color]
+                      : TSHIRTS_F[currentItem.color]
+                  }
+                  className={`px-2 mb-8`}
                 />
                 <div
-                  className="w-[160px] max-h-[255px]
+                  className={`w-[160px] max-h-[255px]
                   sm:w-[170px] max-h-[255px] z-[20]
-                  absolute top-[90px] sm:mb-40 mr-1 sm:mr-2 rounded-md cursor-pointer"
+                  absolute top-[120px] sm:mb-40 mr-1 sm:mr-2 rounded-md cursor-pointer  ${aditionalStyle}`}
                   onClick={() => {
                     setIsSelectedImagePreviewModalOpen(true)
                   }}
                 >
                   <img
-                    className={`secure w-[160px] max-h-[255px]
+                    className={`secure w-[150px] max-h-[255px]
                   sm:w-[170px] max-h-[255px]
-                   sm:mb-40 mr-1 sm:mr-2 rounded-md cursor-pointer`}
+                   sm:mb-40 mr-1 sm:mr-2 rounded-md cursor-pointer sm:mt-[20px]`}
                     src={currentImages[focusedPhotoIndex]}
                   />
                 </div>
-              </>
+              </div>
             ) : (
-              <div
-                className={
-                  'text-gray-400 font-bold flex justify-center items-center rounded-md max-h-[500px] w-full relative overflow-hidden'
-                }
-              >
-                <img
-                  width={400}
-                  src={TSHIRTS[currentItem.color]}
-                  className="px-2 mb-8"
-                />
+              <div className='relative'>
                 <div
-                  className={`flex items-center justify-center w-[170px] h-[170px] absolute mb-32 sm:mb-40 mr-1 sm:mr-2 rounded-md ${
-                    isGeneratingImages ? 'bg-gray-transparent' : 'bg-gray-200'
-                  }`}
+                  className={
+                    'text-gray-400 font-bold flex justify-center items-center rounded-md max-h-[500px] w-full relative overflow-hidden'
+                  }
                 >
+                  <img
+                    width={400}
+                    src={
+                      currentItem.gender === 'male'
+                        ? TSHIRTS[currentItem.color]
+                        : TSHIRTS_F[currentItem.color]
+                    }
+                    className="px-2 mb-8"
+                  />
+                  <div
+                    className={`flex absolute items-center justify-center sm:w-[160px] sm:h-[160px] w-[150px] h-[150px] absolute mb-32 sm:mb-40 mr-1 sm:mr-2 rounded-md ${
+                      isGeneratingImages ? 'bg-gray-transparent' : 'bg-gray-200'
+                    } ${aditionalStyle}`}
+                  >
+                    {isGeneratingImages && (
+                      <div className="loader w-[140px] h-[140px] sm:w-[170px] sm:h-[170px]">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                      </div>
+                    )}
+                  </div>
                   {isGeneratingImages && (
-                    <div className="loader w-[140px] h-[140px] sm:w-[170px] sm:h-[170px]">
-                      <span></span>
-                      <span></span>
-                      <span></span>
-                      <span></span>
+                    <div className="w-full absolute bottom-0">
+                      <div className="mb-2 m-auto flex items-center justify-center">
+                        <div className="font-normal text-light-blue">
+                          {progressBarPercentage}%
+                        </div>
+                      </div>
+                      <div className="w-full bg-gray-200 h-2.5 dark:bg-gray-100 absolute bottom-0 rounded-md">
+                        <div
+                          className="bg-light-blue h-2.5 rounded-full"
+                          style={{
+                            width: `${progressBarPercentage}%`,
+                            transition: 'width 0.3s ease',
+                          }}
+                        ></div>
+                      </div>
                     </div>
                   )}
                 </div>
-                {isGeneratingImages && (
-                  <div className="w-full absolute bottom-0">
-                    <div className="mb-2 m-auto flex items-center justify-center">
-                      <div className="font-normal text-light-blue">
-                        {progressBarPercentage}%
-                      </div>
-                    </div>
-                    <div className="w-full bg-gray-200 h-2.5 dark:bg-gray-100 absolute bottom-0 rounded-md">
-                      <div
-                        className="bg-light-blue h-2.5 rounded-full"
-                        style={{
-                          width: `${progressBarPercentage}%`,
-                          transition: 'width 0.3s ease',
-                        }}
-                      ></div>
-                    </div>
-                  </div>
-                )}
               </div>
             )}
 

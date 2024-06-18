@@ -29,7 +29,6 @@ const prompts = [
   'Elon musk u tradicionalnoj srpskoj nošnji uskače u kolo',
   'Beba Draco Malfoy',
   'Astronaut kulira uz sok na marsu',
-  'Pomeranac u svemiru vija hranu',
   'Sedi žaba sama na listu lokvanja i pije rakiju',
   'Petlovi kao italijanska mafija',
   'Barbie Mona Lisa',
@@ -50,7 +49,7 @@ const prompts = [
 ]
 
 const imagePaths: { src: string; prompt: string }[] = Array.from(
-  { length: 28 },
+  { length: 27 },
   (_, index) => {
     return {
       src: require(`../../../assets/resized_examples/${index + 1}.png`),
@@ -67,7 +66,7 @@ const ShirtSlider = () => {
     speed: 1000,
     autoplay: true,
     slidesToShow: slidesToShow,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 5000,
     centerMode: true,
     centerPadding: '10px', // Adjust as needed
     prevArrow: <PrevArrow />, // Custom previous arrow component
