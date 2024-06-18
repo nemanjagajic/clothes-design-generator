@@ -369,10 +369,10 @@ const ClothesGenerator = ({
                 </div>
               </div>
             ) : (
-              <div className='relative'>
+              <div className="relative">
                 <div
                   className={
-                    'text-gray-400 font-bold flex justify-center items-center rounded-md max-h-[500px] w-full relative overflow-hidden'
+                    'text-gray-400 font-bold flex justify-center items-center rounded-md max-h-[520px] w-full relative overflow-hidden'
                   }
                 >
                   <img
@@ -390,7 +390,7 @@ const ClothesGenerator = ({
                     } ${aditionalStyle}`}
                   >
                     {isGeneratingImages && (
-                      <div className="loader w-[140px] h-[140px] sm:w-[170px] sm:h-[170px]">
+                      <div className="loader w-[140px] h-[140px] sm:w-[160px] sm:h-[160px]">
                         <span></span>
                         <span></span>
                         <span></span>

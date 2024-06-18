@@ -58,8 +58,8 @@ const Card: React.FC<ProductCardProps> = ({
         </div>
         <img width={300} src={shirtSrc} />
         <img
-          className="absolute rounded-md top-[60px] left-[90px] secure"
-          width={110}
+          className="absolute rounded-md top-[80px] left-[90px] secure"
+          width={120}
           src={imageUrl}
         />
       </div>
