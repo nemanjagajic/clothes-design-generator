@@ -29,6 +29,7 @@ const prompts = [
   'Elon musk u tradicionalnoj srpskoj nošnji uskače u kolo',
   'Beba Draco Malfoy',
   'Astronaut kulira uz sok na marsu',
+  'Kosturi na rege koncertu',
   'Sedi žaba sama na listu lokvanja i pije rakiju',
   'Petlovi kao italijanska mafija',
   'Barbie Mona Lisa',
@@ -45,7 +46,6 @@ const prompts = [
   'Novak Djokovic se bori sa penzionerima za piletinu u Lidlu',
   'Beba Ron Weasley',
   'Stara slika u retro stilu, crno beli selfi vanzemaljca turiste',
-  'Kosturi na rege koncertu',
 ]
 
 const imagePaths: { src: string; prompt: string }[] = Array.from(

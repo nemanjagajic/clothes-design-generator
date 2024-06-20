@@ -1,13 +1,12 @@
 {
   "files": {
     "main.css": "/static/css/main.79c198fd.css",
-    "main.js": "/static/js/main.ad05c7d5.js",
+    "main.js": "/static/js/main.23cd37f8.js",
     "static/media/instagram.png": "/static/media/instagram.469cb83ec463191dffdf.png",
     "static/media/19.png": "/static/media/19.17f44aa5b78fa2a779eb.png",
     "static/media/red-tshirt.png": "/static/media/red-tshirt.3dec783ee53dbdcb56a1.png",
     "static/media/lightgray.png": "/static/media/lightgray.0d3dcda3f9b3ad242e63.png",
     "static/media/white-tshirt.png": "/static/media/white-tshirt.154b85d207bec342acc5.png",
-    "static/media/11.png": "/static/media/11.b6e46a99936a6d0fa981.png",
     "static/media/lightgray_f.png": "/static/media/lightgray_f.294b8d5311f15d0b62f7.png",
     "static/media/yellow.png": "/static/media/yellow.869a7cedfdee4cb831e2.png",
     "static/media/gray.png": "/static/media/gray.8cf50f3d6d60aa67aee2.png",
@@ -30,7 +29,7 @@
     "static/media/white_f.png": "/static/media/white_f.c8f7ca2aa969fc74f24b.png",
     "static/media/nemanja.png": "/static/media/nemanja.c1e6ac44e3263c246d99.png",
     "static/media/blue_f.png": "/static/media/blue_f.a5527c32bf65223e5e07.png",
-    "static/media/28.png": "/static/media/28.baca8b7e352eda221673.png",
+    "static/media/11.png": "/static/media/11.baca8b7e352eda221673.png",
     "static/media/vlada.png": "/static/media/vlada.62e3d158f553a3314e51.png",
     "static/media/5.png": "/static/media/5.e724ef34609c5663e362.png",
     "static/media/18.png": "/static/media/18.887227695a5951d40a62.png",
@@ -67,10 +66,10 @@
     "index.html": "/index.html",
     "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
     "main.79c198fd.css.map": "/static/css/main.79c198fd.css.map",
-    "main.ad05c7d5.js.map": "/static/js/main.ad05c7d5.js.map"
+    "main.23cd37f8.js.map": "/static/js/main.23cd37f8.js.map"
   },
   "entrypoints": [
     "static/css/main.79c198fd.css",
-    "static/js/main.ad05c7d5.js"
+    "static/js/main.23cd37f8.js"
   ]
 }
