@@ -253,7 +253,7 @@ const GeneratorForm = forwardRef<HTMLTextAreaElement, GeneratorFormProps>(
           </div> */}
           {showBadWord && (
             <p className="text-[#F00]">
-              *Zbog prevelikog opterećenja došlo je do greške, pokušajte ponovo
+              * Ne možete koristiti uvredljive reči ili opise
             </p>
           )}
         </div>
