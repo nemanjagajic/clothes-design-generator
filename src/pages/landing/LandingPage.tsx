@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CartDrawer from '../../components/cart/CartDrawer'
 import Navbar from '../../components/navbar/Navbar'
 import HomePageBanner from './HomePageBanner'
@@ -14,6 +14,7 @@ import HistoryDrawer from '../../components/history/HistoryDrawer'
 import Handbook from './Handbook/Handbook'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import { useLocation } from 'react-router-dom'
 
 const imgGenerationRef = uuidv4()
 
@@ -21,6 +22,17 @@ const LandingPage = () => {
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [isHistoryOpen, setIsHistoryOpen] = useState(false)
   const { itemCount } = useItems()
+  const location = useLocation();
+
+
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.getElementById(location.hash.substring(1));
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [])
 
   return (
     <div className="App">

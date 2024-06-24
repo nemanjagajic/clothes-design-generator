@@ -38,6 +38,10 @@ export default function OrderForm() {
         }, 0).toString()
       })
       setIsOrdering(false)
+      localStorage.setItem(
+        'clickData',
+        `{ "count": 0, "lastClickTime": null }`,
+      )
       navigate('/success')
       emptyCart()
 
