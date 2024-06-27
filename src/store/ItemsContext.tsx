@@ -23,6 +23,8 @@ export type Item = {
   quantity: number
   price: number
   gender: Gender
+  imageIndex: number
+  mainImageUrl: string | null
 }
 const defaultItem = {
   size: 'L' as SizeOption,
@@ -32,6 +34,8 @@ const defaultItem = {
   price: 2300,
   gender: 'male' as Gender,
   type: 'tshirt',
+  imageIndex: 1,
+  mainImageUrl: null
 }
 // Create the context
 const ItemsContext = createContext<{

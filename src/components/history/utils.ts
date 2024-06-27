@@ -3,7 +3,7 @@ import { HistoryItemType } from "./types";
 
 export const addItemToHistory = (item: HistoryItemType) => {
 
-    let historyStr = localStorage.getItem('history') || '[]'
+    let historyStr = localStorage.getItem('imgHistory') || '[]'
 
     if (historyStr) {
         const history = JSON.parse(historyStr)
@@ -12,7 +12,7 @@ export const addItemToHistory = (item: HistoryItemType) => {
             history.shift()
         }
 
-        localStorage.setItem('history', JSON.stringify(history))
+        localStorage.setItem('imgHistory', JSON.stringify(history))
 
     }
 }

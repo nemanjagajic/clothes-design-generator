@@ -4,6 +4,7 @@ import HistoryItem from './HistoryItem'
 import { SearchOutline } from 'react-ionicons'
 import { useSwipeable } from 'react-swipeable'
 import { scrollToSection } from '../../utils/pageNavigation'
+import { sliceImageIntoUrls } from '../../utils/imageSlicer'
 
 type HistoryDrawerTypes = {
   isHistoryOpen: boolean
@@ -75,9 +76,9 @@ const HistoryDrawer = ({
                   <div className="bg-blue-500 w-full rounded-md text-white h-[40px] mt-2 flex items-center justify-center">
                     <button
                       onClick={() => {
-                        updateCurrentImages(item.imageLinks)
-                        onSurroundingAreaClicked()
-                        scrollToSection('t-shirt-container')
+                          updateCurrentImages(item.imagesLink)
+                          onSurroundingAreaClicked()
+                          scrollToSection('t-shirt-container')
                       }}
                     >
                       Primeni na majicu

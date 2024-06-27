@@ -60,6 +60,7 @@ import { EXTRA_LARGE_SCREEN } from '../../constants/screenSizes'
 import GeneratorForm from './GeneratorForm'
 import { useHistory } from '../../components/history/HistoryContext'
 import ErrorPage from '../error/ErrorPage'
+import { sliceImageIntoUrls } from '../../utils/imageSlicer'
 
 const PROGRESS_BAR_FETCHING_INTERVAL_MS = 5000
 const DEFAULT_PROGRESS_INCREMENT = 2
@@ -121,32 +122,33 @@ const ClothesGenerator = ({
   const { addHistoryItem } = useHistory()
 
   useEffect(() => {
-    const img0 = decodeURIComponent(searchParams.get('img0')!)
-    const img1 = decodeURIComponent(searchParams.get('img1')!)
-    const img2 = decodeURIComponent(searchParams.get('img2')!)
-    const img3 = decodeURIComponent(searchParams.get('img3')!)
-
-    if (img0 !== 'null') {
-      updateCurrentImages([img0, img1, img2, img3])
+    const imgUrl = decodeURIComponent(searchParams.get('imgUrl')!)
+    
+    if (imgUrl !== 'null') {
+      updateCurrentImages(imgUrl)
       return
     }
 
     try {
-      const imagesFromStorage = localStorage.getItem('images')
-      if (imagesFromStorage) {
-        setCurrentImages(JSON.parse(imagesFromStorage))
+      const imageFromStorage = localStorage.getItem('mainImage')
+
+      if (imageFromStorage) {
+        sliceImageIntoUrls(imageFromStorage).then(urls => {
+          setCurrentImages(urls)
+        })
       }
-    } catch (error) {}
+    } catch (error) {
+    }
   }, [])
 
   const { updateCurrentItem, addToCart, currentItem, userId } = useItems()
 
   useEffect(() => {
-    updateCurrentItem({ imageUrl: currentImages[focusedPhotoIndex] })
+    updateCurrentItem({ imageUrl: currentImages[focusedPhotoIndex], mainImageUrl: localStorage.getItem('mainImage'), imageIndex: focusedPhotoIndex + 1 })
   }, [currentImages, focusedPhotoIndex])
 
-  const getRandomOneTwoOrThree = () => {
-    return Math.floor(Math.random() * 3) + 1
+  const fakeProgress = () => {
+    return Math.floor(Math.random() * 3) * 5
   }
 
   const handleAddToCart = () => {
@@ -160,23 +162,30 @@ const ClothesGenerator = ({
   const fetchAndUpdateProgress = async () => {
     try {
       if (currentGenerationImageId) {
-        const { data } = await axios.get(
+        const response = await axios.get(
           `${process.env.REACT_APP_BASE_API_URL}/getImageGenerationProgress/${currentGenerationImageId}`,
         )
-
-        if (data?.response.upscaled_urls) {
+        const data = response.data
+        if (data?.image_url) {
+          const singleImage = data.image_url
+          sliceImageIntoUrls(singleImage)
+          .then((urls: string[])=> { 
+            setCurrentImages(urls)
+            updateCurrentImages(singleImage)
+            
+            })
+            .catch(console.error)
           addHistoryItem({
             prompt: promptRef.current,
-            imageLinks: data?.response.upscaled_urls,
+            imagesLink: singleImage,
           })
-          updateCurrentImages(data?.response.upscaled_urls)
           setIsGeneratingImages(false)
           setCurrentGenerationImageId('')
           setProgressBarPercentage(0)
           return
         }
         if (data?.progress === 0 && progressBarPercentage < 97) {
-          const randomIncrement = getRandomOneTwoOrThree()
+          const randomIncrement = fakeProgress()
           setProgressBarPercentage((prev) => prev + randomIncrement)
           return
         }
@@ -246,6 +255,7 @@ const ClothesGenerator = ({
     scrollToTShirtContainer()
     promptRef.current = description.trim()
     const response = await generateImage(description, imgGenerationRef, () => {
+
       setShowBadWord(true)
       setIsGeneratingImages(false)
       scrollToPromptField()
@@ -280,7 +290,9 @@ const ClothesGenerator = ({
     }, 0)
   }
 
-  const renderPreviewImage = (imageUrl: string, index: number) => (
+  const renderPreviewImage = (imageUrl: string, index: number) => {
+
+    return (
     <div
       key={index}
       className={`flex items-center justify-center border cursor-pointer 
@@ -301,7 +313,7 @@ const ClothesGenerator = ({
     >
       <img src={imageUrl} className="rounded-sm sm:w-auto secure" />
     </div>
-  )
+  )}
 
   const renderEmptyPreviewImage = (index: number) => (
     <div

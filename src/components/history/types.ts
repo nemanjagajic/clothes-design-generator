@@ -1,6 +1,6 @@
 export interface HistoryItemType {
     prompt: string
-    imageLinks: string[]
+    imagesLink: string
 }
 
 export type History = HistoryItemType[]

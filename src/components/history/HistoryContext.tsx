@@ -1,8 +1,9 @@
 import React, { createContext, useState, useEffect, useContext, ReactNode } from 'react';
+import { sliceImageIntoUrls } from '../../utils/imageSlicer';
 
 export interface HistoryItem {
     prompt: string;
-    imageLinks: string[];
+    imagesLink: string;
 }
 
 interface HistoryContextType {
@@ -10,7 +11,7 @@ interface HistoryContextType {
     addHistoryItem: (item: HistoryItem) => void;
     currentImages: string[]
     setCurrentImages: (currentImages: string[]) => void
-    updateCurrentImages: (images: string[]) => void
+    updateCurrentImages: (imageUrl: string) => void
 }
 
 const HistoryContext = createContext<HistoryContextType | undefined>(undefined);
@@ -25,7 +26,7 @@ export const useHistory = () => {
 
 const HistoryProvider = ({ children }: { children: ReactNode }) => {
     const [history, setHistory] = useState<HistoryItem[]>(() => {
-        const storedHistory = localStorage.getItem('history');
+        const storedHistory = localStorage.getItem('imgHistory');
         return storedHistory ? JSON.parse(storedHistory) : [];
     });
 
@@ -33,7 +34,7 @@ const HistoryProvider = ({ children }: { children: ReactNode }) => {
 
 
     useEffect(() => {
-        localStorage.setItem('history', JSON.stringify(history));
+        localStorage.setItem('imgHistory', JSON.stringify(history));
     }, [history]);
 
     const addHistoryItem = (item: HistoryItem) => {
@@ -46,9 +47,11 @@ const HistoryProvider = ({ children }: { children: ReactNode }) => {
         });
     };
 
-    const updateCurrentImages = (imageLinks: string[]) => {
-        localStorage.setItem('images', JSON.stringify(imageLinks))
-        setCurrentImages(imageLinks)
+    const updateCurrentImages = (mainImageUrl: string) => {
+        localStorage.setItem('mainImage', mainImageUrl)
+        sliceImageIntoUrls(mainImageUrl).then(urls=> {
+            setCurrentImages(urls)
+        })
     }
 
     return (
